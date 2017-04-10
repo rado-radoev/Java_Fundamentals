@@ -23,14 +23,14 @@ public class EmployeeTest {
         emp2.setMonthlySalary(emp2.getMonthlySalary() +  (emp2.getMonthlySalary() * 0.1));
         
         // Display the employees' info (including yearly salary)
-    	System.out.println(emp1.getFirstName() + " " + emp1.getLastName() + "'s yearly salary: " + emp1.getMonthlySalary() * 12);
+        System.out.printf("%s %s's yearly salary: %f%n", emp1.getFirstName(), emp1.getLastName(), emp1.getMonthlySalary() * 12);
     	System.out.println(emp2.getFirstName() + " " + emp2.getLastName() + "'s yearly salary: " + emp2.getMonthlySalary() * 12);
 
     	// Display Bernanke's info (including yearly salary)
         System.out.println("Attempting to set a negative salary value...");
     	// Attempt to set Bernanke's salary to a negative value...
         emp1.setMonthlySalary(-1);
-        System.out.println(emp1.getFirstName() + " " + emp1.getLastName() + "'s yearly salary: " + emp1.getMonthlySalary() * 12);
+        System.out.printf("%s %s's yearly salary: %f%n", emp1.getFirstName(), emp1.getLastName(), emp1.getMonthlySalary() * 12);
     }
     
 }

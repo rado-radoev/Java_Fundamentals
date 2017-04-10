@@ -423,102 +423,102 @@ public class Employee_test extends TestCase {
 //	/* Personally I'd prefer to validate the output using this omnibus method... it'd make things more simple for me, but it wouldn't provide
 //	 * as much granularity for partial credit. Still, your code should pass this test method; I just commented it out to avoid "double jeopardy" 
 //	 */
-//	public void testNominalOutput() {
-//		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(capturedOut));
-//		
-//		final double expectedInitialSalaryBen = 14814.72;
-//		final double expectedInitialSalaryPaul = 28148.04;
-//		final double expectedPostRaiseSalaryBen = expectedInitialSalaryBen * 1.1;
-//		final double expectedPostRaiseSalaryPaul = expectedInitialSalaryPaul * 1.1;
-//		
-//		String[] arr = {};
-//		EmployeeTest.main(arr);
-//		Scanner sc = new Scanner(capturedOut.toString());
-//		try {
-//			
-//			/* FIRST LINE
-//			 */
-//			assertEquals("The program's output is non-conformant: no output was recorded", sc.hasNext(), true);
-//			assertEquals("The program's output is non-conformant: first token is not \"Benjamin\"", "Benjamin", sc.next());
-//			try {    // Skip to Ben's salary
-//				sc.skip("\\D+");
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: last name and descriptive text absent");
-//			}
-//			if (!sc.hasNextDouble()) {
-//				fail("The program's output is non-conformant: Ben's salary not present as expected");
-//			}
-//			final double bensSalary = sc.nextDouble();
-//			assertEquals("The program's output is non-conformant: Ben's salary not as specified", expectedInitialSalaryBen, bensSalary, expectedInitialSalaryBen * .01);
-//			try {    // Skip to Paul's first name
-//				sc.skip("\\W+");
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: line-breaks not present as expected");
-//			}
-//			
-//			/* SECOND LINE
-//			 */
-//			try {    // Skip to Paul's last name
-//				sc.next();
-//				assertEquals("The program's output is non-conformant: \"Volcker's\" last name not present where expected on line 2", "Volcker's", sc.next());
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: \"Volcker's\" last name not present where expected on line 2");
-//			}
-//			try {    // Skip to Paul's salary
-//				sc.skip("\\D+");
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: descriptive text absent");
-//			}
-//			if (!sc.hasNextDouble()) {
-//				fail("The program's output is non-conformant: Paul's salary not present as expected");
-//			}
-//			final double paulsSalary = sc.nextDouble();
-//			assertEquals("The program's output is non-conformant: Paul's salary not as specified", expectedInitialSalaryPaul, paulsSalary, expectedInitialSalaryPaul * .01);
-//			
-//			/* FOURTH LINE
-//			 */
-//			try {    // Skip to Ben's raised salary
-//				sc.skip("\\D+");
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: descriptive text absent");
-//			}
-//			if (!sc.hasNextDouble()) {
-//				fail("The program's output is non-conformant: Ben's raised salary not present as expected");
-//			}
-//			final double bensRaisedSalary = sc.nextDouble();
-//			assertEquals("The program's output is non-conformant: Ben's raised salary not as specified", expectedPostRaiseSalaryBen, bensRaisedSalary, expectedPostRaiseSalaryBen * .01);
-//			
-//			/* FIFTH LINE
-//			 */
-//			try {    // Skip to Paul's raised salary
-//				sc.skip("\\D+");
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: descriptive text absent");
-//			}
-//			if (!sc.hasNextDouble()) {
-//				fail("The program's output is non-conformant: Pauls's raised salary not present as expected");
-//			}
-//			final double paulsRaisedSalary = sc.nextDouble();
-//			assertEquals("The program's output is non-conformant: Paul's raised salary not as specified", expectedPostRaiseSalaryPaul, paulsRaisedSalary, expectedPostRaiseSalaryPaul * .01);
-//			
-//			/* SEVENTH LINE
-//			 */
-//			try {    // Skip to Ben's still non-negative salary
-//				sc.skip("\\D+");
-//			} catch (Exception e) {
-//				fail("The program's output is non-conformant: descriptive text absent");
-//			}
-//			if (!sc.hasNextDouble()) {
-//				fail("The program's output is non-conformant: Ben's raised salary not present as expected");
-//			}
-//			final double bensFinalSalary = sc.nextDouble();
-//			assertEquals("The program's output is non-conformant: Ben's decidedly non-negative salary not as specified", expectedPostRaiseSalaryBen, bensFinalSalary, expectedPostRaiseSalaryBen * .01);
-//			
-//		} catch (Exception e) {
-//			assertThrowableTestFailure(e);
-//		}
-//	}
+	public void testNominalOutput() {
+		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(capturedOut));
+		
+		final double expectedInitialSalaryBen = 14814.72;
+		final double expectedInitialSalaryPaul = 28148.04;
+		final double expectedPostRaiseSalaryBen = expectedInitialSalaryBen * 1.1;
+		final double expectedPostRaiseSalaryPaul = expectedInitialSalaryPaul * 1.1;
+		
+		String[] arr = {};
+		EmployeeTest.main(arr);
+		Scanner sc = new Scanner(capturedOut.toString());
+		try {
+			
+			/* FIRST LINE
+			 */
+			assertEquals("The program's output is non-conformant: no output was recorded", sc.hasNext(), true);
+			assertEquals("The program's output is non-conformant: first token is not \"Benjamin\"", "Benjamin", sc.next());
+			try {    // Skip to Ben's salary
+				sc.skip("\\D+");
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: last name and descriptive text absent");
+			}
+			if (!sc.hasNextDouble()) {
+				fail("The program's output is non-conformant: Ben's salary not present as expected");
+			}
+			final double bensSalary = sc.nextDouble();
+			assertEquals("The program's output is non-conformant: Ben's salary not as specified", expectedInitialSalaryBen, bensSalary, expectedInitialSalaryBen * .01);
+			try {    // Skip to Paul's first name
+				sc.skip("\\W+");
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: line-breaks not present as expected");
+			}
+			
+			/* SECOND LINE
+			 */
+			try {    // Skip to Paul's last name
+				sc.next();
+				assertEquals("The program's output is non-conformant: \"Volcker's\" last name not present where expected on line 2", "Volcker's", sc.next());
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: \"Volcker's\" last name not present where expected on line 2");
+			}
+			try {    // Skip to Paul's salary
+				sc.skip("\\D+");
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: descriptive text absent");
+			}
+			if (!sc.hasNextDouble()) {
+				fail("The program's output is non-conformant: Paul's salary not present as expected");
+			}
+			final double paulsSalary = sc.nextDouble();
+			assertEquals("The program's output is non-conformant: Paul's salary not as specified", expectedInitialSalaryPaul, paulsSalary, expectedInitialSalaryPaul * .01);
+			
+			/* FOURTH LINE
+			 */
+			try {    // Skip to Ben's raised salary
+				sc.skip("\\D+");
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: descriptive text absent");
+			}
+			if (!sc.hasNextDouble()) {
+				fail("The program's output is non-conformant: Ben's raised salary not present as expected");
+			}
+			final double bensRaisedSalary = sc.nextDouble();
+			assertEquals("The program's output is non-conformant: Ben's raised salary not as specified", expectedPostRaiseSalaryBen, bensRaisedSalary, expectedPostRaiseSalaryBen * .01);
+			
+			/* FIFTH LINE
+			 */
+			try {    // Skip to Paul's raised salary
+				sc.skip("\\D+");
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: descriptive text absent");
+			}
+			if (!sc.hasNextDouble()) {
+				fail("The program's output is non-conformant: Pauls's raised salary not present as expected");
+			}
+			final double paulsRaisedSalary = sc.nextDouble();
+			assertEquals("The program's output is non-conformant: Paul's raised salary not as specified", expectedPostRaiseSalaryPaul, paulsRaisedSalary, expectedPostRaiseSalaryPaul * .01);
+			
+			/* SEVENTH LINE
+			 */
+			try {    // Skip to Ben's still non-negative salary
+				sc.skip("\\D+");
+			} catch (Exception e) {
+				fail("The program's output is non-conformant: descriptive text absent");
+			}
+			if (!sc.hasNextDouble()) {
+				fail("The program's output is non-conformant: Ben's raised salary not present as expected");
+			}
+			final double bensFinalSalary = sc.nextDouble();
+			assertEquals("The program's output is non-conformant: Ben's decidedly non-negative salary not as specified", expectedPostRaiseSalaryBen, bensFinalSalary, expectedPostRaiseSalaryBen * .01);
+			
+		} catch (Exception e) {
+			assertThrowableTestFailure(e);
+		}
+	}
 	
 	/* method name retrieval code courtesy of: http://dev.kanngard.net/Permalinks/ID_20030114224837.html
 	 */
