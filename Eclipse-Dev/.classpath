@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="BarChart/src"/>
+	<classpathentry kind="src" path="Factorial/src"/>
+	<classpathentry excluding="Welcome1/Test/|Welcome1/src/" kind="src" path="HomeWork#1"/>
+	<classpathentry kind="src" path="HomeWork#1/Welcome1/src"/>
+	<classpathentry kind="src" path="HomeWork#1/Welcome1/Test"/>
+	<classpathentry kind="src" path="HomeWork#2/Employee/src"/>
+	<classpathentry kind="src" path="HomeWork#2/Employee/test"/>
+	<classpathentry kind="src" path="ProductOfOddIntegers/src"/>
+	<classpathentry kind="src" path="Shapes/src"/>
+	<classpathentry kind="src" path="Shapes/Test"/>
+	<classpathentry kind="src" path="TrianglePrinting/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="BarChart/bin"/>
+</classpath>
