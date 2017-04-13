@@ -11,8 +11,8 @@ public class SalesPerson {
 
 	/**
 	 * Sales person object fields
-	 * param salary 	Sales person base salary
-	 * param commission		Sales person commision in percent
+	 * @param salary 	Sales person base salary
+	 * @param commission		Sales person commission in percent
 	 */
 	private final double salary;
 	private final double commission;
