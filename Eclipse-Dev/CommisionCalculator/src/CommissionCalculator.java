@@ -12,14 +12,14 @@ import java.util.Scanner;
 public class CommissionCalculator {
     
     public static void main(String args[]) {
-        // Initialize a Scanner to read input from the command line
-    	Scanner scanner = new Scanner(System.in);
-    	SalesPerson salesPerson = new SalesPerson(); 
-        int itemsSoldTotal = 0;
-    	int item = -1;
-    	double commission;
-        double totalEarnings = salesPerson.getSalary();
+    	Scanner scanner = new Scanner(System.in);		// Initialize a Scanner to read input from the command line
+    	SalesPerson salesPerson = new SalesPerson(); 	// Create new sales person object
+        int itemsSoldTotal = 0;		// Variable to contain the total amount of sold items 
+    	int item = -1;		// Initialize item variable that holds the user input
+    	double commission;		// Total commission the sales person has earned
+        double totalEarnings = salesPerson.getSalary();		// Total earning the sales person has made (salary + commission)
           	
+        // Keep asking the user for input until 0 is entered
     	while (item != 0) {
         	System.out.println("Item\tValue");
             System.out.println("1\t$239.99");
@@ -31,6 +31,7 @@ public class CommissionCalculator {
         	System.out.println("Please select an item from the list above (or enter 0 to exit):");
         	item = scanner.nextInt();
     		
+        	// Add item's price to total items sold
     		switch (item) {
 			case 1:
 				itemsSoldTotal += 239.99;
@@ -45,15 +46,19 @@ public class CommissionCalculator {
 				itemsSoldTotal += 350.89;
 				break;				
 			default:
+				// Only 0-4 are valid choices
 				System.out.println("ERROR: Invalid input!");
 				break;
 			}
     		
+    		// Calculate commission and total earnings
         	commission = itemsSoldTotal * salesPerson.getCommission();
         	totalEarnings = commission + salesPerson.getSalary();
     	}
     	
+    	// Close scanner object
     	scanner.close();
+    	// Display sales person total earnings
     	System.out.printf("Total earnings: %.2f",totalEarnings);
     }
     
