@@ -16,10 +16,10 @@ public class CommissionCalculator {
     	Scanner scanner = new Scanner(System.in);
     	SalesPerson salesPerson = new SalesPerson(); 
         int itemsSoldTotal = 0;
-        double totalEarnings = salesPerson.getSalary();
-        double commission = itemsSoldTotal * salesPerson.getCommission();
     	int item = -1;
-    	
+    	double commission;
+        double totalEarnings = salesPerson.getSalary();
+          	
     	while (item != 0) {
         	System.out.println("Item\tValue");
             System.out.println("1\t$239.99");
@@ -48,10 +48,12 @@ public class CommissionCalculator {
 				System.out.println("ERROR: Invalid input!");
 				break;
 			}
-
+    		
         	commission = itemsSoldTotal * salesPerson.getCommission();
         	totalEarnings = commission + salesPerson.getSalary();
-    	} 	
+    	}
+    	
+    	scanner.close();
     	System.out.printf("Total earnings: %.2f",totalEarnings);
     }
     
