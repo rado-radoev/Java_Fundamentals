@@ -22,13 +22,11 @@ public class CommissionCalculator {
         System.out.println("2\t$129.75");
         System.out.println("3\t$99.95");
         System.out.println("4\t$350.89"); 
-        
-        System.out.println("Sales person total earnings: " + salesPerson.getSalary());
-    	System.out.println("Choose a value from 1 to 4. Enter 0 to exit");
+        System.out.printf("Current compensation: %.2f%n", salesPerson.getSalary());
+    	System.out.println("Please select an item from the list above (or enter 0 to exit):");
     	int item = scanner.nextInt();
-    	    	
-    	while (item != 0) {
-    		//scanner.nextLine();
+    	
+    	while (item != 0) {      	
     		switch (item) {
 			case 1:
 				itemsSoldTotal += 239.99;
@@ -46,15 +44,27 @@ public class CommissionCalculator {
 				System.out.println("ERROR: Invalid input!");
 				break;
 			}
+
+        	double commission = itemsSoldTotal * salesPerson.getCommission();
+        	double totalEarnings = commission + salesPerson.getSalary();
+        	
+        	System.out.println("Item\tValue");
+            System.out.println("1\t$239.99");
+            System.out.println("2\t$129.75");
+            System.out.println("3\t$99.95");
+            System.out.println("4\t$350.89"); 
+            
+            System.out.printf("Current compensation: %.2f%n", totalEarnings);
+        	System.out.println("Please select an item from the list above (or enter 0 to exit):");
+        	item = scanner.nextInt();
     		
-    		System.out.println("Choose a value from 1 to 4. Enter 0 to exit");
-    		item = scanner.nextInt();
+
     	}
     	
     	double commission = itemsSoldTotal * salesPerson.getCommission();
     	double totalEarnings = commission + salesPerson.getSalary();
     	
-    	System.out.printf("%.2f",totalEarnings);
+    	System.out.printf("Total earnings: %.2f",totalEarnings);
 
     	/* Display the user's current compensation
     	 * 
