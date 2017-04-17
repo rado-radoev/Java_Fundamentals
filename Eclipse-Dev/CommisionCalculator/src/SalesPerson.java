@@ -14,16 +14,8 @@ public class SalesPerson {
 	 * @param salary 	Sales person base salary
 	 * @param commission		Sales person commission in percent
 	 */
-	private final double salary;
-	private final double commission;
-	
-	/**
-	 * Sales person constructor
-	 */
-	public SalesPerson () {
-		this.salary = 200;
-		this.commission = 0.09;
-	}
+	private final double salary = 200;
+	private final double commission  = 0.09; 
 
 	/**
 	 * Sales person salary getter
