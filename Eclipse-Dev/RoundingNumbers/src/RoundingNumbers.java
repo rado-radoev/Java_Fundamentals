@@ -1,9 +1,33 @@
 import java.util.Collections;
+import java.util.Scanner;
 
 public class RoundingNumbers {
 
 	public static void main(String[] args) {
-		displaySquareOfAsterisk(4);
+		circleArea();
+	}
+	
+	public static void circleArea() {
+		System.out.println("Enter circle radius:");
+		Scanner scan = new Scanner(System.in);
+		double radius = scan.nextDouble();
+		scan.close();
+		
+		double area = Math.PI * Math.pow(radius, 2);
+		System.out.printf("Area is: %.2f", area);
+	}
+	
+	public static void displaySquareOfChar(int square) {
+		System.out.println("Enter character to print:");
+		Scanner scan = new Scanner(System.in);
+		char fill = scan.next().charAt(0);
+		scan.close();
+		
+		int counter = 0;
+		while (counter < square) {
+			System.out.println(String.join("", Collections.nCopies(square, Character.toString(fill))));
+			counter++;
+		}
 	}
 	
 	public static void displaySquareOfAsterisk(int square) {
