@@ -4,7 +4,11 @@ import java.util.Scanner;
 public class RoundingNumbers {
 
 	public static void main(String[] args) {
-		circleArea();
+		
+	}
+	
+	public static void farenheitToCelcius(double fahrenheit) {
+		
 	}
 	
 	public static void circleArea() {
