@@ -9,22 +9,31 @@
 import java.util.Scanner;
 
 public class CommissionCalculator {
-    
+	
     public static void main(String args[]) {
-    	Scanner scanner = new Scanner(System.in);		// Initialize a Scanner to read input from the command line
-    	SalesPerson salesPerson = new SalesPerson(); 	// Create new sales person object
-        int itemsSoldTotal = 0;		// Variable to contain the total amount of sold items 
+    	   	
+    	SalesPerson salesPerson = new SalesPerson.SalesPersonBuilder(200, 0.09).build(); 	// Create new sales person object
+    	double totalEarnings = totalEarningsCalculate(salesPerson);
+    	
+    	// Display sales person total earnings
+    	System.out.printf("Total earnings: %.2f",totalEarnings);
+    }
+    
+    
+    private static double totalEarningsCalculate (SalesPerson salesPerson) {
+    	Scanner scanner = new Scanner(System.in);
+    	int itemsSoldTotal = 0;		// Variable to contain the total amount of sold items 
     	int item = -1;		// Initialize item variable that holds the user input
     	double commission;		// Total commission the sales person has earned
-        double totalEarnings = salesPerson.getSalary();		// Total earning the sales person has made (salary + commission)
-        
+    	double totalEarnings = salesPerson.getSalary();		// Total earning the sales person has made (salary + commission)
+    	
         // Create 4 item objects with prices
         Item item1 = new Item(239.99);
         Item item2 = new Item(129.75);
         Item item3 = new Item(99.95);
         Item item4 = new Item(350.89);
-          
-        // Keep asking the user for input until 0 is entered
+    	
+    	// Keep asking the user for input until 0 is entered
     	while (item != 0) {
         	System.out.println("Item\tValue");
             System.out.printf("1\t$%.2f%n",item1.getPrice());
@@ -56,14 +65,13 @@ public class CommissionCalculator {
 				// Only 0-4 are valid choices
 				System.out.println("ERROR: Invalid input!");
 				break;
-			}  		
+			}
     		// Calculate commission and total earnings
         	commission = itemsSoldTotal * salesPerson.getCommission();
         	totalEarnings = commission + salesPerson.getSalary();
     	}
-    	// Close scanner object
+    	
     	scanner.close();
-    	// Display sales person total earnings
-    	System.out.printf("Total earnings: %.2f",totalEarnings);
+    	return totalEarnings;
     }
 }
