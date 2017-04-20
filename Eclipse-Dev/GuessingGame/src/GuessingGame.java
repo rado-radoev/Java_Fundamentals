@@ -4,14 +4,17 @@ import java.util.Scanner;
 public class GuessingGame {
 
 	private static int number;
-	
+	private static Random random = new Random();
+	 private static int min = 1;
+	 private static int max = 1000;
+	 
 	public static void guessNumber() {
-		Random random = new Random();
+		
 		number = random.nextInt(1000) + 1;
 		int guess = 0;
 		Scanner scanner = new Scanner(System.in);
 		
-		while (guess == number) {
+		while (guess != number) {
 			System.out.println("Take a guess:");
 			guess = scanner.nextInt();
 			
@@ -19,32 +22,32 @@ public class GuessingGame {
 				System.out.println("You guessed it!. The number is " + guess);
 				return;
 			}
-			else {
+			else if (guess > number) {
+				System.out.printf("Guess lower.%n");
 				
 			}
+			else {
+				System.out.printf("Guess higher.%n" );
+			}
+			displayGuessRange();
+			System.out.printf("Number is in range %d - %d%n", min, max);
 		}
 	}
 	
 	public static void main(String[] args) {
-		int min = 1;
-		int max = 1000;
-		int random = 42;
+		guessNumber();
+	}
+	
+	public static void displayGuessRange() {
 		
-		
-		while (true) {
+		while (min <= max) {
 			int mid = min + (max - min) / 2;
-			if (mid == random) {
-				System.out.println("Found");
-				break;
-			}
-			if (random < mid) {
-				System.out.printf("Number is in the range %d %d%n", min, mid);
-				max = mid;
-			}
-			else {
-				System.out.printf("Number is in the range %d %d%n", min, max);
-				min = mid;
-			}
+			if (number < mid)
+				max = mid - 1;
+			else
+				min = mid + 1;
+
+			return;
 		}
 	}
 }
