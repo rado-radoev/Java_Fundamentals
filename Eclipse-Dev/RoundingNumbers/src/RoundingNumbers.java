@@ -7,8 +7,62 @@ public class RoundingNumbers {
 		
 	}
 	
-	public static void farenheitToCelcius(double fahrenheit) {
+
+	
+	public static void GCD(int a, int b) {
+		int temp = 0;
+		if (a > 0 && b > 0) {
+			temp = a % b;
+			GCD(b, temp);
+		}
+		else if (b <= 0) {
+			System.out.println("GCD is :" + a);
+			return;
+		}
+		else if (a <= 0 ) {
+			System.out.println("GCD is: " + b);
+			return;
+		}
+	}
+	
+	public static void reverseDigits(int number) {
+		int temp = 0;
+		while (number > 0) {
+			temp = number % 10;
+			number /= 10;	
+			System.out.print(temp);
+		}
+	}
+	
+	public static void perfectNumber(long number) {
+		long sum = 0;
+		for (long i = 1; i <= number / 2; i++) {
+			if (number % i == 0) {
+				sum += i; 
+			}
+		}	
+			
+			if (sum == number) {
+				System.out.println(number + " is a perfect number!");
+			}
+			else {
+				System.out.println(number + " is not a perfect number!");
+			}
 		
+	}
+	
+	public static float findMinimum(float a, float b, float c) {
+		float min = Math.min(a, b);
+		min = Math.min(min, c);
+		return min;
+	}
+	
+	public static double celciusToFahrenheit(double celcius) {
+		return 9.0 / 5.0 * celcius + 32;
+	}
+	
+	public static double fahrenheitToCelcius(double fahrenheit) {
+		return 5.0 / 9.0 * (fahrenheit - 32);
 	}
 	
 	public static void circleArea() {
