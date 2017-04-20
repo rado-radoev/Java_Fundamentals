@@ -28,22 +28,22 @@ public class GuessingGame {
 	public static void main(String[] args) {
 		int min = 1;
 		int max = 1000;
-
 		int random = 42;
 		
 		
 		while (true) {
 			int mid = min + (max - min) / 2;
-			if (random == mid) {
-				System.out.printf("Number found %d%n", mid);
+			if (mid == random) {
+				System.out.println("Found");
+				break;
 			}
-			else if (mid < random) {
-				System.out.printf("Number is in the range %d %d%n", min, max);
-				min = mid + 1;
+			if (random < mid) {
+				System.out.printf("Number is in the range %d %d%n", min, mid);
+				max = mid;
 			}
 			else {
 				System.out.printf("Number is in the range %d %d%n", min, max);
-				max = min - 1;
+				min = mid;
 			}
 		}
 	}
