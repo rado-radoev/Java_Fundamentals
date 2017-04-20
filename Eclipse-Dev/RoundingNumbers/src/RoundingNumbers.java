@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class RoundingNumbers {
 
 	public static void main(String[] args) {
-		System.out.println(distanceBetweenPoint(3, 4, 5, 6));
+		
 	}
 	
 	public static double distanceBetweenPoint(double x1, double x2, double y1, double y2) {
-		//return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2)  * (y1 - y2));
-		return Point2D.distance(x1, y1, x2, y2);
+		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2)  * (y1 - y2));
+		//return Point2D.distance(x1, y1, x2, y2);
 	}
 
 	
