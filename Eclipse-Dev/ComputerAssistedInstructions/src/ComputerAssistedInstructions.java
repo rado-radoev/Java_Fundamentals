@@ -14,11 +14,11 @@ public class ComputerAssistedInstructions {
 		int difficulty = difficultyLevel();
 		int problems = problemType();
 		while(true)
-			multiplication(difficulty, problems);
+			calculate(difficulty, problems);
 		
 	}
 	
-	public static int multiplication(int difficulty, int problems) {
+	public static int calculate(int difficulty, int problems) {
 		Scanner scanner = new Scanner(System.in);
 		int num1 = randomNumber.nextInt(difficulty) + 1;
 		int num2 = randomNumber.nextInt(difficulty) + 1;
