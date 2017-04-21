@@ -13,19 +13,41 @@ public class ComputerAssistedInstructions {
 		
 		int difficulty = difficultyLevel();
 		int problems = problemType();
-		multiplication(difficulty);
+		while(true)
+			multiplication(difficulty, problems);
 		
 	}
 	
-	public static int multiplication(int difficulty) {
+	public static int multiplication(int difficulty, int problems) {
 		Scanner scanner = new Scanner(System.in);
 		int num1 = randomNumber.nextInt(difficulty) + 1;
 		int num2 = randomNumber.nextInt(difficulty) + 1;
-		int result = num1 * num2;
-		
-		System.out.printf("How much is %d times %d%n", num1, num2);
+		int result = 0;
 		int input = -1;
 		
+		if (problems == 5) 
+			problems = randomNumber.nextInt(4) + 1;
+		
+		switch (problems) {
+		case 1:
+			result = num1 + num2;
+			System.out.printf("How much is %d added to %d%n", num1, num2);
+			break;
+		case 2:
+			result = num1 - num2;
+			System.out.printf("How much is %d substracted from %d%n", num1, num2);
+			break;
+		case 3:
+			result = num1 * num2;
+			System.out.printf("How much is %d multiplied to %d%n", num1, num2);
+			break;
+		case 4:
+			result = num1 / num2;
+			System.out.printf("How much is %d divided to %d%n", num1, num2);
+			break;
+		}
+		
+
 		while (result != input) {
 			int answer = randomNumber.nextInt(4) + 1;
 			input = scanner.nextInt();
@@ -42,7 +64,6 @@ public class ComputerAssistedInstructions {
 			}
 			else {
 				System.out.println(wrongAnswer(answer));
-				System.out.printf("How much is %d times %d%n", num1, num2);
 				wrongResponseCount++;
 			}	
 		}
