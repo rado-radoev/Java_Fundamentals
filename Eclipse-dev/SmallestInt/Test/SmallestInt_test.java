@@ -11,45 +11,46 @@ public class SmallestInt_test extends TestCase {
 	
 	public static String newline = System.getProperty("line.separator");
 	
-//	public void testFullPromptCompliance() {
-//		// Capture the output
-//		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
-//		System.setOut(new PrintStream(capturedOut));
-//
-//		// Stimulate the input
-//		String data = "3\r\n" + newline + "1" + newline + "4" + newline + "9" + newline;
-//		System.setIn(new ByteArrayInputStream(data.getBytes()));
-//
-//		String[] arr = {};
-//		SmallestInt.main(arr);
-//		System.err.println(capturedOut);
-//
-//		Scanner sc = new Scanner(capturedOut.toString());
-//		try {
-//			/* FIRST LINE
-//			 */
-//			assertEquals("The program's output is non-conformant: no output was recorded", true, sc.hasNext());
-//
-//			/* Consume all output lines asserting that each contains the expected output
-//			 */
-//			String expectedLines[] = { // If the program produces output per guidance all of these will appear on a single line when the unit test output is captured...
-//					"How many integers shall we compare? (Enter a positive integer):",
-//					"Enter value 1:",
-//					"Enter value 2:",
-//					"Enter value 3:",
-//					"The smallest number entered was:"
-//			};
-//			String currentLine = sc.nextLine();
-//			for (int ii = 0; ii < expectedLines.length; ii++) {
-////				String currentLine = sc.nextLine();
-//				assertTrue("The program's output is non-conformant. Expected: " + expectedLines[ii] + " ... Encountered: " + currentLine, currentLine.toLowerCase().contains(expectedLines[ii].toLowerCase()));
-//			}
-//
-//		} catch (Exception e) {
-//			assertThrowableTestFailure(e);
-//		}
-//	}
-	
+	public void testFullPromptCompliance() {
+		// Capture the output
+		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(capturedOut));
+
+		// Stimulate the input
+		String data = "3\r\n" + newline + "1" + newline + "4" + newline + "9" + newline;
+		System.setIn(new ByteArrayInputStream(data.getBytes()));
+
+		String[] arr = {};
+		SmallestInt.main(arr);
+		System.err.println(capturedOut);
+
+		Scanner sc = new Scanner(capturedOut.toString());
+		try {
+			/* FIRST LINE
+			 */
+			assertEquals("The program's output is non-conformant: no output was recorded", true, sc.hasNext());
+
+			/* Consume all output lines asserting that each contains the expected output
+			 */
+			String expectedLines[] = { // If the program produces output per guidance all of these will appear on a single line when the unit test output is captured...
+					"How many integers shall we compare? (Enter a positive integer):",
+					"Enter value 1:",
+					"Enter value 2:",
+					"Enter value 3:",
+					"The smallest number entered was:"
+			};
+			String currentLine = sc.nextLine();
+			for (int ii = 0; ii < expectedLines.length; ii++) {
+//				String currentLine = sc.nextLine();
+				assertTrue("The program's output is non-conformant. Expected: " + expectedLines[ii] + " ... Encountered: " + currentLine, currentLine.toLowerCase().contains(expectedLines[ii].toLowerCase()));
+			}
+
+		} catch (Exception e) {
+			assertThrowableTestFailure(e);
+		}
+	}
+
+
 	public void testThreeIncreasing() {
 		// Capture the output
 		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
@@ -318,4 +319,5 @@ public class SmallestInt_test extends TestCase {
             (new Throwable()).getStackTrace();
 		fail(thrown.getClass().getName() + " encountered! Unable to successfully execute test: " + stackTraceElements[1].toString());
 	}
+
 }

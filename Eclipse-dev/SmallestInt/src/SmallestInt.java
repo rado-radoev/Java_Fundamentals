@@ -29,10 +29,10 @@ public class SmallestInt {
 
     	int smallest = Integer.MAX_VALUE;
 
-        for(int i = 0; i < input ;i++ ) {    // Fill in the blanks! Seriously, fill them in! As currently written this will loop forever
+        for(int i = 0; i < input ;i++ ) {
         	
         		// Prompt as follows
-            	System.out.printf("Enter value %d :", i + 1);
+            	System.out.printf("Enter value %d: ", i + 1);
             	int guess = scanner.nextInt();
             	
             	if (guess < smallest) {
