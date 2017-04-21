@@ -2,6 +2,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+import org.junit.Ignore;
 
 import junit.framework.TestCase;
 
@@ -89,6 +90,7 @@ public class SmallestInt_test extends TestCase {
 		}
 	}
 	
+	
 	public void testNegativeThree() {
 		// Capture the output
 		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
@@ -128,6 +130,7 @@ public class SmallestInt_test extends TestCase {
 			assertThrowableTestFailure(e);
 		}
 	}
+	
 	
 	public void testZeroThree() {
 		// Capture the output
@@ -209,6 +212,7 @@ public class SmallestInt_test extends TestCase {
 		}
 	}
 	
+	
 	public void testSmallestInMiddle() {
 		// Capture the output
 		final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
@@ -248,6 +252,7 @@ public class SmallestInt_test extends TestCase {
 			assertThrowableTestFailure(e);
 		}
 	}
+	
 	
 	public void testSmallestLast() {
 		// Capture the output
