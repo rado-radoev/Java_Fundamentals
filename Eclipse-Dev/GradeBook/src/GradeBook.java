@@ -73,12 +73,12 @@ public class GradeBook {
 		return (double) total / grades.length;
 	}
 	
-	// output barchart displayng grade distribution
+	// output barchart displaying grade distribution
 	public void outputBarChart() {
 		System.out.println("Grade distribution:");
 		
 		// store frequency of grades in each range of 10 grades
-		int[] frequency = new int[10];
+		int[] frequency = new int[11];
 		
 		// for each grade, increment the appropriate frequency
 		for (int grade : grades) {
@@ -92,11 +92,11 @@ public class GradeBook {
 				System.out.printf("%5d: ", 100);
 			}
 			else {
-				System.out.printf("%02d-%02d", count * 10, count * 10 + 9);
+				System.out.printf("%02d-%02d: ", count * 10, count * 10 + 9);
 			}
 			
-			// print bar of asetrisks
-			for(int stars = 0; stars < frequency.length; stars++) {
+			// print bar of asterisks
+			for(int stars = 0; stars < frequency[count]; stars++) {
 				System.out.print("*");
 			}
 			
