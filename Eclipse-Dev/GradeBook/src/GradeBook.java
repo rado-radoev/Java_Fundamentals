@@ -4,9 +4,9 @@ public class GradeBook {
 	private int[] grades;	// array of student grades
 	
 	// Constructor
-	public GradeBook(String courseName, int[] grades) {
-		this.courseName = courseName;
-		this.grades = grades;
+	private GradeBook(GradeBookBuilder builder) {
+		this.courseName = builder.courseName;
+		this.grades = builder.grades;
 	}
 	
 	// set course name
@@ -116,11 +116,29 @@ public class GradeBook {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	public static class GradeBookBuilder {
+		private String courseName; // name of the course that GradeBook represents
+		private int[] grades;	// array of student grades
+		
+		public GradeBookBuilder() {
+			
+		}
+		
+		public GradeBookBuilder courseName(String courseName) {
+			this.courseName = courseName;
+			return this;
+		}
+		
+		public GradeBookBuilder grades(int[] grades) {
+			this.grades = grades;
+			return this;
+		}
+		
+		public GradeBook build() {
+			GradeBook gradeBook = new GradeBook(this);
+			return gradeBook;
+		}
+		
+	}
+
 }
