@@ -17,11 +17,11 @@ public class GradeBookTest2 {
 				.courseName("CS 101 Intorduction to Java Programming")
 				.grades(gradesArray)
 				.build();
-
 		
 		System.out.printf("Welcome to the grade book for %n%s%n%n", myGradeBook.getCourseName());
 		myGradeBook.processGrades();
 		
 	}
+
 
 }

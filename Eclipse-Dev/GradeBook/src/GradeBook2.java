@@ -14,7 +14,7 @@ public class GradeBook2 {
 		this.courseName = courseName;
 	}
 	
-	// retreive course name
+	// Retrieve course name
 	public String getCourseName() {
 		return courseName;
 	}
