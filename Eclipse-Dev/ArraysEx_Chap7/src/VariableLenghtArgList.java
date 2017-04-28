@@ -1,14 +1,16 @@
-
+// 7.14
 public class VariableLenghtArgList {
 
 	public static void main(String[] args) {
-		int[] params = {1,2,3,4,5,6};
+		int param1 = 1;
+		int param2 = 2;
+		int param3 = 3;
 		
-		System.out.println(product(params));
+		System.out.println(product(param1, param2, param3));
 
 	}
 	
-	public static int product(int[] args) {
+	public static int product(int ...args) {
 		int count = 0;
 		for (int i = 0; i < args.length; i++) {
 			count++;
