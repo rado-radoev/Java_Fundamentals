@@ -117,7 +117,7 @@ public class TurtleGraphics {
 			}
 		}
 		positionX = row - 1;
-		positionY = column;
+		positionY = column + 1;
 	}
 	
 	public void setDirection(int direction) {
