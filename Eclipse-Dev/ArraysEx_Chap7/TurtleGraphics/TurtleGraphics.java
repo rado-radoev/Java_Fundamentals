@@ -63,12 +63,13 @@ public class TurtleGraphics {
 		int row = positionX;
 		int column = positionY;
 		int i = 1;
-		for (; position > 0; position--) {
-			row -= i;
+		for (; position > 2; position--) {
 			if (getPenPosition() == 0)
 				board[row][column] = 0;
 			else
 				board[row][column] = 1;
+			
+			row -= i;			
 		}
 		positionX = row;
 	}
@@ -84,7 +85,7 @@ public class TurtleGraphics {
 			else
 				board[row][column] = 1;
 		}
-		positionX = row;
+		positionX = row -1;
 	}
 	
 	public void moveLeft(int position) {
@@ -117,7 +118,7 @@ public class TurtleGraphics {
 			}
 		}
 		positionX = row - 1;
-		positionY = column + 1;
+		positionY = column - 1;
 	}
 	
 	public void setDirection(int direction) {
