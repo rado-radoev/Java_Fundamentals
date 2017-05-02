@@ -60,32 +60,25 @@ public class TurtleGraphics {
 	}
 
 	public void moveUp(int position) {
-		int row = positionX;
-		int column = positionY;
-		int i = 1;
-		for (; position > 2; position--) {
-			if (getPenPosition() == 0)
-				board[row][column] = 0;
-			else
-				board[row][column] = 1;
-			
-			row -= i;			
+		int row = positionX;	// row 11
+		int column = positionY;	// col 11
+		for (; position > 0; position--) {
+			board[row][column] = penPosition;
+			row--;			
 		}
-		positionX = row;
+		positionX = ++row;
 	}
 
 	
 	public void moveDown(int position) {
-		int row = positionX;
-		int column = positionY;
+		int row = positionX;	// 0
+		int column = positionY;  // 0
 		
 		for (; row < position; row++) {
-			if (getPenPosition() == 0)
-				board[row][column] = 0;
-			else
-				board[row][column] = 1;
+			board[row][column] = penPosition;
 		}
-		positionX = row -1;
+		
+		positionX = --row;
 	}
 	
 	public void moveLeft(int position) {
@@ -93,32 +86,24 @@ public class TurtleGraphics {
 		int column = positionY;
 		for (; row <= positionX; row++) {
 			for (; position > 0; position--) {
-				column -= 1;
-				if (getPenPosition() == 0)
-					board[row][column] = 0;
-				else
-					board[row][column] = 1;
+				board[row][column] = penPosition;
+				column--;
 			}
 		}
-		positionX = row - 1;
-		positionY = column -1;
+		positionY = ++column;
 	}
 	
 	public void moveRight(int position) {
-		int row = positionX;
-		int column = positionY;
-		for (; row <= positionX; row++) {
+		int row = positionX;	// 11
+		int column = positionY;	 // 0
+		for (; row <= positionX; row++) {	// only for the current row
 			for (int i = 0; i < position; i++)  {
-				if (getPenPosition() == 0)
-					board[row][column] = 0;
-				else 
-					board[row][column] = 1;
+				board[row][column] = penPosition;
 				
-				column += 1;
+				column++;
 			}
 		}
-		positionX = row - 1;
-		positionY = column - 1;
+		positionY = --column;
 	}
 	
 	public void setDirection(int direction) {
