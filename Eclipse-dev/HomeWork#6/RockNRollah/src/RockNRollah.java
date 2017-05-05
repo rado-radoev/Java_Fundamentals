@@ -21,6 +21,7 @@ public class RockNRollah {
 		int rolls = 36000000;
 		
     	// Initialize the array that will hold the results
+		// Array is set to 13, because we can have 12 possible combinations
 		int[] frequencyArr = new int[13];
 			
     	// Roll the dice (a lot) and sum and tally the results
@@ -35,8 +36,7 @@ public class RockNRollah {
         System.out.println("Results after " + rolls + " rolls");
         System.out.println("-------------------------");
         System.out.println("Value\tFrequency");
- 
-        
+
         // Loop, displaying the rows for the body of the table, each on its own line.
  		for (int i = 2; i < frequencyArr.length; i++) {
 			System.out.printf("%d\t%d%n", i, frequencyArr[i]);
@@ -44,8 +44,7 @@ public class RockNRollah {
 	}
     
     /**
-     * 
-     * @return
+     * @return pseudo-random number from 1 to 6 inclusive
      */
 	public static int rollDice() {
 		return 1 + rand.nextInt(6);
