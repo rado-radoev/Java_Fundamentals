@@ -44,6 +44,7 @@ public class RockNRollah {
 	}
     
     /**
+     * Generate random number in range 1 to 6
      * @return pseudo-random number from 1 to 6 inclusive
      */
 	public static int rollDice() {

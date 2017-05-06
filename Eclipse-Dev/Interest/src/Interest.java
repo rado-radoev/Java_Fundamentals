@@ -20,7 +20,6 @@ public class Interest {
 			//display the year and the amount
 			System.out.printf("%4d%20s%n", year, NumberFormat.getCurrencyInstance().format(amount));
 			
-			
 		}
 	}
 }
