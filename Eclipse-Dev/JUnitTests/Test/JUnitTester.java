@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.junit.Assume;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -15,6 +16,9 @@ public class JUnitTester {
 		Result result = JUnitCore.runClasses(JUnitTest.class);
 		for (Failure failure : result.getFailures()) {
 			System.out.println(failure.toString());
+			
+			// disables a test on Linux
+			Assume.assumeFalse(System.getProperty("os.name").contains("Linux"));
 		}
 	}
 
