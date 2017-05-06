@@ -163,11 +163,6 @@ public class Time2Enhanced
    
    // add one hour
    public void incrementHour() {
-	   if (getHour() + 1 >= 24) {
-		   setHour(0); // if hour + 1 will be 24, next hour is 0
-	   }
-	   else {
-		   setHour(getHour() + 1);	// if hour + 1 is not 24, increment hour
-	   }
+	   setHour((getHour() + 1 >= 24) ? 0 : getHour() + 1);
    }
 } // end class Time2

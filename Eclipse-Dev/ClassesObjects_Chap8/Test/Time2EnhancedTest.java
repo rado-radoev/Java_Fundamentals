@@ -9,7 +9,7 @@ public class Time2EnhancedTest
       t1.tick();
       Time2Enhanced t2 = new Time2Enhanced(2, 58); // 02:00:00
       t2.incremenetMinute();
-      Time2Enhanced t3 = new Time2Enhanced(12, 34); // 21:34:00
+      Time2Enhanced t3 = new Time2Enhanced(23, 34); // 21:34:00
       t3.incrementHour();
       Time2Enhanced t4 = new Time2Enhanced(12, 58, 59); // 12:25:42
       t4.tick();
