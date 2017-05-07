@@ -1,3 +1,5 @@
+import java.time.DayOfWeek;
+
 // ex 8.8
 
 public class Date2 
@@ -6,6 +8,8 @@ public class Date2
    private int day; // 1-31 based on month
    private int year; // any year
    
+   private static final int[] daysInYear = 
+	   {0,31,59,90,120,151,181,212,243,273,304,334,365};
 
    private static final int[] daysPerMonth = 
       {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -26,6 +30,32 @@ public class Date2
 	      setMonth(monthNameToInt.getMonth());
 	      setDay(day);
 	      setYear(year);
+   }
+   
+   public Date2(int dayInYear, int year) {
+	   setMonth(getMonthBasedOnDayInYear(dayInYear));
+	   setDay(getDayBasedOnDayInYear(dayInYear));
+	   setYear(year);
+   }
+   
+   private final int getDayBasedOnDayInYear(int dayInYear) {
+	   int currentDay = 0;
+	   for (int i = 1; i < daysInYear.length;i++) {
+		   if (dayInYear >= daysInYear[i - 1] && dayInYear <= daysInYear[i]) {
+			   return dayInYear - daysInYear[i - 1];
+		   }
+	   }
+	   return currentDay;
+   }
+   
+   private final int getMonthBasedOnDayInYear(int dayInYear) {
+	   int i;
+	   for (i = 1; i < daysInYear.length;i++) {
+		   if (dayInYear >= daysInYear[i - 1] && dayInYear <= daysInYear[i]) {
+			   return i;
+		   }
+	   }
+	   return i;
    }
    
    public void incrementDay() {
