@@ -1,16 +1,17 @@
 // ex 8.8
 
-public class Date 
+public class Date2 
 {
    private int month; // 1-12
    private int day; // 1-31 based on month
    private int year; // any year
+   
 
    private static final int[] daysPerMonth = 
       {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
    
    // constructor: confirm proper value for month and day given the year
-   public Date(int month, int day, int year)
+   public Date2(int month, int day, int year)
    {
       setMonth(month);
       setDay(day);
@@ -18,9 +19,11 @@ public class Date
 
       System.out.printf(
          "Date object constructor for date %s%n", this);
+   } 
+   
+   public Date2(String strMnth, int day, int year) {
+	   
    }
-   
-   
    
    public void incrementDay() {
 	   setDay(++day % daysPerMonth[month]);
