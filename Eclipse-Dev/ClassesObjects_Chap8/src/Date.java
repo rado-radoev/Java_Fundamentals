@@ -33,7 +33,7 @@ public class Date
    }
    
    private void incrementYear() {
-	   setYear(++year);
+	   setYear(++year);	// Roll over the year
    }
    
    public int getDay() {
@@ -48,7 +48,7 @@ public class Date
 	   return year;
    }
    
-   public void setDay(int day) {
+   public final void setDay(int day) {
 	// check if day in range for month
 	      if (day <= 0 || 
 	         (day > daysPerMonth[month] && !(month == 2 && day == 29)))
@@ -58,7 +58,7 @@ public class Date
 	      this.day = day;
    }
 
-   public void setMonth(int month) {
+   public final void setMonth(int month) {
 	      // check if month in range
 	      if (month <= 0 || month > 12)
 	         throw new IllegalArgumentException(
@@ -67,7 +67,7 @@ public class Date
 	      this.month = month;
    }
    
-   public void setYear(int year) {
+   public final void setYear(int year) {
 		  // check if year in range
 		  if (year <= 1900 || year > 3000)
 			  throw new IllegalArgumentException(
