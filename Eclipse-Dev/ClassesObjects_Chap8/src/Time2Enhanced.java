@@ -1,5 +1,4 @@
-// Fig. 8.5: Time2.java
-// Time2 class declaration with overloaded constructors.  
+// ex 8.7
 
 public class Time2Enhanced
 {
@@ -141,9 +140,9 @@ public class Time2Enhanced
 			   }
 			   else setHour(getHour() + 1); // if not midnight increment hour
 		   }
-		   else setMinute(getMinute() + 1);  // if next minute is not 60, inrement it
+		   else setMinute(getMinute() + 1);  // if next minute is not 60, increment it
 	   }
-	   else setSecond(getSecond() + 1);	// if next second is not 60, icrement it
+	   else setSecond(getSecond() + 1);	// if next second is not 60, increment it
    }
    // add one minute
    public void incremenetMinute() {
@@ -163,6 +162,6 @@ public class Time2Enhanced
    
    // add one hour
    public void incrementHour() {
-	   setHour((getHour() + 1 >= 24) ? 0 : getHour() + 1);
+	   setHour((getHour() + 1 >= 24) ? 0 : getHour() + 1); // if hour + 1 is over 24 set to 0, if not increment
    }
 } // end class Time2
