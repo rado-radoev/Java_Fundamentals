@@ -1,6 +1,4 @@
-import java.time.DayOfWeek;
-
-// ex 8.8
+// ex 8.14
 
 public class Date2 
 {
