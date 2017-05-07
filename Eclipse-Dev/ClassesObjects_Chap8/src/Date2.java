@@ -22,7 +22,10 @@ public class Date2
    } 
    
    public Date2(String strMnth, int day, int year) {
-	   
+	   Date2Enum monthNameToInt = Date2Enum.valueOf(strMnth.toUpperCase());
+	      setMonth(monthNameToInt.getMonth());
+	      setDay(day);
+	      setYear(year);
    }
    
    public void incrementDay() {
