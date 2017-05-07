@@ -9,7 +9,7 @@ public class TrafficLightTest {
 		
 		System.out.println();
 		for (TrafficLight trafficLight : EnumSet.range(TrafficLight.RED, TrafficLight.YELLOW)) {
-			System.out.println("Duration of " + trafficLight + "is ----- " + trafficLight.getDuration());
+			System.out.println("Duration of " + trafficLight + " is ----- " + trafficLight.getDuration());
 		}
 
 	}

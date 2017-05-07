@@ -131,37 +131,19 @@ public class Time2Enhanced
    
    // add one second
    public void tick() {
-	   if (getSecond() + 1 >= 60) {
-		   setSecond(0);	// if second + 1 will be 60 next second is 0
-		   if (getMinute() + 1 >= 60) {
-			   setMinute(0);	// if minute + 1 will be 60 next minute is 0
-			   if (getHour() + 1 >= 24) {
-				   setHour(0);	// if next hour is midnight set to 0
-			   }
-			   else setHour(getHour() + 1); // if not midnight increment hour
-		   }
-		   else setMinute(getMinute() + 1);  // if next minute is not 60, increment it
-	   }
-	   else setSecond(getSecond() + 1);	// if next second is not 60, increment it
+	   setSecond(++second % 60);
+	   if (getSecond() == 0)	// Rolled over a minute - increment minute
+		   incremenetMinute();
    }
    // add one minute
    public void incremenetMinute() {
-	   if (getMinute() + 1 >= 60) {
-		   setMinute(0);	// if minute + 1 will be 60, next minute is 0
-		   if (getHour() + 1 >= 24) {
-			   setHour(0); // if hour + 1 will be 24, next hour is 0
-		   }
-		   else {
-			   setHour(getHour() + 1);	// if hour + 1 is not 24, increment hour
-		   }
-	   }
-	   else {
-		   setMinute(getMinute() + 1);	// if minute + 1 is not 60, increment minute
-	   }
+	   setMinute(++minute % 60);
+	   if (getMinute() == 0)	// Rolled over an hour - increment hour
+		   incrementHour();
    }
    
    // add one hour
    public void incrementHour() {
-	   setHour((getHour() + 1 >= 24) ? 0 : getHour() + 1); // if hour + 1 is over 24 set to 0, if not increment
+	   setHour(++hour % 24);   
    }
 } // end class Time2
