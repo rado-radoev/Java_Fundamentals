@@ -15,16 +15,16 @@ public class TicTacToe {
 	// check if winning
 	public boolean checkWin() {
 		for (int i = 1; i < board.length; i++) {
-			if (board[i][1] == board[i][2] && board[i][2] == board[i][3])
+			if ((board[i][1] == board[i][2] && board[i][1] == board[i][3]) && board[i][1] != TicTacToeEnum.EMPTY)
 				return true;				
 		}
 		
-		if (board[1][1] == board[2][2] && board[1][1] == board[3][3])
+		if ((board[1][1] == board[2][2] && board[1][1] == board[3][3]) && board[1][1] != TicTacToeEnum.EMPTY)
 			return true;
 		
-		if (board[1][3] == board[2][2] && board[1][3] == board[3][1])
+		if ((board[1][3] == board[2][2] && board[1][3] == board[3][1]) && board[1][3] != TicTacToeEnum.EMPTY)
 			return true;
-					
+		
 		return false;
 	}
 	
