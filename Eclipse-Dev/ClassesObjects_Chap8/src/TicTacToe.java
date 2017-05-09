@@ -13,16 +13,26 @@ public class TicTacToe {
 	}
 	
 	// check if winning
-//	private boolean checkWin() {
-//		
-//	}
+	public boolean checkWin() {
+		for (int i = 1; i < board.length; i++) {
+			if (board[i][1] == board[i][2] && board[i][2] == board[i][3])
+				return true;				
+		}
+		
+		if (board[1][1] == board[2][2] && board[1][1] == board[3][3])
+			return true;
+		
+		if (board[1][3] == board[2][2] && board[1][3] == board[3][1])
+			return true;
+					
+		return false;
+	}
 	
 	// place figure in array
 	public void makeMove(int[] userChoice, TicTacToeEnum player) {
 		board[userChoice[0]][userChoice[1]] = player;
 	}
 	 
-	
 	// Check if space is available to play
 	public boolean isEmpty(int[] userSelection) {
 		int row = userSelection[0];
@@ -35,17 +45,19 @@ public class TicTacToe {
 	
 	// Ask the user to select a row and a column and output to array
 	public int[] userSelect() {
-		int row;
+		// Perform a check. User cannot enter anything else than 1-3
+		int row = 0;
 		do {
 			System.out.printf("Choose a row to play? (1-3): ");
 			row = input.nextInt();			
-		} while (row < 1 && row > 3);
+		} while (row < 1 || row > 3);
 
-		int column;
+		// Perform a check. User cannot enter anything else than 1-3
+		int column = 0;
 		do {
 			System.out.printf("Choose a column to play? (1-3): ");
 			column = input.nextInt();		
-		} while(column < 1 && column > 3);
+		} while(column < 1 || column > 3);
 
 		
 		userSelection[0] = row;

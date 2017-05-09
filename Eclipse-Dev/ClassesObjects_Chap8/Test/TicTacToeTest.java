@@ -14,6 +14,10 @@ public class TicTacToeTest {
 				ttt.makeMove(userSelection, TicTacToeEnum.X);
 			}
 			ttt.displayBoard();
+			if(ttt.checkWin()) {
+				System.out.println("Player 1 wins!");
+				break;
+			}
 			
 			System.out.println("Player 2 turn:");
 			userSelection = ttt.userSelect();
@@ -21,8 +25,10 @@ public class TicTacToeTest {
 				ttt.makeMove(userSelection, TicTacToeEnum.O);
 			}
 			ttt.displayBoard();
-			
-			
+			if(ttt.checkWin()) {
+				System.out.println("Player 2 wins!");
+				break;
+			}
 		}
 	}
 
