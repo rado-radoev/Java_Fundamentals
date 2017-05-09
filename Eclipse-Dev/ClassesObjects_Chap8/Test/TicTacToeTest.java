@@ -1,5 +1,10 @@
 
 public class TicTacToeTest {
+	
+	
+	// TO DO:
+	// Players can still select a field that has already been played on
+	// Add numbering to rows and columns when displaying table
 
 	public static void main(String[] args) {
 		TicTacToe ttt = new TicTacToe();
