@@ -38,13 +38,13 @@ public class TicTacToePlayer {
 	
 	// Check if the selected figure is available
 	private boolean checkFicgureAvailable(String figure) {
-		if (figure.toUpperCase().equals("X") && !Xoccupied ) {
-			return true;
+		if (figure.toUpperCase().equals("X") && Xoccupied ) {
+			return false;
 		}
-		else if (figure.toUpperCase().equals("O") && !Ooccupied) {
-			return true;
+		else if (figure.toUpperCase().equals("O") && Ooccupied) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public void selectUserFigure() {
@@ -53,19 +53,25 @@ public class TicTacToePlayer {
 			return;
 		}
 		
-		String player1Figure = "";
-		// Loop until user selects X or O
-		while (!player1Figure.toUpperCase().equals("X") && !player1Figure.toUpperCase().equals("O")) {
-			System.out.printf("Select figure. Choose between X and O: ");
-			player1Figure = input.nextLine();	// read user input
-			reserveFigure(player1Figure);
+
+		// Be careful with the infinite loop
+		while (true) {
+			String player1Figure = "";
+			// Loop until user selects X or O
+			while (!player1Figure.toUpperCase().equals("X") && !player1Figure.toUpperCase().equals("O")) {
+				System.out.printf("Select figure. Choose between X and O: ");
+				player1Figure = input.nextLine();	// read user input
+			}
+
 			if (checkFicgureAvailable(player1Figure)) {
+				reserveFigure(player1Figure);
+				playerFigure = TicTacToeEnum.valueOf(player1Figure.toUpperCase());
 				return;
 			}
 			else {
-				System.out.printf("Figure %s already occupied. Choose another one%n", player1Figure);
-				player1Figure = "";
-			}
+				System.out.printf("Figure %s already occupied. Choose another one%n", player1Figure.toUpperCase());
+			}			
 		}
+
 	}
 }

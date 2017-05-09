@@ -20,7 +20,7 @@ public class TicTacToeTest {
 		for (int i = 0; i < 9; i++) {
 			System.out.println("Player 1 turn:");
 			userSelection = ttt.userSelect();
-			while(ttt.isEmpty(userSelection)) {
+			while(ttt.isEmpty(userSelection, player1.getPlayerFigure())) {
 				ttt.makeMove(userSelection, player1.getPlayerFigure());
 			}
 			ttt.displayBoard();
@@ -31,7 +31,7 @@ public class TicTacToeTest {
 			
 			System.out.println("Player 2 turn:");
 			userSelection = ttt.userSelect();
-			while(ttt.isEmpty(userSelection)) {
+			while(ttt.isEmpty(userSelection, player2.getPlayerFigure())) {
 				ttt.makeMove(userSelection, player2.getPlayerFigure());
 			}
 			ttt.displayBoard();
