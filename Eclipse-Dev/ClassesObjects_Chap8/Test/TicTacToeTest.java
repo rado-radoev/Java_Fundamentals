@@ -11,6 +11,10 @@ public class TicTacToeTest {
 		
 		ttt.displayBoard();
 		int[] userSelection = new int[2];
+		
+		TicTacToePlayer player1 = new TicTacToePlayer();
+		player1.selectUserFigure();
+		
 
 		for (int i = 0; i < 9; i++) {
 			System.out.println("Player 1 turn:");
