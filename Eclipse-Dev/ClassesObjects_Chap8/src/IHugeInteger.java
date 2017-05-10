@@ -1,7 +1,8 @@
+import javax.naming.directory.InvalidAttributesException;
 
 public interface IHugeInteger {
 	public String toString();
-	public HugeInteger parse(String hugeInteger);
+	public void parse(String hugeInteger) throws IndexOutOfBoundsException, InvalidAttributesException;
 	public HugeInteger add(HugeInteger a, HugeInteger b);
 	public HugeInteger subtract(HugeInteger a, HugeInteger b);
 	public boolean isEqualTo(HugeInteger a, HugeInteger b);

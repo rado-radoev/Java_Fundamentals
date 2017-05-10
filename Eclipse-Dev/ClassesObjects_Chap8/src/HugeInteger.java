@@ -1,14 +1,54 @@
+import javax.naming.directory.InvalidAttributesException;
+
 // ex 8.16
-import java.math.BigInteger;
 
 public class HugeInteger implements IHugeInteger {
 
-	private BigInteger hugeInteger;
+	private int[] hugeInteger = new int[40];
+	private int numberOfDigits;
+	
+	public HugeInteger() {
+		
+	}
+	
+	public HugeInteger(int[] hugeInteger) {
+		this.hugeInteger = hugeInteger;
+	}
 
+	// Check if string lenght is more than 40
+	private boolean checkHugeIntegerStringLenght(String hugeInteger) {
+		if (hugeInteger.length() > 40) {
+			return false;	// Huge Integer max length is 40
+		}
+		return true;
+	}
+	
+	// Check is current char is digit
+	private boolean isDigit(char character) {
+		if (character >= 48 && character <= 57 ) {
+			return true; // Character is int
+		}
+		return false; 	// character is not int
+	}
+	
+	// Parse String to hugeInteger array 
 	@Override
-	public HugeInteger parse(String hugeInteger) {
-		// TODO Auto-generated method stub
-		return null;
+	public void parse(String hugeInteger) throws IndexOutOfBoundsException, InvalidAttributesException {
+		// Check if parsed string has length of <= 40
+		if (!checkHugeIntegerStringLenght(hugeInteger)) {	
+			throw new IndexOutOfBoundsException(String.format("Huge Integer can contain up to 40 digits. Your contains %d", hugeInteger.length()));	// if String is longer than 40 chars throw an exception
+		}
+		
+		// Loop through each char of the string
+		for (int i = 0; i < hugeInteger.length(); i++) {
+			if (isDigit(hugeInteger.charAt(i))) {	// verify if current char is digit
+				this.hugeInteger[i] = hugeInteger.charAt(i) - 48;	// return current char as digit and assign to array
+				numberOfDigits++;
+			}
+			else {
+				throw new InvalidAttributesException("Expected digit 0 - 9");	// if current char is not digit, throw an exception
+			}
+		}
 	}
 
 	@Override
@@ -81,6 +121,15 @@ public class HugeInteger implements IHugeInteger {
 	public HugeInteger remainder(HugeInteger a, HugeInteger b) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < numberOfDigits; i++) {
+			sb.append(hugeInteger[i]);
+		}
+		return sb.toString();
 	}
 	
 	
