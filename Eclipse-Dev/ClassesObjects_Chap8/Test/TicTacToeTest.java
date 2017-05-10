@@ -2,9 +2,7 @@
 public class TicTacToeTest {
 	
 	private static int[] userSelection = new int[2];
-	
-	// TO DO:
-	// Add numbering to rows and columns when displaying table
+	private static boolean win;
 
 	public static void main(String[] args) {
 		TicTacToe ttt = new TicTacToe();			
@@ -19,13 +17,20 @@ public class TicTacToeTest {
 		
 		for (int i = 0; i < 9; i++) {
 			userMove(ttt, player1);
-			userMove(ttt, player2);	
+			userMove(ttt, player2);				
+
 		}
-		System.out.println("Nobody Wins");
+		if (!win) {
+			System.out.println("Nobody Wins");	
+		}
 	}
 	
 	// Users play on board
 	public static void userMove(TicTacToe ttt, TicTacToePlayer player) {
+		if (win) {
+			return;
+		}
+			
 		boolean nextPlayer = true;	// sentinel controlling variable
 		while(nextPlayer) {
 			System.out.printf("Player %s turn %n", player.getPlayerFigure());	// Display who's turn it is
@@ -38,9 +43,11 @@ public class TicTacToeTest {
 				System.out.print("Space is already occupied. Choose another.");	// If space is occupied ask the user to select again.
 			}
 		}	
+		
 		ttt.displayBoard();	// Display the board
 		if(ttt.checkWin()) {	// Check if user has won
 			System.out.printf("Player %s wins!", player.getPlayerFigure());
+			win = true;
 			return;
 		}
 	}
