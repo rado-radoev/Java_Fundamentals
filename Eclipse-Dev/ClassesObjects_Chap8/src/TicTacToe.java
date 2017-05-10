@@ -37,10 +37,10 @@ public class TicTacToe {
 	public boolean isEmpty(int[] userSelection) {
 		int row = userSelection[0];
 		int col = userSelection[1];
-		if (board[row][col] != TicTacToeEnum.EMPTY) 
-			return false;
-		else 
+		if (board[row][col] == TicTacToeEnum.EMPTY)
 			return true;
+		else 
+			return false;
 	}
 	
 	// Ask the user to select a row and a column and output to array

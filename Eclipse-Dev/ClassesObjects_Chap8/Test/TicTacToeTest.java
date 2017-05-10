@@ -3,7 +3,6 @@ public class TicTacToeTest {
 	
 	
 	// TO DO:
-	// Players can still select a field that has already been played on
 	// Add numbering to rows and columns when displaying table
 
 	public static void main(String[] args) {
@@ -11,30 +10,53 @@ public class TicTacToeTest {
 		
 		ttt.displayBoard();
 		int[] userSelection = new int[2];
+		
+		TicTacToePlayer player1 = new TicTacToePlayer();
+		TicTacToePlayer player2 = new TicTacToePlayer();
+		player1.selectUserFigure();
+		player2.selectUserFigure();
 
+		// sentinel controlling value
+		boolean nextPlayer = true;
 		for (int i = 0; i < 9; i++) {
-			System.out.println("Player 1 turn:");
-			userSelection = ttt.userSelect();
-			while(ttt.isEmpty(userSelection)) {
-				ttt.makeMove(userSelection, TicTacToeEnum.X);
+			while(nextPlayer) {
+				System.out.println("Player 1 turn:");
+				userSelection = ttt.userSelect();
+				if (ttt.isEmpty(userSelection)) {
+					ttt.makeMove(userSelection, player1.getPlayerFigure());
+					nextPlayer = false;
+				}
+				else {
+					System.out.print("Space is already occupied. Choose another.");
+				}
 			}
+			nextPlayer = true;
 			ttt.displayBoard();
 			if(ttt.checkWin()) {
 				System.out.println("Player 1 wins!");
 				break;
 			}
 			
-			System.out.println("Player 2 turn:");
-			userSelection = ttt.userSelect();
-			while(ttt.isEmpty(userSelection)) {
-				ttt.makeMove(userSelection, TicTacToeEnum.O);
+			while(nextPlayer) {
+				System.out.println("Player 2 turn:");
+				userSelection = ttt.userSelect();
+				if (ttt.isEmpty(userSelection)) {
+					ttt.makeMove(userSelection, player2.getPlayerFigure());
+					nextPlayer = false;
+				}
+				else {
+					System.out.print("Space is already occupied. Choose another.");
+				}
 			}
+			nextPlayer = true;
 			ttt.displayBoard();
 			if(ttt.checkWin()) {
 				System.out.println("Player 2 wins!");
 				break;
-			}
+			}	
 		}
+		
+		System.out.println("Nobody Wins");
 	}
 
 }
