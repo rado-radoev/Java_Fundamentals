@@ -77,12 +77,20 @@ public class TicTacToe {
 	
 	// Display the board
 	public void displayBoard() {
-		System.out.printf("%n");
+		System.out.printf("     1     2      3     %n");
+		System.out.printf("------------------------%n");
 		for (int row = 1; row < board.length; row++) {
+			System.out.printf("%d", row);
 			for (int col = 1; col < board[row].length; col++) {
-				System.out.printf("%5s%5s", "|", board[row][col]);
+				System.out.printf("%s%5s%s", 
+						"|", 
+						board[row][col] == TicTacToeEnum.EMPTY ? "" : board[row][col], 
+						"|");
 			}
-			System.out.printf("%s%n", "|");
+			System.out.printf("%2d%n", row);
+			System.out.printf("------------------------%n");
+			
 		}
+		System.out.printf("     1     2      3     %n");
 	}
 }

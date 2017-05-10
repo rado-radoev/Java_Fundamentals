@@ -7,41 +7,39 @@ public class TicTacToeTest {
 	// Add numbering to rows and columns when displaying table
 
 	public static void main(String[] args) {
-		TicTacToe ttt = new TicTacToe();
-		
-		ttt.displayBoard();
-		
-		
+		TicTacToe ttt = new TicTacToe();			
 		TicTacToePlayer player1 = new TicTacToePlayer();
 		TicTacToePlayer player2 = new TicTacToePlayer();
+		
+		
 		player1.selectUserFigure();
 		player2.selectUserFigure();
 
-
+		ttt.displayBoard();
+		
 		for (int i = 0; i < 9; i++) {
 			userMove(ttt, player1);
 			userMove(ttt, player2);	
 		}
-		
 		System.out.println("Nobody Wins");
 	}
 	
+	// Users play on board
 	public static void userMove(TicTacToe ttt, TicTacToePlayer player) {
-		boolean nextPlayer = true;
+		boolean nextPlayer = true;	// sentinel controlling variable
 		while(nextPlayer) {
-			System.out.printf("Player %s turn %n", player.getPlayerFigure());
-			userSelection = ttt.userSelect();
-			if (ttt.isEmpty(userSelection)) {
-				ttt.makeMove(userSelection, player.getPlayerFigure());
-				nextPlayer = false;
+			System.out.printf("Player %s turn %n", player.getPlayerFigure());	// Display who's turn it is
+			userSelection = ttt.userSelect();	// Select row and column to play
+			if (ttt.isEmpty(userSelection)) {	// Check if selectd space is availbe == EMPTY
+				ttt.makeMove(userSelection, player.getPlayerFigure());	// if space is available, make the move
+				nextPlayer = false;	// set sentinel controlling variable to false - exit loop
 			}
 			else {
-				System.out.print("Space is already occupied. Choose another.");
+				System.out.print("Space is already occupied. Choose another.");	// If space is occupied ask the user to select again.
 			}
-		}
-		nextPlayer = true;
-		ttt.displayBoard();
-		if(ttt.checkWin()) {
+		}	
+		ttt.displayBoard();	// Display the board
+		if(ttt.checkWin()) {	// Check if user has won
 			System.out.printf("Player %s wins!", player.getPlayerFigure());
 			return;
 		}
