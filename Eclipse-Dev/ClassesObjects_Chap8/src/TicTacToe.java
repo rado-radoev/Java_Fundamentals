@@ -12,16 +12,25 @@ public class TicTacToe {
 		initializeBoard();
 	}
 	
-	// check if winning
+	// Check if winning
 	public boolean checkWin() {
-		for (int i = 1; i < board.length; i++) {
-			if ((board[i][1] == board[i][2] && board[i][1] == board[i][3]) && board[i][1] != TicTacToeEnum.EMPTY)
+		// Loop through every row and check if all symbols match and they are not of type Enum.EMPTY
+		for (int row = 1; row < board.length; row++) {
+//			for (int col = 1; col < board[row].length; col++) {
+//				if (board[row][col] == board[row][col-1] && board[row][col] != TicTacToeEnum.EMPTY) {
+//					return true;
+//				}
+//			}
+//				
+			if ((board[row][1] == board[row][2] && board[row][1] == board[row][3]) && board[row][1] != TicTacToeEnum.EMPTY)
 				return true;				
 		}
 		
+		// Check diagonal from [1][1] to [3][3]
 		if ((board[1][1] == board[2][2] && board[1][1] == board[3][3]) && board[1][1] != TicTacToeEnum.EMPTY)
 			return true;
 		
+		// Check diagonal from [1][3] to [3][1]
 		if ((board[1][3] == board[2][2] && board[1][3] == board[3][1]) && board[1][3] != TicTacToeEnum.EMPTY)
 			return true;
 		
