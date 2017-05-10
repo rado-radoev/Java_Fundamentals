@@ -1,62 +1,56 @@
 
 public class TicTacToeTest {
 	
-	
-	// TO DO:
-	// Add numbering to rows and columns when displaying table
+	private static int[] userSelection = new int[2];
+	private static boolean win;
 
 	public static void main(String[] args) {
-		TicTacToe ttt = new TicTacToe();
-		
-		ttt.displayBoard();
-		int[] userSelection = new int[2];
-		
+		TicTacToe ttt = new TicTacToe();			
 		TicTacToePlayer player1 = new TicTacToePlayer();
 		TicTacToePlayer player2 = new TicTacToePlayer();
+		
+		
 		player1.selectUserFigure();
 		player2.selectUserFigure();
 
-		// sentinel controlling value
-		boolean nextPlayer = true;
-		for (int i = 0; i < 9; i++) {
-			while(nextPlayer) {
-				System.out.println("Player 1 turn:");
-				userSelection = ttt.userSelect();
-				if (ttt.isEmpty(userSelection)) {
-					ttt.makeMove(userSelection, player1.getPlayerFigure());
-					nextPlayer = false;
-				}
-				else {
-					System.out.print("Space is already occupied. Choose another.");
-				}
-			}
-			nextPlayer = true;
-			ttt.displayBoard();
-			if(ttt.checkWin()) {
-				System.out.println("Player 1 wins!");
-				break;
-			}
-			
-			while(nextPlayer) {
-				System.out.println("Player 2 turn:");
-				userSelection = ttt.userSelect();
-				if (ttt.isEmpty(userSelection)) {
-					ttt.makeMove(userSelection, player2.getPlayerFigure());
-					nextPlayer = false;
-				}
-				else {
-					System.out.print("Space is already occupied. Choose another.");
-				}
-			}
-			nextPlayer = true;
-			ttt.displayBoard();
-			if(ttt.checkWin()) {
-				System.out.println("Player 2 wins!");
-				break;
-			}	
-		}
+		ttt.displayBoard();
 		
-		System.out.println("Nobody Wins");
+		for (int i = 0; i < 9; i++) {
+			userMove(ttt, player1);
+			userMove(ttt, player2);				
+
+		}
+		if (!win) {
+			System.out.println("Nobody Wins");	
+		}
+	}
+	
+	// Users play on board
+	public static void userMove(TicTacToe ttt, TicTacToePlayer player) {
+		if (win) {
+			return;
+		}
+	
+		
+		boolean nextPlayer = true;	// sentinel controlling variable
+		while(nextPlayer) {
+			System.out.printf("Player %s turn %n", player.getPlayerFigure());	// Display who's turn it is
+			userSelection = ttt.userSelect();	// Select row and column to play
+			if (ttt.isEmpty(userSelection)) {	// Check if selectd space is availabe == EMPTY
+				ttt.makeMove(userSelection, player.getPlayerFigure());	// if space is available, make the move
+				nextPlayer = false;	// set sentinel controlling variable to false - exit loop
+			}
+			else {
+				System.out.print("Space is already occupied. Choose another.");	// If space is occupied ask the user to select again.
+			}
+		}	
+		
+		ttt.displayBoard();	// Display the board
+		if(ttt.checkWin()) {	// Check if user has won
+			System.out.printf("Player %s wins!", player.getPlayerFigure());
+			win = true;
+			return;
+		}
 	}
 
 }
