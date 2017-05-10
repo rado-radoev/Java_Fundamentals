@@ -30,12 +30,13 @@ public class TicTacToeTest {
 		if (win) {
 			return;
 		}
-			
+	
+		
 		boolean nextPlayer = true;	// sentinel controlling variable
 		while(nextPlayer) {
 			System.out.printf("Player %s turn %n", player.getPlayerFigure());	// Display who's turn it is
 			userSelection = ttt.userSelect();	// Select row and column to play
-			if (ttt.isEmpty(userSelection)) {	// Check if selectd space is availbe == EMPTY
+			if (ttt.isEmpty(userSelection)) {	// Check if selectd space is availabe == EMPTY
 				ttt.makeMove(userSelection, player.getPlayerFigure());	// if space is available, make the move
 				nextPlayer = false;	// set sentinel controlling variable to false - exit loop
 			}
