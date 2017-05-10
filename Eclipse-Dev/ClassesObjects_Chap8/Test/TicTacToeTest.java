@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class TicTacToeTest {
 	
+	// TO DO;
+	// Add an option to choose number of players
+	// Add an option for computer oponent
+	
 	private static Scanner input= new Scanner(System.in);
 	private static int[] userSelection = new int[2];
 	private static boolean win;
