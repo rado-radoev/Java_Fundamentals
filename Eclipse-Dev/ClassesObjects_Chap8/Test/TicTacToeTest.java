@@ -1,6 +1,8 @@
+import java.util.Scanner;
 
 public class TicTacToeTest {
 	
+	private static Scanner input= new Scanner(System.in);
 	private static int[] userSelection = new int[2];
 	private static boolean win;
 
@@ -9,10 +11,10 @@ public class TicTacToeTest {
 		TicTacToePlayer player1 = new TicTacToePlayer();
 		TicTacToePlayer player2 = new TicTacToePlayer();
 		
-		
 		player1.selectUserFigure();
 		player2.selectUserFigure();
 
+		
 		ttt.displayBoard();
 		
 		for (int i = 0; i < 9; i++) {
@@ -23,6 +25,13 @@ public class TicTacToeTest {
 		if (!win) {
 			System.out.println("Nobody Wins");	
 		}
+	}
+	
+	// Choose number of player
+	public static int numberOfPlayers() {
+		System.out.println("Choose number of players 1 or 2?: ");
+		int playerNumber = input.nextInt();
+		return playerNumber;
 	}
 	
 	// Users play on board
