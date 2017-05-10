@@ -7,15 +7,13 @@ public class HugeInteger implements IHugeInteger {
 	private int[] hugeInteger = new int[40];
 	private int numberOfDigits;
 	
-	public HugeInteger() {
-		
-	}
+	public HugeInteger() {}
 	
 	public HugeInteger(int[] hugeInteger) {
 		this.hugeInteger = hugeInteger;
 	}
 
-	// Check if string lenght is more than 40
+	// Check if string length is more than 40
 	private boolean checkHugeIntegerStringLenght(String hugeInteger) {
 		if (hugeInteger.length() > 40) {
 			return false;	// Huge Integer max length is 40
@@ -52,9 +50,20 @@ public class HugeInteger implements IHugeInteger {
 	}
 
 	@Override
-	public HugeInteger add(HugeInteger a, HugeInteger b) {
-		// TODO Auto-generated method stub
-		return null;
+	public HugeInteger add(HugeInteger hugeInteger) {
+		HugeInteger temp = new HugeInteger();
+		int carry = 0;	// This will hold the carry number when adding digits larger than 10
+		for (int i = numberOfDigits - 1; i >= 0; i--) {
+			temp.hugeInteger[i] = this.hugeInteger[i] + hugeInteger.hugeInteger[i] + carry;
+			if (temp.hugeInteger[i] > 9) {
+				temp.hugeInteger[i] %= 10;
+				carry = 1;
+			}
+			else {
+				carry = 0;
+			}
+		}
+		return temp;
 	}
 
 	@Override
