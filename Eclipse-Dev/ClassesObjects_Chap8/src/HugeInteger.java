@@ -84,20 +84,16 @@ public class HugeInteger implements IHugeInteger {
 		int borrow = 0;
 		int carry = 0;
 		boolean negative = false;
-		int i;
 		
-		for (i = elements - 1; i >= 0;i--) {
-			if (this.hugeInteger[i] < a.hugeInteger[i]) {
-			}
-			
-			this.hugeInteger[i] = (carry + this.hugeInteger[i] - borrow) - a.hugeInteger[i];
-			if (this.hugeInteger[i] < a.hugeInteger[i]) {
-				borrow = 1;
-			}
-			else {
-				borrow = 0;
-			}
-		}
+		for (int i = 0 ; i < elements; i++) {
+            hugeInteger[i] -= a.hugeInteger[i] + borrow;
+            if (hugeInteger[i] >= 0)
+                borrow = 0;
+            else {
+            	hugeInteger[i] += 10;
+                borrow = 1;
+            }
+        }
 		
 		return this;
 		
