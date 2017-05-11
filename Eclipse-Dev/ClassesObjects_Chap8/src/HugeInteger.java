@@ -50,20 +50,18 @@ public class HugeInteger implements IHugeInteger {
 	}
 
 	@Override
-	public HugeInteger add(HugeInteger hugeInteger) {
-		HugeInteger temp = new HugeInteger();
+	public HugeInteger add(HugeInteger a) {
 		int carry = 0;	// This will hold the carry number when adding digits larger than 10
-		for (int i = numberOfDigits - 1; i >= 0; i--) {
-			temp.hugeInteger[i] = this.hugeInteger[i] + hugeInteger.hugeInteger[i] + carry;
-			if (temp.hugeInteger[i] > 9) {
-				temp.hugeInteger[i] %= 10;
-				carry = 1;
-			}
-			else {
-				carry = 0;
-			}
+		int largestArray = this.numberOfDigits >= a.numberOfDigits ? this.numberOfDigits: a.numberOfDigits;	// longest array
+		int smallestArray = this.numberOfDigits <= a.numberOfDigits? this.numberOfDigits: a.numberOfDigits;	// smallest array
+		int difference = largestArray - smallestArray;	// difference between the two arrays
+		
+		HugeInteger temp = new HugeInteger();
+		for (int i = smallestArray - 1; i >= 0;i--) {
+			
 		}
-		return temp;
+		
+		return this;
 	}
 
 	@Override
