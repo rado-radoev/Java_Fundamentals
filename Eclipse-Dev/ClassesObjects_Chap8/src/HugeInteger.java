@@ -29,6 +29,10 @@ public class HugeInteger implements IHugeInteger {
 		return false; 	// character is not int
 	}
 	
+	private int[] smallestArray(HugeInteger a) {
+		return this.hugeInteger.length <= a.hugeInteger.length ? this.hugeInteger : a.hugeInteger;
+	}
+	
 	// Parse String to hugeInteger array 
 	@Override
 	public void parse(String hugeInteger) throws IndexOutOfBoundsException, InvalidAttributesException {
@@ -38,7 +42,7 @@ public class HugeInteger implements IHugeInteger {
 		}
 		
 		// Loop through each char of the string
-		for (int i = 0; i < hugeInteger.length(); i++) {
+		for (int i = hugeInteger.length(); i >= 0; i--) {
 			if (isDigit(hugeInteger.charAt(i))) {	// verify if current char is digit
 				this.hugeInteger[i] = hugeInteger.charAt(i) - 48;	// return current char as digit and assign to array
 				numberOfDigits++;
