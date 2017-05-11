@@ -1,10 +1,13 @@
 import javax.naming.directory.InvalidAttributesException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // ex 8.16
 
 public class HugeInteger implements IHugeInteger {
 
-	private int[] hugeInteger = new int[40];
+	private final int elements = 40;
+	private int[] hugeInteger = new int[elements];
 	private int numberOfDigits;
 	
 	public HugeInteger() {}
@@ -41,11 +44,13 @@ public class HugeInteger implements IHugeInteger {
 			throw new IndexOutOfBoundsException(String.format("Huge Integer can contain up to 40 digits. Your contains %d", hugeInteger.length()));	// if String is longer than 40 chars throw an exception
 		}
 		
+		int counter = elements - 1;
 		// Loop through each char of the string
-		for (int i = hugeInteger.length(); i >= 0; i--) {
+		for (int i = hugeInteger.length() - 1; i >= 0; i--) {
 			if (isDigit(hugeInteger.charAt(i))) {	// verify if current char is digit
-				this.hugeInteger[i] = hugeInteger.charAt(i) - 48;	// return current char as digit and assign to array
+				this.hugeInteger[counter] = hugeInteger.charAt(i) - 48;	// return current char as digit and assign to array
 				numberOfDigits++;
+				counter--;
 			}
 			else {
 				throw new InvalidAttributesException("Expected digit 0 - 9");	// if current char is not digit, throw an exception
@@ -56,15 +61,21 @@ public class HugeInteger implements IHugeInteger {
 	@Override
 	public HugeInteger add(HugeInteger a) {
 		int carry = 0;	// This will hold the carry number when adding digits larger than 10
-		int largestArray = this.numberOfDigits >= a.numberOfDigits ? this.numberOfDigits: a.numberOfDigits;	// longest array
-		int smallestArray = this.numberOfDigits <= a.numberOfDigits? this.numberOfDigits: a.numberOfDigits;	// smallest array
-		int difference = largestArray - smallestArray;	// difference between the two arrays
 		
-		HugeInteger temp = new HugeInteger();
-		for (int i = smallestArray - 1; i >= 0;i--) {
-			
+		// Start from the last index
+		for (int i = elements - 1; i >= 0;i--) {
+			// Add the index of the current object to the index of the passed object + any carry gigits
+			this.hugeInteger[i] += a.hugeInteger[i] + carry;	
+			// if the sum of the two numbers is bigger than 10 do a module and add 1 to carry
+			if (this.hugeInteger[i] >= 10) {
+				this.hugeInteger[i] %= 10;
+				carry++;
+			}
+			else {
+				// if the sum of the two digits is less than 10 there is no carry
+				carry = 0;
+			}
 		}
-		
 		return this;
 	}
 
@@ -137,10 +148,27 @@ public class HugeInteger implements IHugeInteger {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < numberOfDigits; i++) {
+		// Pattern to search for (any number of zeros starting the begging of the string)
+		String pattern = "^0*";
+		
+		// Create pattern object
+		Pattern r = Pattern.compile(pattern);
+		
+		for (int i = 0; i < this.hugeInteger.length; i++) {
 			sb.append(hugeInteger[i]);
 		}
-		return sb.toString();
+		
+		// Create matcher object
+		Matcher m = r.matcher(sb.toString());
+		
+		// Assign SB object to string
+		String s = sb.toString();
+		
+		// Remove all occurances of zero before the 1st significatnt digit
+		s = m.replaceAll("");
+		
+		// print the modified string
+		return s;
 	}
 	
 	
