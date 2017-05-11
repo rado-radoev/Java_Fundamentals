@@ -9,7 +9,9 @@ public class HugeIntegerTest {
 		hugeInteger.parse("123");
 		hugeInteger2.parse("4567");
 		
-		System.out.println(hugeInteger.add(hugeInteger2));
+		//System.out.println(hugeInteger.add(hugeInteger2));
+		
+		System.out.println(hugeInteger.subtract(hugeInteger2));
 
 	}
 

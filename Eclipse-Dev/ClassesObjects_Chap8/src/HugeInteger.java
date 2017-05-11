@@ -1,12 +1,13 @@
 import javax.naming.directory.InvalidAttributesException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.math.BigInteger;
 
 // ex 8.16
 
 public class HugeInteger implements IHugeInteger {
 
-	private final int elements = 40;
+	private static final int elements = 40;
 	private int[] hugeInteger = new int[elements];
 	private int numberOfDigits;
 	
@@ -63,7 +64,7 @@ public class HugeInteger implements IHugeInteger {
 		int carry = 0;	// This will hold the carry number when adding digits larger than 10
 		
 		// Start from the last index
-		for (int i = elements - 1; i >= 0;i--) {
+		for (int i = elements - 1; i >= 0;i--) {	// if the sum of the two digits is less than 10 there is no carry
 			// Add the index of the current object to the index of the passed object + any carry gigits
 			this.hugeInteger[i] += a.hugeInteger[i] + carry;	
 			// if the sum of the two numbers is bigger than 10 do a module and add 1 to carry
@@ -72,7 +73,7 @@ public class HugeInteger implements IHugeInteger {
 				carry++;
 			}
 			else {
-				// if the sum of the two digits is less than 10 there is no carry
+				
 				carry = 0;
 			}
 		}
@@ -80,9 +81,55 @@ public class HugeInteger implements IHugeInteger {
 	}
 
 	@Override
-	public HugeInteger subtract(HugeInteger a, HugeInteger b) {
-		// TODO Auto-generated method stub
-		return null;
+	public HugeInteger subtract(HugeInteger a) {
+		int borrow = 0;
+		int carry = 0;
+		boolean negative = false;
+		int i;
+		
+		for (i = elements - 1; i >= 0;i--) {
+			if (this.hugeInteger[i] < a.hugeInteger[i]) {
+				carry = 10;
+			}
+			
+			this.hugeInteger[i] = (carry + this.hugeInteger[i] - borrow) - a.hugeInteger[i];
+			if (this.hugeInteger[i] < a.hugeInteger[i]) {
+				borrow = 1;
+			}
+			else {
+				borrow = 0;
+			}
+		}
+		
+		return this;
+		
+		/** 101
+		 *  102
+		 *  ---
+		 *   -1
+		 *  
+		 * 101 - 102
+		 * 1 - 2 = -1
+		 * 0 - 0 = 0
+		 * 1 - 1 = 0
+		 * result -1
+		 * 
+		 * 
+		 * 150 - 69
+		 * 0 - 9 = take 1 from 5
+		 * 10 - 9 = 1
+		 * 5 is now 4 because we took 1
+		 * 4 - 6 = take 1 from 1
+		 * 14 - 6 = 8
+		 * result = 81
+		 * 
+		 * 
+		 * 22 - 89
+		 * 9 - 2 = 7
+		 * 8 - 6 = 6
+		 * result = -67
+		 */
+
 	}
 
 	@Override
