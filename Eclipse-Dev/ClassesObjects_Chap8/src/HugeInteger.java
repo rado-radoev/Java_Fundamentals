@@ -1,7 +1,6 @@
 import javax.naming.directory.InvalidAttributesException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.math.BigInteger;
 
 // ex 8.16
 
@@ -89,7 +88,6 @@ public class HugeInteger implements IHugeInteger {
 		
 		for (i = elements - 1; i >= 0;i--) {
 			if (this.hugeInteger[i] < a.hugeInteger[i]) {
-				carry = 10;
 			}
 			
 			this.hugeInteger[i] = (carry + this.hugeInteger[i] - borrow) - a.hugeInteger[i];
