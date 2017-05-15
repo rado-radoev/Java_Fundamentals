@@ -36,7 +36,6 @@ public class IntegerSet {
      * Return a new IntegerSet containing the union of the two IntegerSet objects
      * passed as arguments
      */
-    // TODO: implement the union method
 	public IntegerSet union (IntegerSet a, IntegerSet b) {
 		// create a new IntegerSet that will be hold the union of the two integer sets
 		IntegerSet temp = new IntegerSet();	
