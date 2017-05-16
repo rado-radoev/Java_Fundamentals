@@ -83,12 +83,12 @@ public class IntegerSet {
      * @return Returns false if the value was out of range and true otherwise.
      */
     public boolean insertElement(int index) {   	
-    	if (index > set.length || index < 0) {
-    		return false; 			// specified index is either not in the set range
-    	}
-    	else {						// index is in range
+    	if (index < set.length || index >= 0) { // Check if index is in range
     		this.set[index] = true;	// set index to true;
-    		return true;	
+    		return true; 			// exit, no need to go further
+    	}
+    	else {						// index is not in range
+    		return false;			// nothing to set return false	
     	}
     }
     
@@ -99,12 +99,12 @@ public class IntegerSet {
      * @return Returns false if the value was out of range and true otherwise.
      */
     public boolean deleteElement(int index) {   	
-    	if (index > set.length || index < 0) {
-    		return false; 				// specified index is either not in the set range
-    	}
-    	else { 							// index is in range
+    	if (index < set.length || index >= 0) {
     		this.set[index] = false;	// delete index (set to false);
-    		return true;
+    		return true; 				// index is in range
+    	}
+    	else { 							
+    		return false;				// specified index is either not in the set range
     	}
     }
     
