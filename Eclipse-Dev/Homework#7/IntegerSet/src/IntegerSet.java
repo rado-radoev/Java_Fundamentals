@@ -12,6 +12,7 @@ public class IntegerSet {
      * Creates a new instance of IntegerSet   
      */
 	private boolean[] set = new boolean[101];
+	private static boolean[] unionSet = new boolean[101];
     
 	// Default constructor
 	public IntegerSet() {}
@@ -36,9 +37,9 @@ public class IntegerSet {
      * Return a new IntegerSet containing the union of the two IntegerSet objects
      * passed as arguments
      */
-	public IntegerSet union (IntegerSet a, IntegerSet b) {
-		// create a new IntegerSet that will be hold the union of the two integer sets
-		IntegerSet temp = new IntegerSet();	
+	public static IntegerSet union (IntegerSet a, IntegerSet b) {	
+		
+		IntegerSet temp = new IntegerSet();
 		// iterate through array a.length. - both arrays should have the same size 101
 		// if a[i] == b[i], if both are true then add one element to new array
 		// if a[i] == true, add it to the array
@@ -46,19 +47,19 @@ public class IntegerSet {
 		// if any of the elements is set to false, they are not in the set, so 
 		// don't add them to the new boolean array;
 		
-		for (int i = 0; i < a.getSet().length; i++) {
+		for (int i = 0; i < unionSet.length; i++) {
 			if (a.set[i] == b.set[i]) {
-				temp.set[i] = true;
+				unionSet[i] = true;
 			}
 			else if (a.set[i] == true) {
-				temp.set[i] = true;
+				unionSet[i] = true;
 			}
 			else if (b.set[i] == true) {
-				temp.set[i] = true;
+				unionSet[i] = true;
 			}
 		}
 		
-		return temp;
+		return unionSet;
 		// For example: let A = (1,2,3) and let B = (3,4,5). Now the UNION of A and B, written A union B = (1,2,3,4,5). There is no need to list the 3 twice.
 	}
 	
@@ -74,14 +75,30 @@ public class IntegerSet {
      * value within the set array to true. Returns false if the value was out
      * of range and true otherwise.
      */
-    // TODO: implement the insertElement method
+    public boolean insertElement(int index) {   	
+    	if (index > set.length || index < 0) {
+    		return false; 			// specified index is either not in the set range
+    	}
+    	else {						// index is in range
+    		this.set[index] = true;	// set index to true;
+    		return true;	
+    	}
+    }
     
     /**
      * Deletes an element from the IntegerSet by setting the corresponding
      * value within the set array to false. Returns false if the value was out
      * of range and true otherwise.
      */
-    // TODO: implement the deleteElement method 
+    public boolean deleteElement(int index) {   	
+    	if (index > set.length || index < 0) {
+    		return false; 				// specified index is either not in the set range
+    	}
+    	else { 							// index is in range
+    		this.set[index] = false;	// delete index (set to false);
+    		return true;
+    	}
+    }
     
     /**
      * @Override the toString method in the Object class
