@@ -25,8 +25,8 @@ public class BasePlusCommissionEmployeeComposition {
     	this.firstName = commissionEmployee.getFirstName();
     	this.lastName = commissionEmployee.getLastName();
     	this.ssn = commissionEmployee.getSocialSecurityNumber();
-    	setGrossSales(commissionEmployee.getGrossSales());
-    	setCommissionRate(commissionEmployee.getCommissionRate());
+    	this.sales = commissionEmployee.getGrossSales();
+    	this.rate = commissionEmployee.getCommissionRate();
     	
     	setBaseSalary(salary);
     }
@@ -66,7 +66,6 @@ public class BasePlusCommissionEmployeeComposition {
     		throw new IllegalArgumentException();
     	}
     	commissionEmployee.setGrossSales(sales);
-    	this.sales = sales;
     }
 
     public double getCommissionRate() {
@@ -78,7 +77,6 @@ public class BasePlusCommissionEmployeeComposition {
     		throw new IllegalArgumentException();
     	}
     	commissionEmployee.setCommissionRate(rate);
-    	this.rate = rate;
     }    
     
     public double earnings() {
