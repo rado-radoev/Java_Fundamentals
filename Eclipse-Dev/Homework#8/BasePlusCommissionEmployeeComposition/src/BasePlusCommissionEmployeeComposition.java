@@ -22,8 +22,8 @@ public class BasePlusCommissionEmployeeComposition {
     	this.firstName = first;
     	this.lastName = last;
     	this.ssn = ssn;
-    	this.sales = sales;
-    	this.rate = rate;
+    	setGrossSales(sales);
+    	setCommissionRate(rate);
     	setBaseSalary(salary);
     }
     
@@ -74,11 +74,11 @@ public class BasePlusCommissionEmployeeComposition {
     		throw new IllegalArgumentException();
     	}
     	
-    	this.rate = rate;
+    	this.rate = commissionEmployee.setCommissionRate(rate);
     }    
     
     public double earnings() {
-    	return getBaseSalary() + (getCommissionRate() + getGrossSales());
+    	return commissionEmployee.earnings() + getBaseSalary();
     }
     
     @Override
