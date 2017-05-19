@@ -19,12 +19,15 @@ public class BasePlusCommissionEmployeeComposition {
     // six-argument constructor
     public BasePlusCommissionEmployeeComposition( String first, String last, 
             String ssn, double sales, double rate, double salary) {
+    	
     	commissionEmployee = new CommissionEmployee(first, last, ssn, sales, rate);
-    	this.firstName = first;
-    	this.lastName = last;
-    	this.ssn = ssn;
-    	setGrossSales(sales);
-    	setCommissionRate(rate);
+    	
+    	this.firstName = commissionEmployee.getFirstName();
+    	this.lastName = commissionEmployee.getLastName();
+    	this.ssn = commissionEmployee.getSocialSecurityNumber();
+    	setGrossSales(commissionEmployee.getGrossSales());
+    	setCommissionRate(commissionEmployee.getCommissionRate());
+    	
     	setBaseSalary(salary);
     }
     
