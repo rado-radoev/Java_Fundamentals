@@ -19,6 +19,7 @@ public class BasePlusCommissionEmployeeComposition {
     // six-argument constructor
     public BasePlusCommissionEmployeeComposition( String first, String last, 
             String ssn, double sales, double rate, double salary) {
+    	commissionEmployee = new CommissionEmployee(first, last, ssn, sales, rate);
     	this.firstName = first;
     	this.lastName = last;
     	this.ssn = ssn;
@@ -61,7 +62,7 @@ public class BasePlusCommissionEmployeeComposition {
     	if (sales < 0.0) {
     		throw new IllegalArgumentException();
     	}
-    	
+    	commissionEmployee.setGrossSales(sales);
     	this.sales = sales;
     }
 
@@ -73,8 +74,8 @@ public class BasePlusCommissionEmployeeComposition {
     	if (rate < 0.0) {
     		throw new IllegalArgumentException();
     	}
-    	
-    	this.rate = commissionEmployee.setCommissionRate(rate);
+    	commissionEmployee.setCommissionRate(rate);
+    	this.rate = rate;
     }    
     
     public double earnings() {
