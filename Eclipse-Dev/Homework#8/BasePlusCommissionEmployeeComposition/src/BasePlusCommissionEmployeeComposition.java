@@ -6,11 +6,6 @@ public class BasePlusCommissionEmployeeComposition {
     
 	// BasePlusCommissionEmployee attributes
     private double baseSalary; // base salary per week
-    private String firstName;
-    private String lastName;
-    private String ssn;
-    private double sales;
-    private double rate;
     
     // Demonstrate composition of (as opposed to inheritance from) a CommissionEmployee object
     private CommissionEmployee commissionEmployee;
@@ -21,13 +16,7 @@ public class BasePlusCommissionEmployeeComposition {
             String ssn, double sales, double rate, double salary) {
     	
     	commissionEmployee = new CommissionEmployee(first, last, ssn, sales, rate);
-    	
-    	this.firstName = commissionEmployee.getFirstName();
-    	this.lastName = commissionEmployee.getLastName();
-    	this.ssn = commissionEmployee.getSocialSecurityNumber();
-    	this.sales = commissionEmployee.getGrossSales();
-    	this.rate = commissionEmployee.getCommissionRate();
-    	
+
     	setBaseSalary(salary);
     }
     
@@ -46,19 +35,19 @@ public class BasePlusCommissionEmployeeComposition {
     }
 
     public String getFirstName() {
-    	return firstName;
+    	return commissionEmployee.getFirstName();
     }
 
     public String getLastName() {
-    	return lastName;
+    	return commissionEmployee.getLastName();
     }
 
     public String getSocialSecurityNumber() {
-    	return ssn;
+    	return commissionEmployee.getSocialSecurityNumber();
     }
 
     public double getGrossSales() {
-    	return sales;
+    	return commissionEmployee.getGrossSales();
     }
 
     public void setGrossSales(double sales) throws IllegalArgumentException {
@@ -69,7 +58,7 @@ public class BasePlusCommissionEmployeeComposition {
     }
 
     public double getCommissionRate() {
-    	return rate;
+    	return commissionEmployee.getCommissionRate();
     }
 
     public void setCommissionRate(double rate) {
