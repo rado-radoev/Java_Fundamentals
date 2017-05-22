@@ -3,10 +3,10 @@ public class ComplexNumbers {
 	
 	private float realPart;
 	private float imaginaryPart;
-	private final float i = (float) Math.sqrt(-1);
+	// i = Math.sqrt(-1);
 	
 	public ComplexNumbers () {
-		this(1,3);
+		this(0,0);
 	}
 	
 	public ComplexNumbers (float realPart, float imaginaryPart) {
@@ -22,8 +22,8 @@ public class ComplexNumbers {
 	}
 	
 	public static ComplexNumbers subtract(ComplexNumbers one, ComplexNumbers two) {
-		float real = one.getRealPart() + (-two.getRealPart());
-		float imaginary = one.getImaginaryPart() + (-two.getImaginaryPart());
+		float real = one.getRealPart() - two.getRealPart();
+		float imaginary = one.getImaginaryPart() - two.getImaginaryPart();
 
 		return new ComplexNumbers(real, imaginary);
 	}
