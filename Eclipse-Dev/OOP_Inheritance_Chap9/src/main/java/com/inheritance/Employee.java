@@ -41,9 +41,9 @@ public class Employee {
 	}
 	
 	public final void setSocialSecurityNumber(String socialSecurityNumber) throws IllegalArgumentException {
-//		if (socialSecurityNumber.matches("^([1-9])(?!\1{2}-\1{2}-\1{4})[1-9]{2}-[1-9]{2}-[1-9]{4})")) {
-//			throw new IllegalArgumentException("Social Security Number should be in the format xxx-xx-xxx");
-//		}
+		if (!socialSecurityNumber.matches("^([1-9])(?!\1{2}-\1{2}-\1{4})[1-9]{2}-[1-9]{2}-[1-9]{4}")) {
+			throw new IllegalArgumentException("Social Security Number should be in the format xxx-xx-xxx");
+		}
 		
 		this.socialSecurityNumber = socialSecurityNumber;
 	}
