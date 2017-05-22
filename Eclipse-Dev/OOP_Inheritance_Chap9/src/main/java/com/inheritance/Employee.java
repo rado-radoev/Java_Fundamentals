@@ -50,7 +50,7 @@ public class Employee {
 	
 	public String toString() {
 		return String.format("%s: %s %s%n%s: %s%n", 
-				"commission employee",
+				"employee",
 				getFirstName(),
 				getLastName(),
 				"social security number",
