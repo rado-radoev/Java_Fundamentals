@@ -27,7 +27,7 @@ public abstract class Quadraliteral {
 	
 	// Get the length between A - B
 	public double getABdistance() {
-		return getSideA().getX() - getSideA().getY();
+		return getSideA().getY() - getSideA().getX();
 	}
 	
 	// return side B-C as X,Y coordinates
@@ -47,7 +47,7 @@ public abstract class Quadraliteral {
 	
 	// Get the length between C - D
 	public double getCDdistance() {
-		return getSideC().getX() - getSideC().getY();
+		return getSideC().getY() - getSideC().getX();
 	}
 	
 	// return side D - A as X, Y coordinates
@@ -57,13 +57,8 @@ public abstract class Quadraliteral {
 	
 	// Get the length between D - A 
 	public double getDAdistance() {
-		return getSideD().getX() - getSideD().getY();
+		return getSideD().getY() - getSideD().getX();
 	}
-	
-	
-	
-	
-	
 	
 	// abstract method to be overloaded by subclass
 	public abstract double area();

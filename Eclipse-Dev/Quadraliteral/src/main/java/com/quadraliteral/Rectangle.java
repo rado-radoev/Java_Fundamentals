@@ -2,14 +2,26 @@ package com.quadraliteral;
 
 public class Rectangle extends Quadraliteral {
 
-	public Rectangle(Point sideA, Point sideB, Point sideC, Point sideD) {
-		super(sideA, sideB, sideC, sideD);
+	public Rectangle(Point sideA, Point sideC) {
+		super(sideA, sideC, sideA, sideC);
+		
+		if (super.getABdistance() == super.getCDdistance() &&
+			super.getBCdistance() == super.getDAdistance() &&
+			super.getABdistance() != super.getBCdistance()) {
+		System.out.printf("%s: %s%n", 
+				"Current figure is",
+				getClass().getName());
+		}
+		else {
+			System.out.printf("%s%n", "Rectangle should have opposite sides in congruent.");
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Override
 	public double area() {
-		double heigth = getABdistance();
-		double length = getABdistance();
+		double heigth = super.getABdistance();
+		double length = super.getBCdistance();
 		double area = heigth * length;
 		return area;
 	}
