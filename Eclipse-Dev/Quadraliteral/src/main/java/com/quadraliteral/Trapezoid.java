@@ -4,13 +4,30 @@ public class Trapezoid extends Quadraliteral {
 
 	public Trapezoid(Point sideA, Point sideB, Point sideC, Point sideD) {
 		super(sideA, sideB, sideC, sideD);
-		// TODO Auto-generated constructor stub
+	}
+	
+	public double heigth() {
+		double b;
+		if (getDAdistance() > getBCdistance()) {
+			b = getDAdistance() - getBCdistance();
+		}
+		else {
+			b = getBCdistance() - getDAdistance();
+		}
+		
+		// Pythoagorean theoreme to find height
+		// a*a + b*b =  h*h
+		// https://www.youtube.com/watch?v=5KmCDSI3n-8
+		
+		double height = Math.sqrt(Math.pow(getABdistance(), 2) + Math.pow(b, 2));
+		return height;
 	}
 
 	@Override
 	public double area() {
-		// TODO Auto-generated method stub
-		return 0;
+		// https://www.youtube.com/watch?v=pnjCyF09m2I
+		double area = (getDAdistance() + getBCdistance()) * (heigth() / 2);
+		return area;
 	}
 
 	// How to identify trapezoid: http://sciencing.com/identify-trapezoid-6423.html

@@ -33,7 +33,7 @@ public class Rectangle extends Quadraliteral {
 
 	@Override
 	public String toString() {
-		return String.format("%s%d", 
+		return String.format("%s%f", 
 				super.toString(),
 				area());
 	}

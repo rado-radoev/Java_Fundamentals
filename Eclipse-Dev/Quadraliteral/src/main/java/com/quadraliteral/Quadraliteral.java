@@ -57,7 +57,7 @@ public abstract class Quadraliteral {
 	
 	// Get the length between D - A 
 	public double getDAdistance() {
-		return getSideD().getY() - getSideD().getX();
+		return getSideD().getY() - getSideD().getX  ();
 	}
 	
 	// abstract method to be overloaded by subclass
