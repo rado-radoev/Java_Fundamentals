@@ -2,6 +2,11 @@ package com.quadraliteral;
 
 public class Rectangle extends Quadraliteral {
 
+	/**
+	 * Create a Rectangle object
+	 * @param sideA	sets the width
+	 * @param sideC sets the length
+	 */
 	public Rectangle(Point sideA, Point sideC) {
 		super(sideA, sideC, sideA, sideC);
 		
