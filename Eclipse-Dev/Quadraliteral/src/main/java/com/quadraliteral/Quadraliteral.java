@@ -2,36 +2,71 @@ package com.quadraliteral;
 
 public abstract class Quadraliteral {
 
-	private int ab;
-	private int bc;
-	private int cd;
-	private int da;
+	// Define 4 sides of quadraliteral
+	// Using Point with composite relation. Every quadraliteral has-a Point
+	// Points are considered as A, B, C, D Points, representing each of the 4
+	// angles of a quadraliteral shape.
+	// In clockwise direction, starting from A(bottom left), B(upper left), 
+	// C(upper right), D(bottom right)
+	private Point sideA;
+	private Point sideB;
+	private Point sideC;
+	private Point sideD;
 	
-	public Quadraliteral(int coordX, int coordY, int coordX1, int coordY1) {
-		ab = new Point(coordX, coordY).getXYDistance();
-		bc = new Point(coordY, coordX1).getXYDistance();
-		cd = new Point(coordX1, coordY1).getXYDistance();
-		da = new Point(coordY1, coordX).getXYDistance();
+	public Quadraliteral(Point sideA, Point sideB, Point sideC, Point sideD) {
+		this.sideA = sideA;
+		this.sideB = sideB;
+		this.sideC = sideC;
+		this.sideD = sideD;
 	}
 	
-	public int getAB() {
-		return ab;
+	// return side A-B as X,Y coordinates
+	public Point getSideA() {
+		return sideA;
 	}
 	
-	public int getBC() {
-		return bc;
+	// Get the length between A - B
+	public double getABdistance() {
+		return getSideA().getX() - getSideA().getY();
 	}
-
-	public int getCD() {
-		return cd;
+	
+	// return side B-C as X,Y coordinates
+	public Point getSideB()	{
+		return sideB;
 	}
-
-	public int getDA() {
-		return da;
+	
+	// Get the length between B - C
+	public double getBCdistance() {
+		return getSideB().getY() - getSideB().getX();
 	}
-
+	
+	// return side C - D as X, Y coordinates
+	public Point getSideC() {
+		return sideC;
+	}
+	
+	// Get the length between C - D
+	public double getCDdistance() {
+		return getSideC().getX() - getSideC().getY();
+	}
+	
+	// return side D - A as X, Y coordinates
+	public Point getSideD() {
+		return sideD;
+	}
+	
+	// Get the length between D - A 
+	public double getDAdistance() {
+		return getSideD().getX() - getSideD().getY();
+	}
+	
+	
+	
+	
+	
+	
 	// abstract method to be overloaded by subclass
-	public abstract int area();
+	public abstract double area();
 
 	@Override
 	public String toString() {

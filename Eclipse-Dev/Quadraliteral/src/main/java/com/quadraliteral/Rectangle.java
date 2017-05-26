@@ -2,16 +2,15 @@ package com.quadraliteral;
 
 public class Rectangle extends Quadraliteral {
 
-	public Rectangle(int a, int b, int c, int d) {
-		super(a, b, c, d);
-		
+	public Rectangle(Point sideA, Point sideB, Point sideC, Point sideD) {
+		super(sideA, sideB, sideC, sideD);
 	}
 
 	@Override
-	public int area() {
-		int heigth = getAB();
-		int length = getBC();
-		int area = heigth * length;
+	public double area() {
+		double heigth = getABdistance();
+		double length = getABdistance();
+		double area = heigth * length;
 		return area;
 	}
 

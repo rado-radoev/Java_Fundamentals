@@ -2,26 +2,22 @@ package com.quadraliteral;
 
 public class Point {
 
-	// Define 4 side of quadraliteral
-	private int x;
-	private int y;	
+	// Define 1 side of quadraliteral
+	private double x;
+	private double y;	
 	
-	public Point(int x, int y) {
+	public Point(double x, double y) {
 		this.x = x;
 		this.y = y;
 
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return y;
-	}
-	
-	public int getXYDistance() {
-		return getX() + getY();
 	}
 
 }
