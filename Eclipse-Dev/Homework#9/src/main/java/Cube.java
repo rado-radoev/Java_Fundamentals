@@ -1,24 +1,28 @@
 
 public class Cube extends ThreeDimensionalShape {
 
-	public Cube(double Diameter) {
-		super(Diameter);
+	public Cube(double dimension) {
+		super(dimension);
 	}
 
 	@Override
 	public double getArea() {
-		return 6 * Math.pow(getDiameter(), 2);
+		return 6 * Math.pow(getDimension(), 2);
 	}
 
 	@Override
 	public double getVolume() {
-		return Math.pow(getDiameter(), 3);
+		return Math.pow(getDimension(), 3);
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("%s", getClass().getName());
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s: %.2f","side" ,getDimension());
 	}
 
 }

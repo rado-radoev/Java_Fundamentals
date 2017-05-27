@@ -9,6 +9,6 @@ public abstract class TwoDimensionalShape extends Shape {
 		super(base, heigth);
 	}
 	
-	// Abstract method to be overridden by subclasses
+	// Abstract methods to be overridden by subclasses
 	public abstract double getArea();
 }

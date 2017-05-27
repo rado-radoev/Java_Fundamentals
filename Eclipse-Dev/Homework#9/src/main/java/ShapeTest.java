@@ -13,8 +13,8 @@ public class ShapeTest {
         shapes[0] = new Circle(4);
         shapes[1] = new Square(10);
         shapes[2] = new Triangle(3, 5);
-        //shapes[3] = new Sphere(2);
-        //shapes[4] = new Cube(8);
+        shapes[3] = new Sphere(2);
+        shapes[4] = new Cube(8);
         /**
          * I'm not terribly hip on tetrahedra... if this ratio isn't legit, 
          * don't come complaining (but you're welcome to tell me about it)

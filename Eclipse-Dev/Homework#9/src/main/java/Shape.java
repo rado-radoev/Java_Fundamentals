@@ -1,22 +1,28 @@
 
 public abstract class Shape {
 	
-	private double diameter;
+	private double dimension;
 	private double base;
-	private double heigth;
+	private double height;
 	
-	public Shape(double Diameter) {
-		setDiameter(Diameter);
+	public Shape(double dimension) {
+		setDimension(dimension);
 	}
 	
 	
 	public Shape(double base, double heigth) {
-		setBase(base);
-		setHeigth(heigth);;
+		this(base, heigth ,0);
 	}
 	
-	public double getDiameter() {
-		return diameter;
+	public Shape(double base, double height, double dimension) {
+		setBase(base);
+		setHeigth(height);
+		setDimension(dimension);
+	}
+
+	
+	public double getDimension() {
+		return dimension;
 	}
 	
 	public double getBase() {
@@ -24,30 +30,30 @@ public abstract class Shape {
 	}
 	
 	public double getHeigth() {
-		return heigth;
+		return height;
 	}
 	
-	public final void setDiameter(double diameter) throws IllegalArgumentException {
-		if (diameter <= .0) {
+	public final void setDimension(double dimension) throws IllegalArgumentException {
+		if (dimension < 0) {
 			throw new IllegalArgumentException();
 		}
-		this.diameter = diameter;
+		this.dimension = dimension;
 	}
 	
 	public final void setBase(double base) throws IllegalArgumentException {
-		if (base <= .0) {
+		if (base  < 0) {
 			throw new IllegalArgumentException();
 		}
 		this.base = base;
 	}
 	
 	public final void setHeigth(double heigth) throws IllegalArgumentException {
-		if (heigth <= .0) {
+		if (heigth < 0) {
 			throw new IllegalArgumentException();
 		}
-		this.heigth = heigth;
+		this.height = heigth;
 	}
 	
-	// method that will be overriden and return the name of the object
+	//  Abstract method that will be overriden and return the name of the object
 	public abstract String getName();
 }
