@@ -1,9 +1,9 @@
 
 public abstract class Shape {
 	
-	private double dimension;
-	private double base;
-	private double height;
+	private double dimension;	// Used when only one side, radius, diameter etc is know. Used in Circle, Square, Cube, Sphere, Tetrahedron
+	private double base;		// Used to set triangle or tetrahedron base
+	private double height;		// Used to set trianble or tetrahedron height
 	
 	public Shape(double dimension) {
 		setDimension(dimension);
@@ -33,6 +33,7 @@ public abstract class Shape {
 		return height;
 	}
 	
+	// Setter to set one know dimension of a figure. Negative dimensions are not allowed
 	public final void setDimension(double dimension) throws IllegalArgumentException {
 		if (dimension < 0) {
 			throw new IllegalArgumentException();
@@ -40,6 +41,7 @@ public abstract class Shape {
 		this.dimension = dimension;
 	}
 	
+	// Setter to set the base. Negative base is not allowed
 	public final void setBase(double base) throws IllegalArgumentException {
 		if (base  < 0) {
 			throw new IllegalArgumentException();
@@ -47,6 +49,7 @@ public abstract class Shape {
 		this.base = base;
 	}
 	
+	// Setter to set the height. Negative height is not supported
 	public final void setHeigth(double heigth) throws IllegalArgumentException {
 		if (heigth < 0) {
 			throw new IllegalArgumentException();

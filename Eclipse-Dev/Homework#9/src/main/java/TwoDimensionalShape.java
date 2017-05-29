@@ -1,10 +1,12 @@
 
 public abstract class TwoDimensionalShape extends Shape {
 	
+	// Invoking single parameter super class - Sphere
 	public TwoDimensionalShape(double diameter) {
 		super(diameter);
 	}
 	
+	// Invoking double parameter super class - Sphere
 	public TwoDimensionalShape(double base, double heigth) {
 		super(base, heigth);
 	}
