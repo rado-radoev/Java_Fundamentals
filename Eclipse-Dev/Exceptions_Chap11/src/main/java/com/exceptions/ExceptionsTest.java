@@ -1,8 +1,6 @@
 // Ex. 11.16
 package com.exceptions;
 
-import java.beans.MethodDescriptor;
-
 public class ExceptionsTest {
 	
 	public static void main(String[] args) {
@@ -12,7 +10,8 @@ public class ExceptionsTest {
 			methodA();
 			
 		} catch (ExceptionA ea) {
-			System.err.println(ea.getMessage());
+			ea.printStackTrace();
+			//ea.getMessage();
 		}
 	}
 	
@@ -33,7 +32,7 @@ public class ExceptionsTest {
 		}
 		catch (ExceptionA ea) {
 			//ea.printStackTrace();
-			throw ea;
+			throw new ExceptionA("Exception caught in methodA catch block", ea);
 		}
 	}
 
