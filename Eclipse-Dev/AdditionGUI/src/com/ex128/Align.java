@@ -32,7 +32,7 @@ public class Align extends JFrame {
 	private final JPanel jpanelTextFields;
 	private final Container container;
 	private final FlowLayout layout;
-
+	private Font font;
 	
 	public Align() {
 		
@@ -86,7 +86,19 @@ public class Align extends JFrame {
 	private class CheckBoxHandler implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			JOptionPane.showMessageDialog(Align.this, "Checkbox checked");
+			if (checkBoxes[1].isSelected() && checkBoxes[0].isSelected()) {
+				font = new Font("Serif", Font.PLAIN, 14);
+			}
+			else if (checkBoxes[0].isSelected()) {
+				font = new Font("Serif", Font.BOLD + Font.ITALIC, 25);
+				checkBoxes[1].setSelected(false);
+			}
+			else if (checkBoxes[1].isSelected())  {
+				font = new Font("Serif", Font.PLAIN, 14);
+				checkBoxes[0].setSelected(false);
+			}
+			
+			textFields[0].setFont(font);
 		}
 	}
 	
