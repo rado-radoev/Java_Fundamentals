@@ -1,17 +1,18 @@
 package com.ex1210;
 
-import java.awt.FlowLayout;
-import java.awt.Checkbox;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.ListSelectionModel;
+import javax.swing.JPanel;
 
 
 public class ColorSelect extends JFrame {
@@ -24,21 +25,58 @@ public class ColorSelect extends JFrame {
 	private final JCheckBox italicCheckBox;
 	private final JButton ok;
 	private final JButton cancel;
-	private final JList colorList;
+	private final JComboBox<String> colorList;
+	private final JPanel colorsJPanel;
+	private final JPanel checkBoxesJPanel;
+	private final JPanel buttonsJPanel;
 	
 	public ColorSelect() {
 		super("Color select");
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout(10, 10));
 		
 		boldCheckBox = new JCheckBox("Bold");
 		italicCheckBox = new JCheckBox("Italic");
+		checkBoxesJPanel = new JPanel(new FlowLayout());
+
 		
 		ok = new JButton("OK");
 		cancel = new JButton("Cancel");
+		buttonsJPanel = new JPanel(new FlowLayout());
+		
+		CheckBoxHandler handler = new CheckBoxHandler();
+		colorList = new JComboBox<String>(colorNames);
+		colorList.setPreferredSize(new Dimension(300, 18));
+		add(new JScrollPane(colorList));
+		colorList.addActionListener(handler);
+		colorsJPanel = new JPanel(new FlowLayout());
 		
 		
+		font = new Font("Serif", Font.PLAIN, 14);
+		
+		checkBoxesJPanel.add(boldCheckBox);
+		checkBoxesJPanel.add(italicCheckBox);
+		buttonsJPanel.add(ok);
+		buttonsJPanel.add(cancel);
+		colorsJPanel.add(colorList);
+		
+		
+		add(colorsJPanel, BorderLayout.NORTH);
+		add(checkBoxesJPanel, BorderLayout.CENTER);
+		add(buttonsJPanel, BorderLayout.SOUTH);
 	}
 
+	private class CheckBoxHandler implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JComboBox cb = (JComboBox)e.getSource();
+			String color = (String)cb.getSelectedItem();
+			for (int i = 0; i < colorNames.length; i++) {
+				if (colorNames[i] == color) {
+					// set color
+				}
+			}
+		}
+	}
 }
 
 

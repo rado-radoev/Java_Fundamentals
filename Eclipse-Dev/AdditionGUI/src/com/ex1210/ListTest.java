@@ -1,3 +1,4 @@
+package com.ex1210;
 // Fig. 12.24: ListTest.java
 // Selecting colors from a JList.
 import javax.swing.JFrame;

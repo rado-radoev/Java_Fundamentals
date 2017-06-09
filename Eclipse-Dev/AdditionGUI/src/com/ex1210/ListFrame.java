@@ -1,3 +1,4 @@
+package com.ex1210;
 // Fig. 12.23: ListFrame.java
 // JList that displays a list of colors.
 import java.awt.FlowLayout;
