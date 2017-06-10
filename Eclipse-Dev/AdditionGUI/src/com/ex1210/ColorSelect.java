@@ -5,11 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
@@ -31,23 +37,28 @@ public class ColorSelect extends JFrame {
 	private final JPanel buttonsJPanel;
 	
 	public ColorSelect() {
+		
 		super("Color select");
-		setLayout(new BorderLayout(10, 10));
+		setLayout(new BorderLayout(0,0));
 		
 		boldCheckBox = new JCheckBox("Bold");
 		italicCheckBox = new JCheckBox("Italic");
 		checkBoxesJPanel = new JPanel(new FlowLayout());
 
 		
+		ButtonHandler bhandler = new ButtonHandler();
 		ok = new JButton("OK");
+		ok.addActionListener(bhandler);
 		cancel = new JButton("Cancel");
+		cancel.addActionListener(bhandler);
 		buttonsJPanel = new JPanel(new FlowLayout());
+		
 		
 		CheckBoxHandler handler = new CheckBoxHandler();
 		colorList = new JComboBox<String>(colorNames);
 		colorList.setPreferredSize(new Dimension(300, 18));
 		add(new JScrollPane(colorList));
-		colorList.addActionListener(handler);
+		colorList.addItemListener(handler);
 		colorsJPanel = new JPanel(new FlowLayout());
 		
 		
@@ -65,17 +76,36 @@ public class ColorSelect extends JFrame {
 		add(buttonsJPanel, BorderLayout.SOUTH);
 	}
 
-	private class CheckBoxHandler implements ActionListener {
+	private class CheckBoxHandler implements ItemListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			JComboBox cb = (JComboBox)e.getSource();
-			String color = (String)cb.getSelectedItem();
-			for (int i = 0; i < colorNames.length; i++) {
-				if (colorNames[i] == color) {
-					// set color
+		public void itemStateChanged(ItemEvent e) {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				String color = e.getItem().toString();
+				JComboBox cb = (JComboBox)e.getItem();
+				int i = 0;
+				for (; i < colorNames.length; i++) {
+					if (colorNames[i].equals(color)) {
+						break;
+					}
 				}
 			}
+			
 		}
+	}
+	
+	private class ButtonHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == ok) {
+				JOptionPane.showMessageDialog(getParent(), "Color should be changed");
+			}
+			else if (e.getSource() == cancel) {
+				JOptionPane.showMessageDialog(null, "this should close");
+			}
+			
+		}
+		
 	}
 }
 

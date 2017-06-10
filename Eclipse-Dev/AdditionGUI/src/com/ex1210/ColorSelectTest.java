@@ -2,6 +2,7 @@ package com.ex1210;
 
 import javax.swing.JFrame;
 
+
 public class ColorSelectTest {
 
 	public static void main(String[] args) {
