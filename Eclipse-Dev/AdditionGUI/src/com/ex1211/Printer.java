@@ -2,12 +2,8 @@ package com.ex1211;
 
 import javax.swing.JFrame;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;import java.awt.LayoutManager;
+import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -51,9 +47,9 @@ public class Printer extends JFrame {
 		setLayout(new FlowLayout());
 		
 		// Declare JPanels
-		printerNameJPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		printerNameJPanel = new JPanel(new GridLayout(1,1));
 		mainSectionJPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-		buttonsJPanel = new JPanel(new GridLayout(4, 1, 10, 5));
+		buttonsJPanel = new JPanel(new GridLayout(4, 1, 15, 10));
 		bottomSectionJPanel = new JPanel(new GridLayout(1, 3, 15, 0));
 		checkBoxJPanel = new JPanel(new GridLayout(3, 1));
 		radioButtonsJPanel = new JPanel(new GridLayout(3, 0));
@@ -63,7 +59,7 @@ public class Printer extends JFrame {
 		printerNameJPanel.add(printerLabel);
 		
 		// Create 1st Text Area
-		textArea1 = new JTextArea(3, 2);
+		textArea1 = new JTextArea(5, 5);
 		textArea1.setEditable(true);
 		mainSectionJPanel.add(textArea1);
 		
@@ -80,7 +76,7 @@ public class Printer extends JFrame {
 		
 		// Create text area 2
 		// Add it to the main JPanel
-		textArea2 = new JTextArea(3,2);
+		textArea2 = new JTextArea(5, 5);
 		textArea2.setEditable(true);
 		mainSectionJPanel.add(textArea2);
 				
@@ -101,9 +97,9 @@ public class Printer extends JFrame {
 		radioButtonsJPanel.add(appletRadioButton);
 		mainSectionJPanel.add(radioButtonsJPanel);
 
-		// Create text area 2
+		// Create text area 3
 		// Add it to the main JPanel
-		textArea3 = new JTextArea();
+		textArea3 = new JTextArea(5, 5);
 		textArea3.setEditable(true);
 		mainSectionJPanel.add(textArea3);
 		
@@ -136,8 +132,6 @@ public class Printer extends JFrame {
 		add(printerNameJPanel);
 		add(mainSectionJPanel);
 		add(buttonsJPanel);
-		add(checkBoxJPanel);
-		add(radioButtonsJPanel);
 		add(bottomSectionJPanel);
 		
 	}
