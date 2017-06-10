@@ -48,6 +48,7 @@ public class Printer extends JFrame {
 		
 		// Declare JPanels
 		printerNameJPanel = new JPanel(new GridLayout(1,1));
+		//mainSectionJPanel = new JPanel(new GridLayout(3, 2, 1, 0));
 		mainSectionJPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		buttonsJPanel = new JPanel(new GridLayout(4, 1, 15, 10));
 		bottomSectionJPanel = new JPanel(new GridLayout(1, 3, 15, 0));
