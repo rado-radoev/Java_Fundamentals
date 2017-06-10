@@ -2,8 +2,12 @@ package com.ex1211;
 
 import javax.swing.JFrame;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.GridLayout;import java.awt.LayoutManager;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -30,9 +34,10 @@ public class Printer extends JFrame {
 	private final JRadioButton appletRadioButton;
 	private final ButtonGroup radioButtonGroup;
 	private final JComboBox<String> printQualityComboBox;
+	private final String[] printQualities = {"High", "Medium", "Low"};
 	private final JButton ok;
 	private final JButton cancel;
-	private final JButton settings;
+	private final JButton setup;
 	private final JButton help;
 	private final JPanel buttonsJPanel;
 	private final JPanel mainSectionJPanel;
@@ -43,6 +48,7 @@ public class Printer extends JFrame {
 	
 	public Printer() {
 		super("Printer");
+		setLayout(new FlowLayout());
 		
 		// Declare JPanels
 		printerNameJPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -94,6 +100,45 @@ public class Printer extends JFrame {
 		radioButtonsJPanel.add(allRadioButton);
 		radioButtonsJPanel.add(appletRadioButton);
 		mainSectionJPanel.add(radioButtonsJPanel);
+
+		// Create text area 2
+		// Add it to the main JPanel
+		textArea3 = new JTextArea();
+		textArea3.setEditable(true);
+		mainSectionJPanel.add(textArea3);
+		
+		// Setting up the bottom row with buttons
+		// Creating the label
+		prinQualityLabel = new JLabel("Print Quality:");
+		bottomSectionJPanel.add(prinQualityLabel);
+		
+		// creating the print quality combo box
+		printQualityComboBox = new JComboBox<String>(printQualities);
+		printQualityComboBox.setMaximumRowCount(3);
+		add(new JScrollPane(printQualityComboBox));
+		bottomSectionJPanel.add(printQualityComboBox);
+		
+		// creating the print to file checkbox
+		printToFileCheckBox = new JCheckBox("Print to file");
+		bottomSectionJPanel.add(printToFileCheckBox);
+		
+		// Creating the buttons
+		ok = new JButton("OK");
+		cancel = new JButton("Cancel");
+		setup = new JButton("Setup...");
+		help = new JButton("Help");
+		buttonsJPanel.add(ok);
+		buttonsJPanel.add(cancel);
+		buttonsJPanel.add(setup);
+		buttonsJPanel.add(help);
+		
+		// add all JPanels to JFrame
+		add(printerNameJPanel);
+		add(mainSectionJPanel);
+		add(buttonsJPanel);
+		add(checkBoxJPanel);
+		add(radioButtonsJPanel);
+		add(bottomSectionJPanel);
 		
 	}
 }
