@@ -3,12 +3,15 @@ package com.ex1212;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class TempConversion extends JFrame {
@@ -26,7 +29,6 @@ public class TempConversion extends JFrame {
 	private final JPanel tempConversionJPanel;
 	private final JPanel buttonsJPanel;
 	private final FlowLayout layout;
-	//private final JPanel mainJPanel;
 	
 	public TempConversion() {
 		super("Temperature convertor");
@@ -40,7 +42,7 @@ public class TempConversion extends JFrame {
 		
 		// Set two radio buttons
 		celciusToFahreneit = new JRadioButton("Celcius to Fahrenheit");
-		fahrenheitToCelcius = new JRadioButton("Fahrenheit to celcius");
+		fahrenheitToCelcius = new JRadioButton("Fahrenheit to Celcius");
 		celciusToFahreneit.setSelected(true);
 		buttongroup = new ButtonGroup();
 		buttongroup.add(celciusToFahreneit);
@@ -51,9 +53,9 @@ public class TempConversion extends JFrame {
 		// set two labels and two textfields
 		tempToConvert = new JLabel("Enter temperature:");
 		convertedTemp = new JLabel("Converted temperature:");
-		userInput = new JTextField(2);
+		userInput = new JTextField(null, 2);
 		userInput.setEditable(true);
-		convertedTempResult = new JTextField(2);
+		convertedTempResult = new JTextField(null, 2);
 		convertedTempResult.setEditable(false);
 		tempConversionJPanel.add(tempToConvert);
 		tempConversionJPanel.add(userInput);
@@ -61,14 +63,46 @@ public class TempConversion extends JFrame {
 		tempConversionJPanel.add(convertedTempResult);
 		
 		// add buttons
+		ButtonHandler buttonHandler = new ButtonHandler();
 		convert = new JButton("Convert");
 		clear = new JButton("Clear");
+		convert.addActionListener(buttonHandler);
+		clear.addActionListener(buttonHandler);
 		buttonsJPanel.add(convert);
 		buttonsJPanel.add(clear);
 		
 		add(radioButtonsJPanel, layout.LEFT);
 		add(tempConversionJPanel, layout.CENTER);
 		add(buttonsJPanel, layout.RIGHT);
+		
+	}
+	
+	private class ButtonHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == convert) {
+				String userInputStr = userInput.getText();
+				double convetedTemp = 0.0;
+				double userEnteredTemp;
+				try {
+					userEnteredTemp = Double.parseDouble(userInputStr);
+					if (celciusToFahreneit.isSelected()) {
+						convetedTemp = ((userEnteredTemp * 9) / 5) + 32;
+					}
+					else if (fahrenheitToCelcius.isSelected()) {
+						convetedTemp = ((userEnteredTemp - 32) * 5) / 9;
+					}
+					convertedTempResult.setText(String.valueOf(convetedTemp));
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(getParent(), "Numbers only accepted");
+				} 
+			} else if (e.getSource() == clear) {
+				userInput.setText("");
+				convertedTempResult.setText("");
+			}
+			
+		}
 		
 	}
 }
