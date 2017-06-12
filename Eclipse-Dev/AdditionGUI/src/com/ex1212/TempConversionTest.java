@@ -8,7 +8,7 @@ public class TempConversionTest {
 	public static void main(String[] args) {
 		TempConversion tempConversionFrame = new TempConversion();
 		tempConversionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tempConversionFrame.setSize(250, 150);
+		tempConversionFrame.setSize(250, 220);
 		tempConversionFrame.setVisible(true);
 	}
 

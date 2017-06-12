@@ -22,6 +22,7 @@ public class TempConversion extends JFrame {
 	private final JButton clear;
 	private final JRadioButton celciusToFahreneit;
 	private final JRadioButton fahrenheitToCelcius;
+	private final JRadioButton kelvinToCelcius;
 	private final ButtonGroup buttongroup;
 	private final JLabel tempToConvert;
 	private final JLabel convertedTemp;
@@ -31,6 +32,7 @@ public class TempConversion extends JFrame {
 	private final JPanel tempConversionJPanel;
 	private final JPanel buttonsJPanel;
 	private final GridLayout layout;
+	private Temperature t;
 	
 	public TempConversion() {
 		super("Temperature convertor");
@@ -38,7 +40,7 @@ public class TempConversion extends JFrame {
 		setLayout(layout);
 		
 		// setup JPanels;
-		radioButtonsJPanel = new JPanel(new GridLayout(2, 1, -10, -10));
+		radioButtonsJPanel = new JPanel(new GridLayout(3, 1, -10, -10));
 		tempConversionJPanel = new JPanel(new FlowLayout());
 		buttonsJPanel = new JPanel(new FlowLayout());
 		
@@ -46,14 +48,18 @@ public class TempConversion extends JFrame {
 		RadioButtonHandler radioButtonHandler = new RadioButtonHandler();
 		celciusToFahreneit = new JRadioButton("Celcius to Fahrenheit");
 		fahrenheitToCelcius = new JRadioButton("Fahrenheit to Celcius");
+		kelvinToCelcius = new JRadioButton("Kelving to Celcius");
 		celciusToFahreneit.setSelected(true);
 		buttongroup = new ButtonGroup();
 		buttongroup.add(celciusToFahreneit);
 		buttongroup.add(fahrenheitToCelcius);
+		buttongroup.add(kelvinToCelcius);
 		radioButtonsJPanel.add(celciusToFahreneit);
 		radioButtonsJPanel.add(fahrenheitToCelcius);
+		radioButtonsJPanel.add(kelvinToCelcius);
 		celciusToFahreneit.addItemListener(radioButtonHandler);
 		fahrenheitToCelcius.addItemListener(radioButtonHandler);
+		kelvinToCelcius.addItemListener(radioButtonHandler);
 		
 		// set two labels and two textfields
 		tempToConvert = new JLabel(String.format("Enter temperature:\t\t\t"));
@@ -104,13 +110,17 @@ public class TempConversion extends JFrame {
 				String userInputStr = userInput.getText();
 				double convetedTemp = 0.0;
 				double userEnteredTemp;
+				// Implement Temperature object and type cast to Celcius, Kelvin and Fahrenheit
 				try {
 					userEnteredTemp = Double.parseDouble(userInputStr);
 					if (celciusToFahreneit.isSelected()) {
-						convetedTemp = ((userEnteredTemp * 9) / 5) + 32;
+						convetedTemp = Celcius.convertToFahrenheit(userEnteredTemp);
 					}
 					else if (fahrenheitToCelcius.isSelected()) {
-						convetedTemp = ((userEnteredTemp - 32) * 5) / 9;
+						convetedTemp = Fahrenheit.converttoCelcius(userEnteredTemp);
+					}
+					else if (kelvinToCelcius.isSelected()) {
+						convetedTemp = Kelvin.convertToCelcius(userEnteredTemp);
 					}
 					convertedTempResult.setText(String.format("%.2f", convetedTemp));
 				} catch (NumberFormatException nfe) {
