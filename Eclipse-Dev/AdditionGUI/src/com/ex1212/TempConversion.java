@@ -32,7 +32,6 @@ public class TempConversion extends JFrame {
 	private final JPanel tempConversionJPanel;
 	private final JPanel buttonsJPanel;
 	private final GridLayout layout;
-	private Temperature t;
 	
 	public TempConversion() {
 		super("Temperature convertor");
@@ -110,22 +109,18 @@ public class TempConversion extends JFrame {
 				String userInputStr = userInput.getText();
 				double convetedTemp = 0.0;
 				double userEnteredTemp;
-				// Implement Temperature object and type cast to Celcius, Kelvin and Fahrenheit
 				try {
 					userEnteredTemp = Double.parseDouble(userInputStr);		
 					if (celciusToFahreneit.isSelected()) {
-						t = new Celcius(userEnteredTemp);
-						((Celcius)t).convertToFahrenheit(userEnteredTemp);
+						convetedTemp = Celcius.convertToFahrenheit(userEnteredTemp);
 					}
 					else if (fahrenheitToCelcius.isSelected()) {
-						t = new Fahrenheit(userEnteredTemp);
-						((Fahrenheit)t).converttoCelcius(userEnteredTemp);
+						convetedTemp = Fahrenheit.converttoCelcius(userEnteredTemp);
 					}
 					else if (kelvinToCelcius.isSelected()) {
-						t = new Kelvin(userEnteredTemp);
-						((Kelvin)t).convertToCelcius(userEnteredTemp);
+						convetedTemp = Kelvin.convertToCelcius(userEnteredTemp);
 					}
-					convertedTempResult.setText(String.format("%.2f", t.toString()));
+					convertedTempResult.setText(String.format("%.2f", convetedTemp));
 				} catch (NumberFormatException nfe) {
 					JOptionPane.showMessageDialog(getParent(), "Numbers only accepted");
 				} 

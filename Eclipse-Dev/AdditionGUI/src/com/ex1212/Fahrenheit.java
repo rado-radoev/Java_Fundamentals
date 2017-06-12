@@ -8,11 +8,11 @@ public class Fahrenheit extends Temperature{
 		super(temp);
 	}
 	
-	public double converttoCelcius(double temperature) {
+	public static double converttoCelcius(double temperature) {
 		return ((temperature - 32) * 5) / 9;
 	}
 	
-	public double convertToKelvin(double temperature) {
+	public static double convertToKelvin(double temperature) {
 		return ((temperature + 459.67) * 5 ) / 9;
 	}
 	
