@@ -25,7 +25,6 @@ public class TypeWriter extends JFrame implements KeyListener {
 	private final JButton[] letterButtons = new JButton[127]; // array that will contain the number of letters from z to a
 	private final Character[] chars = new Character[letterButtons.length];
 	private final HashMap<String, JButton> buttonMap;
-	private final JPanel buttons;
 	private final JTextArea textArea;
 	private final BorderLayout textAreaBorderLayout;
 	private final JPanel textAreaJpanel;
@@ -56,36 +55,9 @@ public class TypeWriter extends JFrame implements KeyListener {
 		textArea.setWrapStyleWord(true);
 		textAreaJpanel.add(textArea, textAreaBorderLayout);
 		
-		
-		buttons = new JPanel();
 		buttonMap = new HashMap<String, JButton>();
-		for (int i = 97; i <= 122; i++) {
-			chars[i] = (char)i;
-			letterButtons[i] = new JButton(chars[i].toString());
-			textAreaJpanel.add(letterButtons[i], textAreaBorderLayout.SOUTH);
-			letterButtons[i].addKeyListener(this);
-			buttonMap.put(chars[i].toString(), letterButtons[i]);
-			
-			
-			if (i == 105 || i == 73) {
-				letterButtons[8] = new JButton("Backsp");
-				textAreaJpanel.add(letterButtons[8], textAreaBorderLayout.SOUTH);
-				letterButtons[8].addKeyListener(this);
-				buttonMap.put("Backsp", letterButtons[8]);
-			}
-			
-			
-			if (i == 116 || i == 84) {
-				letterButtons[14] = new JButton("Shift     ");
-				textAreaJpanel.add(letterButtons[14], textAreaBorderLayout.SOUTH);
-				letterButtons[14].addKeyListener(this);
-				buttonMap.put("Backsp", letterButtons[14]);
-			}
-		}
+		createButtons();
 		
-		letterButtons[32] = new JButton("Space                                                                             ");
-		textAreaJpanel.add(letterButtons[32]);
-
 		add(upperTextArea, BorderLayout.NORTH);
 		add(textAreaJpanel, BorderLayout.CENTER);
 
@@ -130,7 +102,31 @@ public class TypeWriter extends JFrame implements KeyListener {
 			textAreaJpanel.repaint();
 		}
 	}
-
+	
+	private void createButtons() {
+		for (int i = 0; i < 127; i++) {
+			chars[i] = (char)i;
+			if (i == 8) {
+				letterButtons[i] = new JButton("Backspace");
+				textAreaJpanel.add(letterButtons[i], BorderLayout.SOUTH);
+				letterButtons[i].addKeyListener(this);
+				buttonMap.put("Backspace", letterButtons[i]);
+			} else if (i == 14) {
+				letterButtons[i] = new JButton(String.format("%s%10s", "Shift", ""));
+				textAreaJpanel.add(letterButtons[i], BorderLayout.SOUTH);
+				letterButtons[i].addKeyListener(this);
+				buttonMap.put("Backsp", letterButtons[i]);
+			} else if (i == 32) {
+				letterButtons[i] = new JButton(String.format("%10s%10s%14s", "","Space", ""));
+				textAreaJpanel.add(letterButtons[i]);
+			} else if (i >= 97 && i <= 122) {
+				letterButtons[i] = new JButton(chars[i].toString());
+				textAreaJpanel.add(letterButtons[i], BorderLayout.SOUTH);
+				letterButtons[i].addKeyListener(this);
+				buttonMap.put(chars[i].toString(), letterButtons[i]);
+			}
+		}
+	}
 }
 
 
