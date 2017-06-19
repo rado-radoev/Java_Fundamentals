@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
-public class Iris extends Shapes {
+public class Iris extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {

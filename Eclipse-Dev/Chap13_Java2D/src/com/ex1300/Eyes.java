@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
-public class Eyes extends Shapes {
+public class Eyes extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
