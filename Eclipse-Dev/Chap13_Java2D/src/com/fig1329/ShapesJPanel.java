@@ -29,7 +29,6 @@ public class ShapesJPanel extends JPanel {
 		g2d.setPaint(new GradientPaint(15, 50, Color.BLUE, 35, 100, Color.YELLOW, true));
 		g2d.fill(new Ellipse2D.Double(5, 30, 65, 100));
 		
-		g2d.drawArc(x, y, width, height, startAngle, arcAngle);
 		
 		// draw 2d rectangle in red
 		g2d.setPaint(Color.RED);
