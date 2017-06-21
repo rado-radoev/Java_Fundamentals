@@ -1,4 +1,4 @@
-package com.ex1310;
+package com.ex139;
 
 import javax.swing.JPanel;
 import java.awt.Graphics2D;
