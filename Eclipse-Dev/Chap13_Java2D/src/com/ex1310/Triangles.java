@@ -17,8 +17,8 @@ public class Triangles extends JPanel {
 		Random rand = new Random(System.currentTimeMillis());
 		
 		// generate coordinates for triangles
-		int[] xPoint = {20, 60, 100,10,30,50};
-		int[] yPoint = {20, 60, 20,80,-80,80};
+		int[] xPoint = {20, 60, 100};
+		int[] yPoint = {20, 60, 20};
 		
 //		for (int i = 0; i < xPoint.length;i++) {
 //			rand.setSeed(System.currentTimeMillis());
@@ -46,7 +46,8 @@ public class Triangles extends JPanel {
 		triangle.closePath();
 		g2d.translate(150, 150);
 		
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 20; i++) {
+			g2d.rotate(Math.PI / 10.0);
 			g2d.setColor(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
 			g2d.fill(triangle);
 		}
