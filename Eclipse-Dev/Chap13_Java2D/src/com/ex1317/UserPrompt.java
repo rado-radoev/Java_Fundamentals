@@ -21,7 +21,7 @@ public class UserPrompt extends JFrame {
 	private final JLabel yCoordLabel;
 	private final JPanel jPanel;
 	
-	private String radius;
+	private float radius;
 	private float x;
 	private float y;
 	
@@ -32,13 +32,13 @@ public class UserPrompt extends JFrame {
 		jPanel = new JPanel();
 		
 		radiusLabel = new JLabel("Enter radius: ");
-		radiusTextField = new JTextField("radius");
+		radiusTextField = new JTextField(5);
 		
 		xCoordLabel = new JLabel("Enter x coordinate: ");
-		xCoordTextField = new JTextField("x coordinate");
+		xCoordTextField = new JTextField(5);
 		
 		yCoordLabel = new JLabel("Enter y coordinate: ");
-		yCoordTextField = new JTextField("y coordinate");
+		yCoordTextField = new JTextField(5);
 		
 		ButtonHandler buttonHandler = new ButtonHandler();
 		ok = new JButton("OK");
@@ -52,6 +52,8 @@ public class UserPrompt extends JFrame {
 		jPanel.add(yCoordTextField);
 		jPanel.add(xCoordLabel);
 		jPanel.add(xCoordTextField);
+		jPanel.add(ok);
+		jPanel.add(cancel);
 		
 				
 		add(jPanel);
@@ -64,7 +66,10 @@ public class UserPrompt extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == ok) {
-				radius = radiusTextField.getText();
+				if (testCoordinateFiled(radiusTextField.getText()))
+					radius = Float.valueOf(radiusTextField.getText());
+				else
+					radius = .1f;
 				
 				if (testCoordinateFiled(xCoordTextField.getText()))
 					x = Float.valueOf(xCoordTextField.getText());
@@ -85,7 +90,7 @@ public class UserPrompt extends JFrame {
 		
 		private boolean testCoordinateFiled(String text) {
 			try {
-				if (Float.valueOf(text) != null) {
+				if (text.equals(null)) {
 					return true;
 				}
 				return false;

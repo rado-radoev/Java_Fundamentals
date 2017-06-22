@@ -9,7 +9,7 @@ public class DrawCircleEllipseTest {
 		userPromptFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		userPromptFrame.setVisible(true);
-		userPromptFrame.setSize(400, 400);
+		userPromptFrame.pack();
 		
 
 	}
