@@ -1,4 +1,4 @@
-package com.ex1319;
+package com.ex1320;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -12,6 +12,7 @@ import java.util.Random;
 public class ScreenSaver extends JPanel implements ActionListener {
 
 	private Random rnd;
+	private Color color;
 	private Timer timer;
 	
 	public ScreenSaver() {
@@ -24,8 +25,10 @@ public class ScreenSaver extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	
-
-		for (int i = 0; i < UserInput.getIterations(); i++) {
+		
+		
+		
+		for (int i = 0; i < 101; i++) {
 			g.setColor(new Color(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
 			g.drawLine(rnd.nextInt(this.getParent().getSize().width), 
 					rnd.nextInt(this.getParent().getSize().height),

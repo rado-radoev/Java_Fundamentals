@@ -6,13 +6,11 @@ import javax.swing.JFrame;
 public class ScreenSaverTest {
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Screen server");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		frame.setSize(800, 800);
-		
-		ScreenSaver ss = new ScreenSaver();
-		frame.add(ss);
+		UserInput ui = new UserInput();
+		ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ui.setSize(800,800);
+		ui.setVisible(true);
+	
 	}
 
 }
