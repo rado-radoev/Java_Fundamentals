@@ -49,7 +49,7 @@ public class UserPanel extends JFrame implements ItemListener, ActionListener {
 		comboBox =  new JComboBox<String>(comboBoxChoices);
 		comboBox.addItemListener(this);
 		comboBox.setMaximumRowCount(comboBox.getItemCount());
-		comboBox.setSelectedIndex(0);
+		comboBox.setSelectedIndex(selectedItem);
 		comboBoxPanel.add(comboBox);
 		
 		
@@ -80,5 +80,7 @@ public class UserPanel extends JFrame implements ItemListener, ActionListener {
 		if (currentColor == null) {
 			currentColor = Color.BLACK;
 		}
+		
+		shape.repaint();
 	}
 }
