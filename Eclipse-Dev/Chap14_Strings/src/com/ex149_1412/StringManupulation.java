@@ -7,6 +7,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -48,7 +51,7 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		buttonClear = new JButton("Clear");
 		checkBoxUpperCase = new JCheckBox("UppserCase", false);
 		checkBoxLowerCase = new JCheckBox("LowerCase", false);
-		scroller = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		userLabelReverse = new JLabel("String to reverse:");
 		userLabelSearch = new JLabel("Character to search for:");
 		userTextFieldReverse = new JTextField(20);
@@ -72,14 +75,17 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		stringAletrationOptions.add(checkBoxLowerCase, flowLayout);
 		stringAletrationOptions.add(checkBoxUpperCase, flowLayout);
 		
-		textAreaPanel.add(strToDraw);
+		//textAreaPanel.add(strToDraw);
 		
 		textArea.setVisible(true);
 		textArea.setFont(new Font("Serif", Font.PLAIN, 14));
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		scroller.add(textArea);
+		textArea.setForeground(Color.BLACK);
+		scroller = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroller.setVisible(true);
+		scroller.setPreferredSize(new Dimension(300,200));
 		textAreaPanel.add(scroller, flowLayout);
 		
 		add(userInputRevers, flowLayout);
@@ -98,7 +104,7 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		
 	}
 
-
+	// TO DO: Not working!!!
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER && userTextFieldReverse.isFocusOwner())  {
@@ -122,8 +128,7 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonReverse) {
 			reverseText(userTextFieldReverse.getText());
-			strToDraw = new DrawString();
-			strToDraw.repaint();
+			textArea.append(getReversedString() + "\n");
 		}
 		
 	}
@@ -132,12 +137,7 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		return returnedString;
 	}
 	
-	private void reverseText (String text) {
-		// TO DO: implement this
-		// receive a string of text, split it and reverese the 
-		// order of the words
-		//output the reversed string
-		
+	private void reverseText (String text) {	
 		// SB to hold the newly generated string
 		StringBuilder sb = new StringBuilder();
 		

@@ -14,7 +14,7 @@ public class StringManipulationTest {
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setSize(600, 200);
+		frame.setSize(600, 350);
 
 		
 	}
