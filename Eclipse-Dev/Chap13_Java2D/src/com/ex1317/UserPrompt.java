@@ -3,6 +3,7 @@ package com.ex1317;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
@@ -20,10 +21,51 @@ public class UserPrompt extends JFrame {
 	private final JLabel xCoordLabel;
 	private final JLabel yCoordLabel;
 	private final JPanel jPanel;
+	private DrawCircleEllipse elipse;
 	
-	private float radius;
-	private float x;
-	private float y;
+	private static float radius;
+	private static float x;
+	private static float y;
+	private static float diameter;
+	private static float circumference;
+	private static float area;
+	
+	public static float getRadius() {
+		return radius;
+	}
+	
+	public static float getPosX()	{
+		return x;
+	}
+	
+	public static float getPosY() {
+		return y;
+	}
+	
+	public static float getArea() {
+		return area;
+	}
+	
+	public static float getDiameter() {
+		return diameter;
+	}
+	
+	public static float getCircumference() {
+		return circumference;
+	}
+	
+	private void setArea(float radius) {
+		this.area = (float)Math.pow(radius, 2);
+	}
+	
+	private void setDiameter(float radius) {
+		this.diameter = (float)2 * radius;
+	}
+	
+	private void setCircumference(float radius) {
+		this.circumference = (float) (2 * Math.PI) * radius;
+	}
+	
 	
 	public UserPrompt() {
 		super("User prompt");
@@ -80,6 +122,15 @@ public class UserPrompt extends JFrame {
 					y = Float.valueOf(yCoordTextField.getText());
 				else
 					y = .0f;
+				
+				setArea(getRadius());
+				setDiameter(getRadius());
+				setCircumference(getRadius());
+				
+				EllipseFrame eFrame = new EllipseFrame();
+				elipse = new DrawCircleEllipse();
+				eFrame.add(elipse);
+				
 			}
 			else if(e.getSource() == cancel) {
 				// implement close of JFrame
@@ -90,7 +141,7 @@ public class UserPrompt extends JFrame {
 		
 		private boolean testCoordinateFiled(String text) {
 			try {
-				if (text.equals(null)) {
+				if (!text.equals(null)) {
 					return true;
 				}
 				return false;
@@ -99,11 +150,9 @@ public class UserPrompt extends JFrame {
 			}
 
 		}
+
 		
 	}
-	
-	
-	
 	
 }
 
