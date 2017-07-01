@@ -100,6 +100,20 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		
 
 	}
+	
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (checkBoxLowerCase.isSelected() && checkBoxUpperCase.isSelected()) {
+			checkBoxUpperCase.setSelected(false);
+			checkBoxLowerCase.setSelected(false);
+		}
+		else if (checkBoxLowerCase.isSelected()) {
+			userTextFieldReverse.setText(userTextFieldReverse.getText().toLowerCase());
+		}
+		else if (checkBoxUpperCase.isSelected()) {
+			userTextFieldReverse.setText(userTextFieldReverse.getText().toUpperCase());
+		}
+	}
 
 
 	@Override
@@ -117,8 +131,6 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER && userTextFIeldSearch.isFocusOwner()) {
 			buttonSearch.doClick();
 		}
-
-		
 	}
 
 
@@ -139,7 +151,15 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 			textArea.setText("");
 		}
 		else if (e.getSource() == buttonSearch) {
-			textArea.append(countChars(userTextFieldReverse.getText(), userTextFIeldSearch.getText().charAt(0)));
+			// if the search button is pressed
+			if (userTextFIeldSearch.getText().length() > 0) {	// check to see if the lenght of the field contains any letters
+				textArea.append(countChars(userTextFieldReverse.getText(), userTextFIeldSearch.getText().charAt(0))); 	// if it does grab the first char search how many times is appears in the string
+			}
+			else {
+				textArea.append(countAllChars(userTextFieldReverse.getText()));	// we count each char occurance in the string.
+			}
+
+		
 		}
 		
 	}
@@ -168,29 +188,43 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 			chars[c]++;
 			start = text.indexOf(c, start + 1);
 		}
-		
-		
+
 		return String.format("Character %s, found: %d times%n", Character.valueOf(c), chars[c]);
 	}
 
 
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		if (checkBoxLowerCase.isSelected() && checkBoxUpperCase.isSelected()) {
-			checkBoxUpperCase.setSelected(false);
-			checkBoxLowerCase.setSelected(false);
-		}
-		else if (checkBoxLowerCase.isSelected()) {
-			userTextFieldReverse.setText(userTextFieldReverse.getText().toLowerCase());
-		}
-		else if (checkBoxUpperCase.isSelected()) {
-			userTextFieldReverse.setText(userTextFieldReverse.getText().toUpperCase());
+	private String countAllChars(String text) {
+		int[] chars = new int[128];
+		boolean[] found = new boolean[128];
+		StringBuffer sb = new StringBuffer();
+		
+		for (int i = 0; i < text.length(); i++) {	// loop through each letter
+			if (!found[text.charAt(i)]) {	// if letter is already added found, skip it
+				int start = text.indexOf(text.charAt(i), 0);	// get the index of the first occurance of the letter
+				while (start > -1) {	// loop until there are no more occurances of the letter
+					chars[text.charAt(i)]++;	// when the letter is encountered, increment the array index, corresponding to that letter		
+					start = text.indexOf(text.charAt(i), start + 1);	// search for the next occurance or exit loop
+				}
+			}
+			found[text.charAt(i)] = true;	// set the array that the letter has already been found, so next time it can be skipped, otherwise
+			//	multiple occurances of the same letter will appear in the output
 		}
 		
+		// loop thorught the array by skypping everything but letters
+		// output the letter and how many times it was found
+		for (int i = 1; i < chars.length; i++) {
+			if (chars[i] > 0 && // check if the current index is not 0
+					((i >= 65 && i <= 90) ||	// and check if the index is in the ASCII letter range
+					(i >=97 && i <= 122))) {	// 65-90 for uppercase 97-122 for lower case
+								
+				sb.append(String.format("Chacacter %s, found: %d times.%n", (char)i, chars[i]));
+			}
+		}
 		
+		return sb.toString();
 	}
+
 	
-	// FOR BOTH METHODS USE DRAWSTRING CLASS
 }
 
 
