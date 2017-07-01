@@ -72,7 +72,6 @@ public class CheckProtection extends JFrame {
 		String format = String.valueOf(zeros);
 		DecimalFormat df = new DecimalFormat(format);
 		df.setMinimumFractionDigits(2);
-		df.getCurrencyInstance(new Locale("en", "US"));
 		sb.append(df.format(number));
 		
 		
@@ -83,6 +82,7 @@ public class CheckProtection extends JFrame {
 			position++;
 		}
 		
+
 		return sb.toString();
 	}
 }
