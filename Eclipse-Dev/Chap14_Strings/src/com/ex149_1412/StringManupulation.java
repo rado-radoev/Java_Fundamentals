@@ -7,7 +7,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -16,8 +15,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
-public class StringManupulation extends JPanel implements ActionListener, KeyListener {
+
+public class StringManupulation extends JPanel implements ActionListener, KeyListener, ItemListener {
 	
 	private final FlowLayout flowLayout;
 	private final JPanel userInputRevers;
@@ -51,6 +53,8 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		buttonClear = new JButton("Clear");
 		checkBoxUpperCase = new JCheckBox("UppserCase", false);
 		checkBoxLowerCase = new JCheckBox("LowerCase", false);
+		checkBoxLowerCase.addItemListener(this);
+		checkBoxUpperCase.addItemListener(this);
 		
 		userLabelReverse = new JLabel("String to reverse:");
 		userLabelSearch = new JLabel("Character to search for:");
@@ -113,6 +117,7 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER && userTextFIeldSearch.isFocusOwner()) {
 			buttonSearch.doClick();
 		}
+
 		
 	}
 
@@ -129,6 +134,12 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 		if (e.getSource() == buttonReverse) {
 			reverseText(userTextFieldReverse.getText());
 			textArea.append(getReversedString() + "\n");
+		}
+		else if (e.getSource() == buttonClear) {
+			textArea.setText("");
+		}
+		else if (e.getSource() == buttonSearch) {
+			textArea.append(countChars(userTextFieldReverse.getText(), userTextFIeldSearch.getText().charAt(0)));
 		}
 		
 	}
@@ -149,13 +160,34 @@ public class StringManupulation extends JPanel implements ActionListener, KeyLis
 	}
 	
 	private String countChars(String text, char c) {
-		// TO DO: Implement this
-		// receive a text and a character
-		// using IndexOf, find how many times 
-		// a char "c" is being used in the string,
-		// if any at all
-		// return the number of occurances
-		return null;
+		int[] chars = new int[128];
+		text = text.toLowerCase();
+		
+		int start = text.indexOf(c, 0);
+		while (start > -1) {
+			chars[c]++;
+			start = text.indexOf(c, start + 1);
+		}
+		
+		
+		return String.format("Character %s, found: %d times%n", Character.valueOf(c), chars[c]);
+	}
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (checkBoxLowerCase.isSelected() && checkBoxUpperCase.isSelected()) {
+			checkBoxUpperCase.setSelected(false);
+			checkBoxLowerCase.setSelected(false);
+		}
+		else if (checkBoxLowerCase.isSelected()) {
+			userTextFieldReverse.setText(userTextFieldReverse.getText().toLowerCase());
+		}
+		else if (checkBoxUpperCase.isSelected()) {
+			userTextFieldReverse.setText(userTextFieldReverse.getText().toUpperCase());
+		}
+		
+		
 	}
 	
 	// FOR BOTH METHODS USE DRAWSTRING CLASS
