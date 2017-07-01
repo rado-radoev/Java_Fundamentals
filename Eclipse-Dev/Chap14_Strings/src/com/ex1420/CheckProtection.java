@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Locale;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
@@ -59,9 +60,7 @@ public class CheckProtection extends JFrame {
 					JOptionPane.showMessageDialog(null, "Amount cannot be null");
 				}
 			}
-			
-		}
-		
+		}		
 	}
 	
 	private String convert(String amount) {
@@ -73,11 +72,18 @@ public class CheckProtection extends JFrame {
 		String format = String.valueOf(zeros);
 		DecimalFormat df = new DecimalFormat(format);
 		df.setMinimumFractionDigits(2);
+		df.getCurrencyInstance(new Locale("en", "US"));
 		sb.append(df.format(number));
 		
-		for (int i = 0; i < sb.length(); i++) {
-			
+		
+		int position = 0;
+		while (sb.charAt(position) == '0') {
+			sb.replace(position, position, "*");
+			sb.deleteCharAt(position + 1);
+			position++;
 		}
+		
+		return sb.toString();
 	}
 }
 
