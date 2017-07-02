@@ -69,14 +69,14 @@ public class CheckProtection extends JFrame {
 		int digits = 6;
 		char[] zeros = new char[digits];
 		Arrays.fill(zeros, '0');
-		String format = String.valueOf(zeros);
+		String format = "000,000";
 		DecimalFormat df = new DecimalFormat(format);
 		df.setMinimumFractionDigits(2);
 		sb.append(df.format(number));
 		
 		
 		int position = 0;
-		while (sb.charAt(position) == '0') {
+		while (sb.charAt(position) == '0' || sb.charAt(position) == ',') {
 			sb.replace(position, position, "*");
 			sb.deleteCharAt(position + 1);
 			position++;
