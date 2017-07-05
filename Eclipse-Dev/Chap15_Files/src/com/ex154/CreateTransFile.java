@@ -11,6 +11,12 @@ public class CreateTransFile {
 
 	private static ObjectOutputStream output;
 	
+	public static void main(String[] args) {
+		openFile();
+		addRecords();
+		closeFile();
+	}
+	
 	private static void openFile() {
 		try {
 			output = new ObjectOutputStream(Files.newOutputStream(Paths.get("trans.txt")));
@@ -22,24 +28,25 @@ public class CreateTransFile {
 	
 	
 	private static void addRecords() {
-		TransactionRecord tr = new TransactionRecord();
+		
 		Scanner input = new Scanner(System.in);
-			
 		System.out.printf("%s%n", "Enter account number: ");
-		tr.setAccountNumber(input.nextInt());
-		
 		System.out.printf("%s%n", "Enter transaction amount: ");
-		tr.setTransactionAmount(input.nextDouble());
 		
-		try {
-		// serialize transaction record into a file
-		output.writeObject(tr);
-		}
-		catch (IOException ioException) {
-			System.out.printf("%s", "Error writing to a file");
-		}
-		catch (NoSuchElementException noSuchElement) {
-			System.out.printf("%s", "Invalid input.");
+		while (input.hasNext()) {
+			try {
+				
+				TransactionRecord tr = new TransactionRecord(input.nextInt(), input.nextDouble());
+					
+				// serialize transaction record into a file
+				output.writeObject(tr);
+			}
+			catch (IOException ioException) {
+				System.out.printf("%s", "Error writing to a file");
+			}
+			catch (NoSuchElementException noSuchElement) {
+				System.out.printf("%s", "Invalid input.");
+			}
 		}
 	}
 	
