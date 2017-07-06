@@ -1,5 +1,25 @@
 package com.ex154;
 
+/*
+ * 
+ * 
+ * 
+ * THIS CLASS IS NOT BEING USED
+ * FILES ARE BEING CREATED FROM THE 
+ * CREATEFILE CLASS
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
+
+
+
+
+
+
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
@@ -7,7 +27,7 @@ import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class CreateOldMastFile {
+public class CreateOldMastFile___OBSOLETE {
 
 	private static ObjectOutputStream output;
 	
