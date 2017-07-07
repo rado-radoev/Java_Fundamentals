@@ -70,7 +70,8 @@ public class FileMatch {
 				}
 			}
 			
-			transactionRecords.add(tempRecord);
+			if (tempRecord.getAccountNumber() != tempTS.get(i).getAccountNumber())
+				transactionRecords.add(tempRecord);
 			tempRecord = null;
 		}
 		
