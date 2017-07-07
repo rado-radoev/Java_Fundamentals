@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Formatter;
 import java.util.FormatterClosedException;
+import java.util.HashSet;
 
 public class FileMatch {
 	
@@ -24,30 +25,33 @@ public class FileMatch {
 	private static ArrayList<Account> accounts = new ArrayList<Account>();
 	private static ArrayList<TransactionRecord> transactionRecords = new ArrayList<TransactionRecord>();
 	
-	
 	public static void main(String[] args) {
 		openFile();
 		
 		checkDupliateTransactions();
-		addTransactionRecords();
-		addAccountRecords();
-		
-		matchTransactionsToAccounts();
-		checkMissingAccountRecords();
-		
-		checkWrongTransactionRecord();
+//		addTransactionRecords();
+//		addAccountRecords();
+//		
+//		matchTransactionsToAccounts();
+//		checkMissingAccountRecords();
+//		
+//		checkWrongTransactionRecord();
 		
 		closeFile();
 	}
 	
 	private static void checkDupliateTransactions() {
-		ArrayList<TransactionRecord> tempTS = new ArrayList<TransactionRecord>();
-		TransactionRecord tempRecord;
+		// Create temporary array to hold duplicate transactions
+		ArrayList<TransactionRecord> allTransactionRecords = new ArrayList<TransactionRecord>();
+		ArrayList<TransactionRecord> duplicateTransactionRecords = new ArrayList<TransactionRecord>();
+		ArrayList<TransactionRecord> uniqueTransactionRecords = new ArrayList<TransactionRecord>();
+		HashSet<Integer> found = new HashSet<Integer>();
 		
+		// read all transactions from the transaction file
 		try {
 			while (true) {
 				TransactionRecord transactionRecrod = (TransactionRecord) transInput.readObject();
-				tempTS.add(transactionRecrod);
+				allTransactionRecords.add(transactionRecrod);
 			}
 		} catch (EOFException eof) {
 			System.err.printf("%nNo more records%n");
@@ -59,20 +63,54 @@ public class FileMatch {
 			System.err.printf("%nError opening file.%n");
 		}
 		
-		for (int i = 0; i < tempTS.size();i++) {
-			tempRecord = new TransactionRecord();
-			tempRecord.setAccountNumber(tempTS.get(i).getAccountNumber());
-			tempRecord.setTransactionAmount(tempTS.get(i).getTransactionAmount());
+
+		
+		for (int i = 0; i < allTransactionRecords.size();i++) {	// loop through all records
+			//boolean duplicate = false;	// set sentinel variable if match is found or not
+			double balance = allTransactionRecords.get(i).getTransactionAmount();	// get the initial transaction amount
 			
-			for (int j = i + 1; j < tempTS.size() - 1; j++) {
-				if (tempTS.get(i).getAccountNumber() == tempTS.get(j).getAccountNumber()) {
-					tempRecord.setTransactionAmount(tempRecord.getTransactionAmount() + tempTS.get(j).getTransactionAmount());
+			for (int j = i + 1; j < allTransactionRecords.size();j++) {	// try to match the each record to the rest
+				if (allTransactionRecords.get(i).getAccountNumber() == allTransactionRecords.get(j).getAccountNumber()) {	// if a duplicate record is found
+					balance += allTransactionRecords.get(j).getTransactionAmount();	// add the additional amount to the base
+					//duplicate = true;	// set the control variable to true(match found)
+					found.add(allTransactionRecords.get(i).getAccountNumber());
 				}
 			}
 			
-			if (tempRecord.getAccountNumber() != tempTS.get(i).getAccountNumber())
-				transactionRecords.add(tempRecord);
-			tempRecord = null;
+			//if (duplicate) { //if a match is found. add record to duplicate transactions array
+				//allTransactionRecords.get(i).setTransactionAmount(balance); // update the transaction amount first
+				//duplicateTransactionRecords.add(allTransactionRecords.get(i));	// add the record to the duplicate transactions array
+			//} else {
+				// check if the transaction doesn't already exist. that is more for the last item in the list.
+				
+				allTransactionRecords.get(i).setTransactionAmount(balance); // update the transaction amount first
+				uniqueTransactionRecords.add(allTransactionRecords.get(i));		// if no duplicate record is found add to unique records
+			//}
+		}
+		
+		allTransactionRecords.clear(); // we don't need that array anymore. preping it to be garbage collected
+		
+		// now when we have two arays - one with duplicate records and one with unique records let's rewrite the file
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get("trans.txt")));
+			
+			
+			try {
+				// read through all unique records and add them to the trans.txt file
+				for (TransactionRecord tr : uniqueTransactionRecords) {
+					oos.writeObject(tr);
+				}
+				
+				// read through all duplicate records and add them to the trans.txt file
+				for (TransactionRecord tr : duplicateTransactionRecords) {
+					oos.writeObject(tr);
+				}
+			} catch (IOException ioException) {
+				System.out.println("Cannot write to file");				
+			}
+			
+		} catch (IOException e) {
+			System.out.print("File trans.txt does not exist.");
 		}
 		
 	}
