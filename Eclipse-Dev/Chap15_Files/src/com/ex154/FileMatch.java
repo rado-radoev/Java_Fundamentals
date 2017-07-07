@@ -27,6 +27,8 @@ public class FileMatch {
 	
 	public static void main(String[] args) {
 		openFile();
+		
+		checkDupliateTransactions();
 		addTransactionRecords();
 		addAccountRecords();
 		
@@ -36,6 +38,42 @@ public class FileMatch {
 		checkWrongTransactionRecord();
 		
 		closeFile();
+	}
+	
+	private static void checkDupliateTransactions() {
+		ArrayList<TransactionRecord> tempTS = new ArrayList<TransactionRecord>();
+		TransactionRecord tempRecord;
+		
+		try {
+			while (true) {
+				TransactionRecord transactionRecrod = (TransactionRecord) transInput.readObject();
+				tempTS.add(transactionRecrod);
+			}
+		} catch (EOFException eof) {
+			System.err.printf("%nNo more records%n");
+		}
+		catch (ClassNotFoundException cnf) {
+			System.err.printf("%nInvalid object type%n");
+		}
+		catch (IOException ioe) {
+			System.err.printf("%nError opening file.%n");
+		}
+		
+		for (int i = 0; i < tempTS.size();i++) {
+			tempRecord = new TransactionRecord();
+			tempRecord.setAccountNumber(tempTS.get(i).getAccountNumber());
+			tempRecord.setTransactionAmount(tempTS.get(i).getTransactionAmount());
+			
+			for (int j = i + 1; j < tempTS.size() - 1; j++) {
+				if (tempTS.get(i).getAccountNumber() == tempTS.get(j).getAccountNumber()) {
+					tempRecord.setTransactionAmount(tempRecord.getTransactionAmount() + tempTS.get(j).getTransactionAmount());
+				}
+			}
+			
+			transactionRecords.add(tempRecord);
+			tempRecord = null;
+		}
+		
 	}
 	
 	private static void openFile() {

@@ -66,8 +66,7 @@ public class CreateFile {
 	private static void addTransactionRecords() {
 		
 		Scanner input = new Scanner(System.in);
-		System.out.printf("%s%n", "Enter account number: ");
-		System.out.printf("%s%n", "Enter transaction amount: ");
+		System.out.printf("%s %s%n", "Enter account number", "Enter transaction amount");
 		
 		while (input.hasNext()) {
 			try {
