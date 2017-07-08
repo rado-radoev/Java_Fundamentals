@@ -44,7 +44,6 @@ public class FileMatch {
 		// Create temporary array to hold duplicate transactions
 		ArrayList<TransactionRecord> allTransactionRecords = new ArrayList<TransactionRecord>();
 		ArrayList<TransactionRecord> duplicateTransactionRecords = new ArrayList<TransactionRecord>();
-		ArrayList<TransactionRecord> uniqueTransactionRecords = new ArrayList<TransactionRecord>();
 		HashSet<Integer> found = new HashSet<Integer>();
 		
 		// read all transactions from the transaction file
@@ -66,26 +65,20 @@ public class FileMatch {
 
 		
 		for (int i = 0; i < allTransactionRecords.size();i++) {	// loop through all records
-			//boolean duplicate = false;	// set sentinel variable if match is found or not
 			double balance = allTransactionRecords.get(i).getTransactionAmount();	// get the initial transaction amount
 			
-			for (int j = i + 1; j < allTransactionRecords.size();j++) {	// try to match the each record to the rest
-				if (allTransactionRecords.get(i).getAccountNumber() == allTransactionRecords.get(j).getAccountNumber()) {	// if a duplicate record is found
-					balance += allTransactionRecords.get(j).getTransactionAmount();	// add the additional amount to the base
-					//duplicate = true;	// set the control variable to true(match found)
-					found.add(allTransactionRecords.get(i).getAccountNumber());
+			if (!found.contains(allTransactionRecords.get(i).getAccountNumber())) {
+				for (int j = i + 1; j < allTransactionRecords.size();j++) {	// try to match the each record to the rest
+					if (allTransactionRecords.get(i).getAccountNumber() == allTransactionRecords.get(j).getAccountNumber()) {	// if a duplicate record is found
+						balance += allTransactionRecords.get(j).getTransactionAmount();	// add the additional amount to the base						
+					}
 				}
-			}
-			
-			//if (duplicate) { //if a match is found. add record to duplicate transactions array
-				//allTransactionRecords.get(i).setTransactionAmount(balance); // update the transaction amount first
-				//duplicateTransactionRecords.add(allTransactionRecords.get(i));	// add the record to the duplicate transactions array
-			//} else {
-				// check if the transaction doesn't already exist. that is more for the last item in the list.
 				
 				allTransactionRecords.get(i).setTransactionAmount(balance); // update the transaction amount first
-				uniqueTransactionRecords.add(allTransactionRecords.get(i));		// if no duplicate record is found add to unique records
-			//}
+				duplicateTransactionRecords.add(allTransactionRecords.get(i));		// if no duplicate record is found add to unique records
+				found.add(allTransactionRecords.get(i).getAccountNumber());
+			}
+
 		}
 		
 		allTransactionRecords.clear(); // we don't need that array anymore. preping it to be garbage collected
@@ -95,12 +88,7 @@ public class FileMatch {
 			ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get("trans.txt")));
 			
 			
-			try {
-				// read through all unique records and add them to the trans.txt file
-				for (TransactionRecord tr : uniqueTransactionRecords) {
-					oos.writeObject(tr);
-				}
-				
+			try {			
 				// read through all duplicate records and add them to the trans.txt file
 				for (TransactionRecord tr : duplicateTransactionRecords) {
 					oos.writeObject(tr);
