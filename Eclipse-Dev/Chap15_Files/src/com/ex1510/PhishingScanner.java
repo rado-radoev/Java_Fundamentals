@@ -1,3 +1,6 @@
+/*
+ * Program that reads a list of spam words and matches provided text
+ */
 package com.ex1510;
 
 import java.util.Formatter;
@@ -27,6 +30,11 @@ public class PhishingScanner {
 		
 	}
 	
+	/**
+	 * <p>Method that checks the spam score and displays a message<br />
+	 * how likely it is that the message is spam or not
+	 * </p>
+	 */
 	private static void checkScore() {
 		int total = 0;
 		for (int i = 1; i < scores.length;i++) {
@@ -36,6 +44,20 @@ public class PhishingScanner {
 		System.out.println("Total score is: " + total + ". " + (total > 10 ? "Message is probably spam." : "Message does not look like spam."));
 	}
 	
+	/**
+	 * <p>Method that accepts a string of text and parses each word individually<br />
+	 * Then it matches each word from the text to the list of predefined spam words.<br />
+	 * If a match is found, the word score is written to an array.
+	 * </p>
+	 * 
+	 * <ul>
+	 * 	Example
+	 * 	<li>scanText("This is a FREE spam message"); </li>
+	 * </ul>
+	 * 
+	 * @param text - A string that will be scanned against the spam list.
+	 * @return none
+	 */
 	private static void scanText (String text) {
 		Pattern p = Pattern.compile("\\b\\w+\\b");
 		Matcher m = p.matcher(text);
@@ -47,12 +69,21 @@ public class PhishingScanner {
 		}
 	}
 	
+	/**
+	 * <p>Reads the spam list and their score to the screen</p>
+	 * */
+	@SuppressWarnings("unused")
 	private static void readSpamList() {
 		for (String key : spamListScores.keySet()) {
 			System.out.println("Key: " + key + " value: " + spamListScores.get(key));
 		}
 	}
 	
+	/**
+	 * <title>THIS IS A TEST</title>
+	 * <p>
+	 * </p>
+	 * */
 	private static void loadSpamList() {
 		
 		spamListScores = new HashMap<String, Integer>();
