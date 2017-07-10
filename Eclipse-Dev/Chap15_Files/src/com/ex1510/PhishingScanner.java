@@ -5,10 +5,11 @@ import java.util.FormatterClosedException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 
 
 public class PhishingScanner {
@@ -16,22 +17,53 @@ public class PhishingScanner {
 	private static Formatter output;
 	private static Map<String,Integer> spamListScores;
 	private static int lineCount;
+	private static int[] scores = new int[4];
 	
-	private static void openFile() {
+	public static void main(String[] args) {
+		loadSpamList();
+		String s = "Greetings from Avanset: Price Drop 40% on everything with Avanset! Dear customers! Join Avanset team to celebrate World Chocolate Day! Only 1 week from Monday, July 10th till Sunday, July 16th get 40% OFF all the purchases on Avanset website. Use the chance to become a certified IT expert easier and cheaper. Make your life sweeter! To use the discount simply type in the Promo Code 40OffJuly17 on the checkout page and enjoy your preparation. Enjoy this life! Activate your brain. Shop with Avanset team!Choose the VCE Exam Simulator plan that suits you best: VCE Exam Simulator BASIC let you play existing .vce exam files VCE Exam Simulator PRO let you play and edit existing .vce exam files and create your own exams The Offer is on this week only and ends on Sunday, July 16th, so don’t miss this great opportunity to save 40% with Avanset and invest in your better future today! Enter the Promo Code 40OffJuly17 at the checkout to use 40% OFF. Click here to get started!Avanset makes exam preparation easier, so here’s to getting certified hassle-free! Follow us on Facebook: tps://www.facebook.com/avansetcom For Mac users, click here. Want to install it on your mobile device?Thank you for your loyalty and support!Avanset Support Team support@avanset.comwww.avanset.omAvanset.com Mailing Address:27 Old Gloucester StreetLondonWC1N 3AXUnited KingdomNOTICE: You have received this email at rradoev@gmail.com as you are a registered member of Avanset.com. If you wish to discontinue receiving the Avanset.com Newsletter, please UNSUBSCRIBE.";
+		scanText(s);
+		checkScore();
+		
+	}
+	
+	private static void checkScore() {
+		int total = 0;
+		for (int i = 1; i < scores.length;i++) {
+			total += scores[i];
+		}
+		
+		System.out.println("Total score is: " + total + ". " + (total > 10 ? "Message is probably spam." : "Message does not look like spam."));
+	}
+	
+	private static void scanText (String text) {
+		Pattern p = Pattern.compile("\\b\\w+\\b");
+		Matcher m = p.matcher(text);
+		
+		while (m.find()) {
+			if (spamListScores.containsKey(m.group())) {
+				scores[spamListScores.get(m.group())]++;
+			}
+		}
+	}
+	
+	private static void readSpamList() {
+		for (String key : spamListScores.keySet()) {
+			System.out.println("Key: " + key + " value: " + spamListScores.get(key));
+		}
+	}
+	
+	private static void loadSpamList() {
 		
 		spamListScores = new HashMap<String, Integer>();
-		Pattern word = Pattern.compile("\\b(\\w+[^0-9])\\b");
-		Pattern score = Pattern.compile("[0-9]$");
-		
-		try  (Scanner input = new Scanner(Paths.get("spamlist.txt"))) {
+
+		try  (Scanner input = new Scanner(Paths.get("spamlist"))) {
 			while (input.hasNext()) {
-				lineCount++;
-				// read each line 
-				// grab the text and add it to hashmaps as key
-				// grab the number and add it to the hashmap key as value
+				String[] splitted = input.nextLine().split(",");
+				spamListScores.put(splitted[0], Integer.valueOf(splitted[1]));
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (IOException ioException) {
+			System.out.print("Cannot open file;");
 		}
 	}
 
