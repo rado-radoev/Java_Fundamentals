@@ -1,9 +1,12 @@
 package com.Time;
 
+;
+
 // This class is used to set time
 
-public class Time {
+public class Time implements Comparable<Time> {
 
+	private Time time;
 	private int hour;
 	private int minute;
 	private int second;
@@ -32,7 +35,7 @@ public class Time {
 		}
 	}
 	
-	public int getMinute () {
+	public int getMinute() {
 		return minute;
 	}
 	
@@ -60,5 +63,16 @@ public class Time {
 			this.second = 0;
 		}
 	}
+
+	@Override
+	public int compareTo(Time otherTiem) {
+		return this.time.compareTo(otherTiem);
+	}
 	
+	@Override
+	public String toString() {
+		// dispaly time separated by :
+		return String.format("%02d%4$s%02d%4$s%02d", getHour(), getMinute(), getSecond(), ":");
+		
+	}
 }
