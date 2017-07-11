@@ -80,9 +80,19 @@ public class PhishingScanner {
 	}
 	
 	/**
-	 * <title>THIS IS A TEST</title>
-	 * <p>
-	 * </p>
+	 * <HTML>
+	*	<BODY>
+	*	This method scans a text file, containing spam words and a score assigned to them
+	*	and outputs it into a HashMap
+	*	<p>
+	*	The hasmap is loaded into memory in order to be used later on for processing strings
+	*	</p>
+	*	
+	*	@throws IOException
+	*	@since 1.0 
+	*	@see java.util.Map
+	*	</BODY>
+	* 	</HTML>
 	 * */
 	private static void loadSpamList() {
 		
