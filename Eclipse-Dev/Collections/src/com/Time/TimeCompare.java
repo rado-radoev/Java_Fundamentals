@@ -21,12 +21,8 @@ public class TimeCompare implements Comparator<Time> {
 				return compareMinutes;
 						
 		// if minutes are equal we need to compare seconds
-		int compareSeconds = time1.getSecond() - time2.getSecond();
-			if (compareSeconds != 0)
-				return compareSeconds;
-		
 		// if the seconds are equal too. return the seconds(0), meaning that the hours are equal
+		int compareSeconds = time1.getSecond() - time2.getSecond();
 		return compareSeconds;
 	}
-	
 }
