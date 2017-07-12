@@ -63,8 +63,11 @@ public class TimeCompareTest {
 		Collections.sort(timesList, new TimeCompare());
 		System.out.println("After collection is sorted again: " + timesList);
 		
+		System.out.println("Perform binary search for time: 18:22:55 and output index: " +
+				Collections.binarySearch(timesList, new Time(18,22,55), new TimeCompare()));
 		
-		
+		Collections.addAll(copyList, times);
+		System.out.println("Copylist after addall: " + copyList);
 		
 	}
 }
