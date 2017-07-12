@@ -16,7 +16,7 @@ public class TimeCompareTest {
 	public static void main(String[] args) {
 		
 		Time[] times = {new Time(14, 25, 06), new Time(18, 22, 55),
-				new Time(16,04,25), new Time(16,30,00)}; 
+				new Time(16,04,25), new Time(16,30,00), new Time(18,22,55)}; 
 		
 		List<Time> timesList = new LinkedList<>(Arrays.asList(times));
 		System.out.println("Before the shuffle: " + timesList);
@@ -66,8 +66,11 @@ public class TimeCompareTest {
 		System.out.println("Perform binary search for time: 18:22:55 and output index: " +
 				Collections.binarySearch(timesList, new Time(18,22,55), new TimeCompare()));
 		
-		Collections.addAll(copyList, times);
-		System.out.println("Copylist after addall: " + copyList);
+		Collections.copy(copyList, timesList);
+		System.out.println("CopyList copied again: " + copyList);
+		
+		System.out.println("Does the 2 lists have elements in common: " + 
+				(Collections.disjoint(copyList, timesList) ? "they don't" : "they do"));
 		
 	}
 }
