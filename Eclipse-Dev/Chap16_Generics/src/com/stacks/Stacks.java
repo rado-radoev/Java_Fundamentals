@@ -16,7 +16,9 @@ public class Stacks {
 		stack.push(18.9D);
 		
 		//printStack(stack);
-		printStackEmpty(stack);
+		//printStackEmpty(stack);
+		System.out.printf("%s", stack.contains(12L));
+		
 		
 	}
 	
