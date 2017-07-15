@@ -18,19 +18,20 @@ public class CountDuplicateWords {
 	}
 	
 	private static void displayMap() {
-		TreeSet<String> sortedWords = new TreeSet<String>();
-		Set<String> words = wordCount.keySet();
+		Set<String> set = wordCount.keySet();
+		TreeSet<String> wordSet = new TreeSet<String>();
 		
-		for (String word : words) {
-			if (!sortedWords.contains(word)) {
-				sortedWords.add(word);
+		for (String s : set) {
+			if (wordCount.get(s) > 1) {
+				wordSet.add(s);
 			}
 		}
 		
-		System.out.printf("Duplicate words:");
-		for (String e : sortedWords) {
+		System.out.printf("Duplicate words:%n");
+		for (String e : wordSet) {
 			System.out.println(e);
 		}
+
 	}
 	
 	private static void createMap() {
@@ -40,13 +41,12 @@ public class CountDuplicateWords {
 		System.out.println("Enter text here:");
 		
 		String text = input.nextLine();
-		String[] splitted = text.split(" ");
-		
+		String[] splitted = text.toLowerCase().split(" ");
 	
 		for (String s: splitted) {
 			if (wordCount.containsKey(s)) {
 				int count = wordCount.get(s);
-				wordCount.put(s, count++);
+				wordCount.put(s, count+ 1);
 			}
 			else{
 				wordCount.put(s, 1);
