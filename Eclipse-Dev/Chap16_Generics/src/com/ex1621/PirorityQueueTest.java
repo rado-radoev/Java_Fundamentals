@@ -8,7 +8,7 @@ public class PirorityQueueTest {
 
 	public static void main(String[] args) {
 		// queue of capacity 11
-		Queue<Double> queue = new PriorityQueue<>(11, Collections.reverseOrder());
+		Queue<Double> queue = new PriorityQueue<>(1, Collections.reverseOrder());
 		
 
 		// insert elements into queue
