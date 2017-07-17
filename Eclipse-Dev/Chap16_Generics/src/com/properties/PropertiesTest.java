@@ -42,6 +42,9 @@ public class PropertiesTest {
 		else {
 			System.out.println("\n Property color not in table");
 		}
+		
+		
+		
 	}
 	
 	private static void loadProperties(Properties props) {
@@ -70,10 +73,10 @@ public class PropertiesTest {
 	}
 
 	private static void listProperties (Properties props) {
-		Set <Object> keys = props.keySet();
+		//Set <Object> keys = props.keySet();
 		
 		// output name/value pairs
-		for (Object key : keys) {
+		for (Object key : props.keySet()) {
 			System.out.printf("%s\t%s%n", key, props.getProperty((String) key));
 		}
 	}
