@@ -67,6 +67,7 @@ public class StreamsTest {
 			.filter(even.and(greaterThan5))
 			.forEach(value -> System.out.printf("%d ", value));
 		
+		
 	}
 
 }
