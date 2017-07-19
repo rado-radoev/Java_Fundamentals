@@ -51,6 +51,28 @@ public class ProcessingEmploiyee {
 				.filter(fourToSixThousand)
 				.findFirst()
 				.get());
+		
+		
+		// Function for getting first and last name from an employee
+		// return the object as a String
+		Function<Employee, String> byFirstName = Employee::getFirstName;
+		Function<Employee, String> byLastName = Employee::getLastName;
+		
+		// Comparator for comparing employees by last then by first name
+		Comparator<Employee> lastThenFirst = 
+				Comparator.comparing(byLastName).thenComparing(byFirstName);
+		
+		// sort employees by last then by first name
+		System.out.printf("%nEmployees in ascending order by last name then first:%n");
+		list.stream()
+			.sorted(lastThenFirst)
+			.forEach(System.out::println);
+		
+		// sort employees in descending order by last name then by first
+		System.out.printf("%nEmployees in descending order by last name then first:%n");
+		list.stream()
+			.sorted(lastThenFirst.reversed())
+			.forEach(System.out::println);
 	}
 
 }
