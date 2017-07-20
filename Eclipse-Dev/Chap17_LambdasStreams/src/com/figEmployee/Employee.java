@@ -4,11 +4,11 @@ public class Employee {
 
 	private String firstName;
 	private String lastName;
-	private double salary;
+	private Double salary;
 	private String department;
 	
 	public Employee(String firstName, String lastName,
-			double salary, String department) {
+			Double salary, String department) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.salary = salary;
@@ -23,7 +23,7 @@ public class Employee {
 		return lastName;
 	}
 
-	public double getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
