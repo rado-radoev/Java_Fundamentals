@@ -48,9 +48,9 @@ public class ProcessingEmploiyee {
 		// Display first employee in the range of salaries 4000-6000
 		System.out.printf("%nFirst employee who earns $4000 - $6000:%n%s%n", 
 				list.stream()
-				.filter(fourToSixThousand)
-				.findFirst()
-				.get());
+					.filter(fourToSixThousand)
+					.findFirst()
+						.get());
 		
 		
 		// Function for getting first and last name from an employee
