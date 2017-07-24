@@ -60,8 +60,6 @@ public class InvoiceTest {
 			.stream()
 			.sorted(Comparator.comparing(Invoice::getPricePerItem).reversed().thenComparing(Invoice::getPartNumber))
 			.forEach(System.out::println);
-			
-		
 	}
 	
 	
