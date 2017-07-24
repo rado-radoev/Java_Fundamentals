@@ -1,6 +1,8 @@
 package com.ex1710;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Map;
+import java.util.TreeMap;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.Comparator;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class FileTypeSummary {
@@ -27,6 +30,14 @@ public class FileTypeSummary {
 		
 		List<String> directories = new ArrayList<>();
 		dir.spliterator().forEachRemaining(curdir -> directories.add(curdir.toString()));
+		
+		Map<String, Long> fileSummaryLength = directories.stream()
+				.map(Paths::get)
+				.filter(Files::isRegularFile)
+				.flatMap(paths -> pattern.splitAsStream(paths.toString()))
+				.collect(Collectors.groupingBy(String::toLowerCase,
+						TreeMap::new, Collectors.counting()));
+		
 		
 		Set<String> fileSummary = directories.stream()
 			.map(Paths::get)
