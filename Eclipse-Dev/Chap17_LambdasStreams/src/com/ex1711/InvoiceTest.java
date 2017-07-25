@@ -1,9 +1,15 @@
 package com.ex1711;
 
+import java.lang.reflect.GenericArrayType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Comparator;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class InvoiceTest {
 
@@ -63,8 +69,24 @@ public class InvoiceTest {
 			.stream()
 			.sorted(Comparator.comparing(Invoice::getPricePerItem).reversed().thenComparing(Invoice::getPartNumber))
 			.forEach(System.out::println);		
+		
+		
+		// Map each invoice to its ParDescription and Quantity. Sort results by Quantity. Display results
+		Map<Integer, List<Invoice>> sortedInvoices = 
+				invoicesList.stream()
+					.collect(Collectors.groupingBy(Invoice::getQuantity, TreeMap::new, Collectors.toList()));
+		
+		Set<Map.Entry<Integer,List<Invoice>>> tempSet = sortedInvoices.entrySet();
+		for (Entry entry : tempSet) {
+			System.out.println("Key: "  + entry.getKey());
 
+		}
+		
 	}
+	
+	
+	
+	
 	
 	
 
