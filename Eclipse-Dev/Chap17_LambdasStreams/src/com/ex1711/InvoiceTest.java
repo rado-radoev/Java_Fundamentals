@@ -1,6 +1,8 @@
 package com.ex1711;
 
 import java.lang.reflect.GenericArrayType;
+import java.nio.MappedByteBuffer;
+import java.nio.file.attribute.GroupPrincipal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Comparator;
@@ -71,16 +73,49 @@ public class InvoiceTest {
 			.forEach(System.out::println);		
 		
 		
-		// Map each invoice to its ParDescription and Quantity. Sort results by Quantity. Display results
-		Map<Integer, List<Invoice>> sortedInvoices = 
-				invoicesList.stream()
-					.collect(Collectors.groupingBy(Invoice::getQuantity, TreeMap::new, Collectors.toList()));
+		System.out.println();
 		
-		Set<Map.Entry<Integer,List<Invoice>>> tempSet = sortedInvoices.entrySet();
-		for (Entry entry : tempSet) {
-			System.out.println("Key: "  + entry.getKey());
-
-		}
+		System.out.println("Sort by invoice quantity: ");	
+		// Map each invoice to its ParDescription and Quantity. Sort results by Quantity. Display results
+		Map<Integer, List<String>> sortedByQuantity = 
+				invoicesList.stream()
+					.collect(Collectors.groupingBy(Invoice::getQuantity, TreeMap::new, Collectors.mapping(Invoice::getPartDescription, Collectors.toList())));
+		
+		sortedByQuantity.entrySet()
+			.stream()
+			.forEach(v1 -> {
+				System.out.printf("%d ", v1.getKey());
+				v1.getValue().forEach(System.out::println);
+				});
+		
+		System.out.println();
+		
+		System.out.println("Sort by invoice amount: ");
+		// Map each invoice to the invoice amount (quantity * pricePerIteam), sort by payed amount and display amount and item description
+		Map<Double, List<String>> sortedByPayedAmount =
+				invoicesList.stream()
+					.collect(Collectors.groupingBy(s -> (s.getQuantity() * s.getPricePerItem()), TreeMap::new,
+							Collectors.mapping(Invoice::getPartDescription, Collectors.toList())));
+		
+		sortedByPayedAmount.entrySet()
+			.stream()
+			.forEach(v1 -> {
+				System.out.printf("%.2f ", v1.getKey());
+				v1.getValue().forEach(System.out::println);
+			});
+		
+		System.out.println();
+		
+		System.out.println("Sort by invoice amount and display range between $200 - $500: ");
+		// Map each invoice to the invoice amount (quantity * pricePerIteam), sort by payed amount and display amount and item description 
+		// in range 200 - 500
+		sortedByPayedAmount.entrySet()
+			.stream()
+			.filter(w -> (w.getKey() >= 200 && w.getKey() <= 500))
+			.forEach(v1 -> {
+				System.out.printf("%.2f ", v1.getKey());
+				v1.getValue().stream().map(s -> s.toString()).forEach(System.out::println);
+			});
 		
 	}
 	
