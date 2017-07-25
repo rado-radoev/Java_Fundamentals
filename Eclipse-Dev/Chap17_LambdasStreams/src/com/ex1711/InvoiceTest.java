@@ -19,7 +19,7 @@ public class InvoiceTest {
 				new Invoice(56, "Jig saw", 21, 11.00),
 				new Invoice(3, "Wrench", 34, 7.50)};
 		
-<<<<<<< HEAD
+
 		// Convert invoices array to List and display the unmodified list
 		List<Invoice> invoicesList = Arrays.asList(invoices);
 		System.out.printf("List of invoices (unmodified):%n");
@@ -34,18 +34,7 @@ public class InvoiceTest {
 		// Sort invoice objects by Part Description and display them
 		Function<Invoice, String> byPartDescription = Invoice::getPartDescription;
 		System.out.printf("Invoice objects sorted by Part Description:");
-=======
 		
-		List<Invoice> invoicesList = Arrays.asList(invoices);
-		System.out.printf("List of invoices (unmodified):%n");
-		System.out.printf("%s%n", invoicesList);
-		
-		
-		
-		// Sort invoice objects by Part Description and display them
-		Function<Invoice, String> byPartDescription = Invoice::getPartDescription;
-		System.out.printf("Invoice objects sorted by Part Description");
->>>>>>> e59cc6c2afe59ac8f5f973cc3627a9c2c440ada4
 		System.out.printf("%n%-10s%30s%15s%15s%n" ,
 				"Part number",
 				"Part description",
@@ -54,7 +43,7 @@ public class InvoiceTest {
 		invoicesList
 			.stream()
 			.sorted(Comparator.comparing(byPartDescription))
-<<<<<<< HEAD
+
 			.forEach(item -> System.out.printf("%-10s%30s%15d%15.2f%n", 
 					item.getPartNumber(),
 					item.getPartDescription(),
@@ -73,11 +62,8 @@ public class InvoiceTest {
 		invoicesList
 			.stream()
 			.sorted(Comparator.comparing(Invoice::getPricePerItem).reversed().thenComparing(Invoice::getPartNumber))
-			.forEach(System.out::println);
-=======
-			.forEach(System.out::println);
-		
->>>>>>> e59cc6c2afe59ac8f5f973cc3627a9c2c440ada4
+			.forEach(System.out::println);		
+
 	}
 	
 	
