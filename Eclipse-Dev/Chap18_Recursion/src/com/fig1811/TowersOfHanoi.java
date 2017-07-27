@@ -8,7 +8,24 @@ public class TowersOfHanoi {
 		int tempPeg = 2;
 		int totalDisks = 3;
 		
-		solveTowers(totalDisks, startPeg, endPeg, tempPeg);
+		solveTowers(totalDisks, "A", "B", "C");
+	}
+	
+	public static void solveTowers(int disks, String startPole, String temporaryPole, String endPole) {
+		// If there is only one pole, print where it was and were it went
+		if (disks == 1) {
+			System.out.println(startPole + " --> " + endPole);
+		}
+		else {
+			// if more than one disks exist, move the disk from the start position, to end position
+			solveTowers(disks - 1, startPole, endPole, temporaryPole);
+			
+			// print where disk was and were it went
+			System.out.println(startPole + " --> " + endPole);
+			
+			// // if more than one disks exist, move the disk from the start position, to end position
+			solveTowers(disks - 1, temporaryPole, startPole, endPole);
+		}
 	}
 
 	public static void solveTowers(int disks, int sourcePeg, int destinatioPeg, int tempPeg) {
