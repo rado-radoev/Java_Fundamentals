@@ -2,7 +2,7 @@ package com.fig184;
 
 import java.math.BigInteger;
 
-public class Fibonacci {
+public class Factorial {
 
 	public static void main(String[] args) {
 /*		for (int i = 0; i < 21; i++) {
