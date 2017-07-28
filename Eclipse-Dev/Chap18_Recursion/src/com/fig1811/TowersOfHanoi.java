@@ -1,5 +1,7 @@
 package com.fig1811;
 
+import javax.xml.ws.Endpoint;
+
 public class TowersOfHanoi {
 	
 	public static void main(String[] args) {
@@ -8,7 +10,8 @@ public class TowersOfHanoi {
 		int tempPeg = 2;
 		int totalDisks = 3;
 		
-		solveTowers(totalDisks, "A", "B", "C");
+		//solveTowers(totalDisks, "A", "B", "C");
+		solveHanoi(3, startPeg, endPeg, tempPeg);
 	}
 	
 	public static void solveTowers(int disks, String startPole, String temporaryPole, String endPole) {
@@ -44,4 +47,22 @@ public class TowersOfHanoi {
 		// move (disks - 1) disks from tempPeg to destinationPeg
 		solveTowers(disks - 1, tempPeg, destinatioPeg, sourcePeg);
 	}
+	
+	
+	
+
+	public static void solveHanoi(int disks, int sourcePole, int destinationPole, int tempPole) {
+		if (disks == 1) {
+			System.out.printf("%n%d --> %d", sourcePole, destinationPole);
+			return; 
+		}
+
+		solveHanoi(disks - 1, sourcePole, tempPole, destinationPole);
+		
+		System.out.printf("%n%d --> %d", sourcePole, destinationPole);
+		solveHanoi(disks - 1, tempPole, destinationPole, sourcePole);
+	}
+
+
+
 }
