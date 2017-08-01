@@ -1,24 +1,18 @@
 package com.ex1815;
 
-import java.util.Set;
-import java.util.HashSet;
 import static java.lang.Math.min;
 
 public class NQueens_2 {
 	
-	private static int N = 8; // default board size
+	private static int N = 4; // default board size
 	private static int[][] board = new int[N][N];
-	private static Set<Integer> existingRows = new HashSet<Integer>();
 	
 	public static void main(String[] args) {
 		System.out.printf("%4d %2d %2d %2d %2d %2d %2d %2d%n", 0,1,2,3,4,5,6,7);
-//		board[2][3] = 1;
-//		printBoard(board, 0);
-		
-		NQueenBackTrack(0,N);		
-//		System.out.println("2, 3 " +  isQueenSafe(2,3));
-//		System.out.println("3, 4 " + isQueenSafe(3,4));
-//		System.out.println("0, 4 " + isQueenSafe(0,4));
+		if (NQueenBackTrack(0,N)) {
+			printBoard(board, 0);
+		}
+
 	}
 	
 	// print the board using recursion
@@ -42,10 +36,6 @@ public class NQueens_2 {
 	
 	// function to check if the cell is safe for a queen
 	private static boolean isQueenSafe(int row, int col) {
-		
-		// if row has already been used no need to go further
-//		if (existingRows.contains(row))
-//			return false;
 		
 		// if another queen is on the same row or col return false
 		// loop throuh all the rows and cols
@@ -74,30 +64,28 @@ public class NQueens_2 {
 		
 		// if none of the checks have returned false. 
 		// it is safe to place a queen
-		// but first add the column and row to a hash map.
-		// that way next time when a check is performed we don't have to 
-		// iterate through all the rows and cols. We can check if the row has been 
-		// used and if it is then skip it.
-		existingRows.add(row);
 		return true;
 	}
 	
-	public static void NQueenBackTrack(int row, int n) {
+	
+	public static boolean NQueenBackTrack(int row, int n) {
 		
 		if (row == n - 1) {
-			printBoard(board, 0);
+			return true;
 		}
 		
 		for (int i = 0; i < n;i++) {
 			if (isQueenSafe(row, i)) {
 				board[row][i] = 1; // it is safe to place a queen
-			
+				
+				if (NQueenBackTrack(row + 1, n)) {
+					return true;
 				}
-			else {
+				
 				board[row][i] = 0;
 			}
 		}
-		NQueenBackTrack(row + 1, n);
+		
+		return false;
 	}
-
 }
