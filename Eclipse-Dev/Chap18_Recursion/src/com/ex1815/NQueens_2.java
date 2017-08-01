@@ -23,7 +23,7 @@ public class NQueens_2 {
 	
 	// print the board using recursion
 	private static String printBoard(int[][] board, int row) {
-		if (row == N) 
+		if (row == N - 1) 
 			return "";
 		
 		System.out.printf("%d ", row);	// this print the number of the row
@@ -44,8 +44,8 @@ public class NQueens_2 {
 	private static boolean isQueenSafe(int row, int col) {
 		
 		// if row has already been used no need to go further
-		if (existingRows.contains(row))
-			return false;
+//		if (existingRows.contains(row))
+//			return false;
 		
 		// if another queen is on the same row or col return false
 		// loop throuh all the rows and cols
@@ -56,7 +56,7 @@ public class NQueens_2 {
 		}
 		
 		// get diagonal. To calculate -> min(row, col) - 1
-		int diag = min(row, col) - 1;
+		int diag = min(row, col);
 
 		// checking from top left to bottom right
 		for (int i = row - diag, j = col - diag; i < N && j < N; i++, j++) {
@@ -83,19 +83,21 @@ public class NQueens_2 {
 	}
 	
 	public static void NQueenBackTrack(int row, int n) {
-		for (int i = 0; i < n ; i++) {
+		
+		if (row == n - 1) {
+			printBoard(board, 0);
+		}
+		
+		for (int i = 0; i < n;i++) {
 			if (isQueenSafe(row, i)) {
-				board[row][i] = 1;
-				if (row == n) {
-					printBoard(board, 0);
+				board[row][i] = 1; // it is safe to place a queen
+			
 				}
-				else {
-					board[row][i] = 0;
-				}
-				
-				NQueenBackTrack(row + 1, n);
+			else {
+				board[row][i] = 0;
 			}
 		}
+		NQueenBackTrack(row + 1, n);
 	}
 
 }
