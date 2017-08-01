@@ -4,7 +4,7 @@ import static java.lang.Math.min;
 
 public class NQueens_2 {
 	
-	private static int N = 4; // default board size
+	private static int N = 8; // default board size
 	private static int[][] board = new int[N][N];
 	
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class NQueens_2 {
 	
 	// print the board using recursion
 	private static String printBoard(int[][] board, int row) {
-		if (row == N - 1) 
+		if (row == N) 
 			return "";
 		
 		System.out.printf("%d ", row);	// this print the number of the row
@@ -56,7 +56,7 @@ public class NQueens_2 {
 		}
 		
 		// checking from top right to bottom left
-		for (int i = row - diag, j = col + diag; i < N && j > 0; i++, j--) {
+		for (int i = row - diag, j = col + diag; i < N && (j > 0 && j < N); i++, j--) {
 			if (board[i][j] == 1) {
 				return false; // queen exists
 			}
@@ -70,7 +70,7 @@ public class NQueens_2 {
 	
 	public static boolean NQueenBackTrack(int row, int n) {
 		
-		if (row == n - 1) {
+		if (row == n) {
 			return true;
 		}
 		
