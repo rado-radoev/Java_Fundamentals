@@ -8,7 +8,7 @@ public class NQueens_2 {
 	private static int[][] board = new int[N][N];
 	
 	public static void main(String[] args) {
-		System.out.printf("%4d %2d %2d %2d %2d %2d %2d %2d%n", 0,1,2,3,4,5,6,7);
+		System.out.printf("%4d %2d %2d %2d %2d %2d %2d %2d%n", 1,2,3,4,5,6,7,8);
 		if (NQueenBackTrack(0,N)) {
 			printBoard(board, 0);
 		}
@@ -20,7 +20,7 @@ public class NQueens_2 {
 		if (row == N) 
 			return "";
 		
-		System.out.printf("%d ", row);	// this print the number of the row
+		System.out.printf("%d ", row + 1);	// this print the number of the row
 		for (int j = 0; j < N; j++) { // loop though cols 
 			if (board[row][j] == 0) 
 				System.out.print(" * ");  // if box is 0, no queen is placed on that position, print *
@@ -45,6 +45,7 @@ public class NQueens_2 {
 			}
 		}
 		
+		
 		// get diagonal. To calculate -> min(row, col) - 1
 		int diag = min(row, col);
 
@@ -56,7 +57,7 @@ public class NQueens_2 {
 		}
 		
 		// checking from top right to bottom left
-		for (int i = row - diag, j = col + diag; i < N && (j > 0 && j < N); i++, j--) {
+		for (int i = row - diag, j = col + diag; i < N && (j >= 0 && j < N); i++, j--) {
 			if (board[i][j] == 1) {
 				return false; // queen exists
 			}
@@ -69,7 +70,6 @@ public class NQueens_2 {
 	
 	
 	public static boolean NQueenBackTrack(int row, int n) {
-		
 		if (row == n) {
 			return true;
 		}
@@ -81,8 +81,9 @@ public class NQueens_2 {
 				if (NQueenBackTrack(row + 1, n)) {
 					return true;
 				}
-				
-				board[row][i] = 0;
+				else {
+					board[row][i] = 0;
+				}
 			}
 		}
 		
