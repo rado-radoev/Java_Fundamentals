@@ -1,4 +1,4 @@
-package com.exBunnyEars;
+package com.exRecursion1;
 
 /*
 	We have a number of bunnies and each bunny has two big floppy ears. We want to compute the total 

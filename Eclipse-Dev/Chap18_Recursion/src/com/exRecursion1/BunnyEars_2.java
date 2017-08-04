@@ -1,4 +1,4 @@
-package com.exBunnyEars;
+package com.exRecursion1;
 
 /* We have bunnies standing in a line, numbered 1, 2, ... 
  * The odd bunnies (1, 3, ..) have the normal 2 ears. 

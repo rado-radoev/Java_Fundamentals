@@ -1,4 +1,4 @@
-package com.exBunnyEars;
+package com.exRecursion1;
 
 /*
  * Given a string, return recursively a "cleaned" string where adjacent chars 

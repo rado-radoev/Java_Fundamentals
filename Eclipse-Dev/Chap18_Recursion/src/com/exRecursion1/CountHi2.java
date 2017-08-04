@@ -1,4 +1,4 @@
-package com.exBunnyEars;
+package com.exRecursion1;
 
 /*
 Given a string, compute recursively the number of times lowercase "hi"

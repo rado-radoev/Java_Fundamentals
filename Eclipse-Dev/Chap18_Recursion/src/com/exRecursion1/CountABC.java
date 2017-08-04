@@ -1,4 +1,4 @@
-package com.exBunnyEars;
+package com.exRecursion1;
 
 /*Count recursively the total number of "abc" and "aba" substrings that appear in the given string.*/
 

@@ -1,4 +1,4 @@
-package com.exBunnyEars;
+package com.exRecursion1;
 
 /*
  * 	Given an array of ints, compute recursively the number of times that the value 11 appears in the array.
