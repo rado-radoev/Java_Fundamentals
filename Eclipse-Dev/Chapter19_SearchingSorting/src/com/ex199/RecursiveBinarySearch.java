@@ -11,6 +11,17 @@ package com.ex199;
 
 
 public class RecursiveBinarySearch {
+	
+	public static int binarySearchRecursive(int[] data, int start, int end, int searchKey) {
+		if (start > end) 
+			return -1;
+		
+		int low = start;
+		int hight = end;
+		int middle = (start + end + 1) / 2;
+		
+		
+	}
 
 	 // perform a binary search on the data      
 	   public static int binarySearch(int[] data, int key)
