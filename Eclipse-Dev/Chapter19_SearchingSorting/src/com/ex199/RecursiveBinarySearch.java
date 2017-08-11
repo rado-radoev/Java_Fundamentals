@@ -1,13 +1,7 @@
 package com.ex199;
 
-
-
-// TO DO: implement recursive binary search
-
-
-
-
-
+import java.security.SecureRandom;
+import java.util.Arrays;
 
 
 public class RecursiveBinarySearch {
@@ -16,13 +10,20 @@ public class RecursiveBinarySearch {
 		if (start > end) 
 			return -1;
 		
-		int low = start;
-		int hight = end;
 		int middle = (start + end + 1) / 2;
+		
+		if (searchKey == data[middle])
+			return middle;
+		else if (searchKey < data[middle])
+			end = middle - 1;
+		else
+			start = middle + 1;
+		
+		return binarySearchRecursive(data, start, end, searchKey);
 		
 		
 	}
-
+	
 	 // perform a binary search on the data      
 	   public static int binarySearch(int[] data, int key)
 	   {
@@ -30,17 +31,17 @@ public class RecursiveBinarySearch {
 	      int high = data.length - 1; // high end of the search area
 	      int middle = (low + high + 1) / 2; // middle element      
 	      int location = -1; // return value; -1 if not found 
-
+	
 	      do // loop to search for element
 	      {
 	         // print remaining elements of array
 	         System.out.print(remainingElements(data, low, high));
-
+	
 	         // output spaces for alignment
 	         for (int i = 0; i < middle; i++)
 	            System.out.print("   ");
 	         System.out.println(" * "); // indicate current middle
-
+	
 	         // if the element is found at the middle                  
 	         if (key == data[middle])                                  
 	            location = middle; // location is the current middle   
@@ -48,62 +49,47 @@ public class RecursiveBinarySearch {
 	            high = middle - 1; // eliminate the higher half        
 	         else  // middle element is too low                        
 	            low = middle + 1; // eliminate the lower half          
-
+	
 	         middle = (low + high + 1) / 2; // recalculate the middle
 	      } while ((low <= high) && (location == -1));               
-
+	
 	      return location; // return location of search key
 	   } // end method binarySearch                        
-
+	
 	   // method to output certain values in array
 	   private static String remainingElements(int[] data, int low, int high)
 	   {
 	      StringBuilder temporary = new StringBuilder();
-
+	
 	      // append spaces for alignment
 	      for (int i = 0; i < low; i++)
 	         temporary.append("   ");
-
+	
 	      // append elements left in array 
 	      for (int i = low; i <= high; i++)
 	         temporary.append(data[i] + " ");
-
+	
 	      return String.format("%s%n", temporary);
 	   } // end method remainingElements
-
+	
 	   public static void main(String[] args)
 	   {
-	      Scanner input = new Scanner(System.in);
 	      SecureRandom generator = new SecureRandom();
-
+	
 	      int[] data = new int[15]; // create array
-
+	
 	      for (int i = 0; i < data.length; i++) // populate array
-	         data[i] = 10 + generator.nextInt(90);
-
+	         data[i] = 10 + generator.nextInt(10);
+	
 	      Arrays.sort(data); // binarySearch requires sorted array
 	      System.out.printf("%s%n%n", Arrays.toString(data)); // display array
+	      System.err.println("Number is found at index: " + binarySearchRecursive(data, 0, data.length - 1, 10));
+	
+      } 
+} 
 
-	      // get input from user
-	      System.out.print("Please enter an integer value (-1 to quit): ");
-	      int searchInt = input.nextInt(); 
 
-	      // repeatedly input an integer; -1 terminates the program
-	      while (searchInt != -1)
-	      {
-	         // perform search
-	         int location = binarySearch(data, searchInt);
 
-	         if (location == -1) // not found
-	            System.out.printf("%d was not found%n%n", searchInt); 
-	         else // found
-	            System.out.printf("%d was found in position %d%n%n", 
-	               searchInt, location);
 
-	         // get input from user
-	         System.out.print("Please enter an integer value (-1 to quit): ");
-	         searchInt = input.nextInt();
-	      } 
-	   } // end main
 
-}
+
