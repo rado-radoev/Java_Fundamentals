@@ -1,5 +1,7 @@
 package com.fig195;
 
+import java.util.Arrays;
+
 public class InsertionSort {
 
 	public static void main(String[] args) {
@@ -16,6 +18,8 @@ public class InsertionSort {
 			
 			data[moveItem] = insert;
 		}
+		
+		System.out.println(Arrays.toString(data));
 	}
 
 }
