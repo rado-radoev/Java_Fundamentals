@@ -1,7 +1,5 @@
 package com.ex206;
 
-import javax.print.DocFlavor.STRING;
-
 public class GenericMethodOverload {
 
 	public static void main(String[] args) {
