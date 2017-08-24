@@ -1,7 +1,5 @@
 package com.figLinkedList;
 
-import java.awt.event.ItemEvent;
-
 public class List<T> {
 
 	private ListNode<T> firstNode;
