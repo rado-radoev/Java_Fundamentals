@@ -1,9 +1,6 @@
 package com.figLinkedListTest;
 import com.figLinkedList.List;
 
-import java.awt.Transparency;
-import java.security.KeyStore.TrustedCertificateEntry;
-
 import com.figLinkedList.EmptyListException;
 
 public class ListTest {
