@@ -1,5 +1,4 @@
-package com.ex217;
-import com.ex217.ListNode;
+package com.ex219;
 
 public class SortedList<T extends Comparable<T>> {
 
@@ -177,6 +176,22 @@ public class SortedList<T extends Comparable<T>> {
 		return slowPointer;
 	}
 	
+	private ListNode<T> reverseHelper (ListNode<T> head) {
+		ListNode<T> result = null;
+		
+		if (head == null)
+			return head;
+		
+		result = head.nextNode;
+
+		result.nextNode = reverseHelper(result);
+		return result;
+	}
+	
+	
+	public void reverse() {
+		reverseHelper(firstNode);
+	}
 }
 
 
