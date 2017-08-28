@@ -190,7 +190,24 @@ public class SortedList<T extends Comparable<T>> {
 	
 	
 	public void reverse() {
-		reverseHelper(firstNode);
+		reverseList(firstNode);
+	}
+	
+	
+	
+	public ListNode<T> reverseList(ListNode<T> head) {
+	    if(head==null || head.nextNode == null)
+	        return head;
+	 
+	    //get second node    
+	    ListNode<T> second = head.nextNode;
+	    //set first's next to be null
+	    head.nextNode = null;
+	 
+	    ListNode<T> rest = reverseList(second);
+	    second.nextNode = head;
+	 
+	    return rest;
 	}
 }
 
