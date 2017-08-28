@@ -74,10 +74,12 @@ public class SortedList<T extends Comparable<T>> {
 		return removedItem;
 	}
 	
+	// Check if list is empty
 	public boolean isEmpty() {
 		return firstNode == null; // return true if list is empty
 	}
 	
+	// Print all elements in the list
 	public void print()	{
 		if (isEmpty()) {
 			System.out.printf("Empty %s%n", name);
@@ -96,7 +98,13 @@ public class SortedList<T extends Comparable<T>> {
 		System.out.println();
 	}
 	
-	public ListNode<T> mergeSort(ListNode<T> head) {
+	// Publicly visible sort method. Uses merge sort.
+	public void sort() {
+		mergeSort(firstNode);
+	}
+	
+	// Use merge sort to break up the list
+	private ListNode<T> mergeSort(ListNode<T> head) {
 		// Base case, if head is null
 		if (head == null || head.nextNode == null)
 			return head;
@@ -149,19 +157,19 @@ public class SortedList<T extends Comparable<T>> {
 			return head;
 		
 		// the fast pointer will go twice as fast as the slow pointer
-		// slow pointer will poin to the middle of the list
+		// slow pointer will point to the middle of the list
 		ListNode<T> fastPointer = head.nextNode;
 		ListNode<T> slowPointer = head;
 		
 		// continue while you reach the end of the list
-		while (fastPointer != null) {
+		while (fastPointer.nextNode != null) {
 			fastPointer = fastPointer.nextNode;
 			
 			// if next pointer is not the end of the list 
 			// increment the slow and fast pointers
 			if (fastPointer != null) {
 				slowPointer = slowPointer.nextNode;
-				fastPointer = fastPointer.nextNode;
+				//fastPointer = fastPointer.nextNode;
 			}
 		}
 		

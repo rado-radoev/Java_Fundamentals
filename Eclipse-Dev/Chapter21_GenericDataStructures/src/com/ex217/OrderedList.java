@@ -8,14 +8,16 @@ public class OrderedList {
 		SecureRandom rand = new SecureRandom();
 		SortedList<Integer> list = new SortedList<Integer>();
 		
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < 6; i++) {
 			list.insertAtFront(rand.nextInt(100) + 1);
 		}
 		
 		// display list
 		list.print();
 		
-		list.mergeSort()
+		list.sort();
+		list.print();
+		
 	}
 
 }
