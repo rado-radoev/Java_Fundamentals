@@ -18,11 +18,21 @@ public class InfixToPostfixConverter implements Infix{
 			else if (c == '(')				// if char is left bracket
 				stack.push(c);				// push it to the stack
 			else if (isOperator(c)) {		// if char is operator
+				// not sure about this one! May be I need to check only the top most char in the stack not every one
 				while (!stack.isEmpty()) {	// pop operators at the top of the stack while they have equal or higher precedence
 					if (!isOperator(stack.peek()))	// then the current operator and append popped operators to postfix
+						postfix.append(stack.pop());
+				}
+				stack.push(c);		// push current char onto stack
+			}
+			else if (c == ')') {				// if char is right bracket
+				while (stack.peek() != '(') {   // while left paranthesis is not at the top of the stack
+					if (isOperator(stack.peek())) {		// if the char is operator
+						postfix.append(stack.pop());	// pop from the stack and append to postfix
+					}
 				}
 			}
-			
+			stack.pop();	// pop and discard left paranthesis from the stack
 		}
 		
 	}
