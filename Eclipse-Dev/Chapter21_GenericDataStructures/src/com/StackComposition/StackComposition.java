@@ -1,6 +1,7 @@
 package com.StackComposition;
 import com.figLinkedList.EmptyListException;
 import com.figLinkedList.List;
+import com.figLinkedList.ListNode;
 
 public class StackComposition<T> {
 
@@ -29,5 +30,12 @@ public class StackComposition<T> {
 	
 	public void print() {
 		stackList.print();
+	}
+	
+	public T peek() {
+		if (stackList.isEmpty())
+			return null;
+		else
+			return stackList.getFirstNode();
 	}
 }

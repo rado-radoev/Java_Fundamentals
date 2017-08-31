@@ -18,6 +18,10 @@ public class List<T> {
 		firstNode = lastNode = null;
 	}
 	
+	public T getFirstNode () {
+		return firstNode.data;
+	}
+	
 	// insert item at from of the list
 	public void insertAtFront(T insertItem)	{
 		if (isEmpty()) // firstNode and lastNode refer to same object
@@ -94,6 +98,7 @@ public class List<T> {
 		
 		System.out.println();
 	}
+	
 }
 
 
