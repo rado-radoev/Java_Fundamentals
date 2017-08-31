@@ -3,7 +3,7 @@ package com.ex2111;
 public class Palindrome {
 
 	public static void main(String[] args) {
-		String str = "alala";
+		String str = "hellothisispalindoremmerodnilapsisihtolleh";
 		
 		StackComposition<Character> stack = new StackComposition<Character>();
 		for (Character c : str.toCharArray()) {

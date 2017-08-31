@@ -6,6 +6,7 @@ public class Testis {
 	public static void main(String[] args) {
 		SecureRandom rand = new SecureRandom();
 		SortedList<Integer> list = new SortedList<Integer>();
+		SortedList<Integer> reversed = new SortedList<Integer>();
 		
 		for (int i = 0; i < 6; i++) {
 			list.insertAtFront(rand.nextInt(100) + 1);

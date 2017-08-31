@@ -182,15 +182,15 @@ public class SortedList<T extends Comparable<T>> {
 		if (head == null)
 			return head;
 		
-		result = head.nextNode;
+		result = head;
+		result.nextNode = reverseHelper(head.nextNode);
 
-		result.nextNode = reverseHelper(result);
 		return result;
 	}
 	
 	
-	public void reverse() {
-		reverseList(firstNode);
+	public ListNode<T> reverse() {
+		return reverseHelper(firstNode);
 	}
 	
 	
