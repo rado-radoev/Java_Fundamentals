@@ -1,38 +1,48 @@
 package com.ex2112;
 import com.StackComposition.StackComposition;
 import java.util.Scanner;
+import java.util.Stack;
 
 
 public class InfixToPostfixConverter implements Infix{
 
 	private StringBuffer infix;
-	private StringBuffer postfix;
+	private StringBuffer postfix = new StringBuffer();
 	private StackComposition<Character> stack = new StackComposition<Character>();
+	private Stack<Character> testStack = new Stack<>();
 	
 	@Override
-	public void convertToPostfix(StringBuffer infix) {
+	public void convertToPostfix(StringBuffer infix) {		
 		for (int i = 0; i < infix.length(); i++) {	// loop through each character
 			char c = infix.charAt(i);		// get the current char in variable
-			if (isDigit(c)) 				// if character is digit
+			if ((int)c == 32)
+				continue;
+			else if (isDigit(c)) 				// if character is digit
 				postfix.append(c);			// append it to postfix
 			else if (c == '(')				// if char is left bracket
 				stack.push(c);				// push it to the stack
 			else if (isOperator(c)) {		// if char is operator
 				// not sure about this one! May be I need to check only the top most char in the stack not every one
-				while (!stack.isEmpty()) {	// pop operators at the top of the stack while they have equal or higher precedence
-					if (!isOperator(stack.peek()))	// then the current operator and append popped operators to postfix
+				while (!stack.isEmpty() && isOperator(stack.peek())) { // then the current operator and append popped operators to postfix
+					if (precendence(c, stack.peek()))	
 						postfix.append(stack.pop());
+					else 
+						break;
 				}
 				stack.push(c);		// push current char onto stack
 			}
 			else if (c == ')') {				// if char is right bracket
-				while (stack.peek() != '(') {   // while left paranthesis is not at the top of the stack
+				while (stack.peek() != '(' || !stack.isEmpty()) {   // while left paranthesis is not at the top of the stack
 					if (isOperator(stack.peek())) {		// if the char is operator
 						postfix.append(stack.pop());	// pop from the stack and append to postfix
 					}
 				}
+				stack.pop();	// pop and discard left paranthesis from the stack
 			}
-			stack.pop();	// pop and discard left paranthesis from the stack
+		}
+		
+		while(!stack.isEmpty()) {
+			postfix.append(stack.pop());
 		}
 		
 	}
@@ -52,7 +62,7 @@ public class InfixToPostfixConverter implements Infix{
 
 	
 	@Override
-	public boolean precendence(Character operator1, Character operator2) {
+	public boolean precendence(Character operator1Infix, Character operator2Stack) {
 		// if operator1 < operato2 return true
 		// else return false
 		Character[] additive = {'+', '-'};
@@ -62,28 +72,28 @@ public class InfixToPostfixConverter implements Infix{
 		
 		// check if operator1 is in the additive array 
 		for (Character c : additive) {
-			if (operator1 == c)
+			if (operator1Infix == c)
 				op1 = true;
 		}
 		
 		for (Character c : multiplicative) {
-			if (operator2 == c) 
+			if (operator2Stack == c) 
 				op2 = true;
 		}
 		
 		if (op1 && op2)
 			return true;
-		
-		
+
 		return false;
 	}
 	
-	private void readInfix() {
+	public StringBuffer readInfix() {
 		System.out.println("Enter expression below:");
 		Scanner input = new Scanner(System.in);
 		
-		infix.append(input.nextLine());
+		infix = new StringBuffer(input.nextLine());
 		input.close();
+		return infix;
 	}
 	
 	private boolean isInRange(int num, int minRange, int maxRange) {
@@ -93,15 +103,15 @@ public class InfixToPostfixConverter implements Infix{
 			return false;
 	}
 	
+	public void print() {
+		System.out.print(postfix);
+	}
+	
 	
 	private boolean isDigit(Character character) {
 		if (isInRange((int)character, 48, 57))
 			return true;
 		else 
 			return false;
-	}
-	
-	public static void main(String[] args) {
-
 	}
 }
