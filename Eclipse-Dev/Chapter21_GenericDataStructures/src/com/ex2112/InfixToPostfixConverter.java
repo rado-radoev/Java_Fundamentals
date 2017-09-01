@@ -4,8 +4,6 @@ import com.StackComposition.StackComposition;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.stream.IntStream;
-
 
 public class InfixToPostfixConverter implements Infix{
 
@@ -24,23 +22,15 @@ public class InfixToPostfixConverter implements Infix{
 				postfix.append(c);			// append it to postfix
 			else if (c == '(')				// if char is left bracket
 				stack.push(c);				// push it to the stack
-			else if (isOperator(c)) {		// if char is operator
-				// not sure about this one! May be I need to check only the top most char in the stack not every one
-				while (!stack.isEmpty() && isOperator(stack.peek())) { // then the current operator and append popped operators to postfix
-					if (!precendence(c, stack.peek()))	
-						postfix.append(stack.pop());
-					else 
-						break;
-				}
-				stack.push(c);		// push current char onto stack
+			else if (c == ')') {
+				while (!stack.isEmpty() && stack.peek() == '(')
+					postfix.append(stack.peek());
+				stack.pop();
 			}
-			else if (c == ')') {				// if char is right bracket
-				while (stack.peek() != '(' && !stack.isEmpty()) {   // while left paranthesis is not at the top of the stack
-					if (isOperator(stack.peek())) {		// if the char is operator
-						postfix.append(stack.pop());	// pop from the stack and append to postfix
-					}
-				}
-				stack.pop();	// pop and discard left paranthesis from the stack
+			else if (isOperator(c)) {		// if char is operator
+				while (!stack.isEmpty() && precendence(stack.peek(), c))
+					postfix.append(stack.pop());
+				stack.push(c);
 			}
 		}
 		
@@ -65,19 +55,17 @@ public class InfixToPostfixConverter implements Infix{
 
 	
 	@Override
-	public boolean precendence(Character operator1Infix, Character operator2Stack) {
+	public boolean precendence(Character operator1, Character operator2) {
 		// if operator1 < operato2 return true
 		// else return false
 		Character[] additive = {'+', '-'};
 		Character[] multiplicative = {'*', '/', '%'};
-		boolean op1 = false;
-		boolean op2 = false;
-		
+	
 		// check if operator1 is in the additive array 
-		if (Arrays.asList(additive).contains(operator1Infix) && Arrays.asList(multiplicative).contains(operator2Stack))
+		if (Arrays.asList(multiplicative).contains(operator1) && Arrays.asList(additive).contains(operator2))
 			return true;	// infix operator1 has lower precendence than operator2
 		else
-			return false;   // both operators have the same precendence
+			return false;   // both operators have the same precendence or 2 is higher than 1
 	}
 	
 	public StringBuffer readInfix() {
