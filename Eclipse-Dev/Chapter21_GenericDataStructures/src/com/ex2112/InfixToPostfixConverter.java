@@ -1,7 +1,10 @@
 package com.ex2112;
 import com.StackComposition.StackComposition;
+
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.stream.IntStream;
 
 
 public class InfixToPostfixConverter implements Infix{
@@ -24,7 +27,7 @@ public class InfixToPostfixConverter implements Infix{
 			else if (isOperator(c)) {		// if char is operator
 				// not sure about this one! May be I need to check only the top most char in the stack not every one
 				while (!stack.isEmpty() && isOperator(stack.peek())) { // then the current operator and append popped operators to postfix
-					if (precendence(c, stack.peek()))	
+					if (!precendence(c, stack.peek()))	
 						postfix.append(stack.pop());
 					else 
 						break;
@@ -32,7 +35,7 @@ public class InfixToPostfixConverter implements Infix{
 				stack.push(c);		// push current char onto stack
 			}
 			else if (c == ')') {				// if char is right bracket
-				while (stack.peek() != '(' || !stack.isEmpty()) {   // while left paranthesis is not at the top of the stack
+				while (stack.peek() != '(' && !stack.isEmpty()) {   // while left paranthesis is not at the top of the stack
 					if (isOperator(stack.peek())) {		// if the char is operator
 						postfix.append(stack.pop());	// pop from the stack and append to postfix
 					}
@@ -71,20 +74,10 @@ public class InfixToPostfixConverter implements Infix{
 		boolean op2 = false;
 		
 		// check if operator1 is in the additive array 
-		for (Character c : additive) {
-			if (operator1Infix == c)
-				op1 = true;
-		}
-		
-		for (Character c : multiplicative) {
-			if (operator2Stack == c) 
-				op2 = true;
-		}
-		
-		if (op1 && op2)
-			return true;
-
-		return false;
+		if (Arrays.asList(additive).contains(operator1Infix) && Arrays.asList(multiplicative).contains(operator2Stack))
+			return true;	// infix operator1 has lower precendence than operator2
+		else
+			return false;   // both operators have the same precendence
 	}
 	
 	public StringBuffer readInfix() {
