@@ -21,12 +21,7 @@ public class PostfixEvaluator {
 	}
 	
 	public void evaluatePostfixExpression () {
-		String[] temp = new String[postfix.length()];
-		
-		for (int i = 0; i < postfix.length();i++) {
-			temp[i] = String.valueOf(postfix.charAt(i));
-		}
-		
+		String[] temp = postfix.toString().split(" ");
 		
 		for (int i = 0; i < temp.length; i++) {
 			String num = temp[i];
@@ -84,7 +79,7 @@ public class PostfixEvaluator {
 
 	// check if current char is digit
 	private boolean isNumber (String character) {
-		if (character.matches("\\d"))
+		if (character.matches("\\d+"))
 			return true;
 		else 
 			return false;
