@@ -1,4 +1,6 @@
 package com.ex2112;
+
+// very good video: https://www.youtube.com/watch?v=vq-nUF0G4fI
 import com.StackComposition.StackComposition;
 
 import java.util.Arrays;
