@@ -10,7 +10,7 @@ public class Line<T> extends Queue<T> {
 	}
 
 	public int getMaxCustomersInLine() {
-		return maxCustomersInLine;
+		return getSize();
 	}
 
 	public void setMaxCustomersInLine(int maxCustomersInLine) {

@@ -5,10 +5,17 @@ import com.figLinkedList.EmptyListException;
 public class Queue<T> {
 	
 	private List<T> queueList;
+	private int size;
 	
 	// constructor
 	public Queue() {
 		queueList = new List<T>("Queue");
+		this.size++;
+	}
+	
+	// get queue size
+	public int getSize() {
+		return size;
 	}
 
 	// add object to queue

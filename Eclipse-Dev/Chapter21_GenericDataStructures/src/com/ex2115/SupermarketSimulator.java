@@ -16,34 +16,41 @@ public class SupermarketSimulator {
 		Customer firstCustomer = new Customer();
 				
 		// set arrival time for the first customer
-//		int arrivalTime = rand.nextInt(AVGWAIT) + 1;
-//		int minute = arrivalTime;
+		int arrivalTime = rand.nextInt(AVGWAIT) + 1;
+		int minute = arrivalTime;
 		
 //		// first customer
-//		firstCustomer.setArrivalTime(arrivalTime); // 1. determine customer's arrival time
-//		firstCustomer.setMinutes_served(rand.nextInt(AVGWAIT) + 1);  // 2. determine customer's service time
-//		firstCustomer.setMinute_discarded(firstCustomer.getArrivalTime() + firstCustomer.getMinutes_served());
-//		firstCustomer.setMinutes_waiting(firstCustomer.getArrivalTime() - minute);
+		firstCustomer.setArrivalTime(arrivalTime); // 1. determine customer's arrival time
+		firstCustomer.setMinutes_served(rand.nextInt(AVGWAIT) + 1);  // 2. determine customer's service time
+		firstCustomer.setMinute_discarded(firstCustomer.getArrivalTime() + firstCustomer.getMinutes_served());
+		firstCustomer.setMinutes_waiting(firstCustomer.getArrivalTime() - minute);
 //	
-//		line.enqueue(firstCustomer); // 3. begin serving the client
+		line.enqueue(firstCustomer); // 3. begin serving the client
 		
+		int nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1);
+		int timeUntilServiceCompleted = 0;
+		for (; minute < SIMULATIONTIME; minute++) {
 
-		for (int minute = 0; minute < SIMULATIONTIME; minute++) {
-			int nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1); // 4. Schedule arrival time for next customer
-			
-			if (!line.isEmpty() && minute == nextCustArrivalTime)	{// 5. if next customer arrives proceeed
+			if (minute == nextCustArrivalTime)	{// 5. if next customer arrives proceeed
 				System.out.printf("%s%n", "New customer arrives");
 				
 				Customer newCustomer = new Customer(nextCustArrivalTime, rand.nextInt(AVGWAIT) + 1);
 				newCustomer.setMinute_discarded(minute);
 				newCustomer.setMinutes_waiting(newCustomer.getArrivalTime() - minute);
 				line.enqueue(newCustomer);
+				nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1);
 			}
 				
-			if (!line.isEmpty() && minute == line.peek().getMinute_discarded()) {
-			System.out.printf("%s%n", "Service completed");
-			line.dequeue();
+			if (!line.isEmpty() && line.peek().getMinutes_served() == timeUntilServiceCompleted) {
+				System.out.printf("%s%n", "Service completed");
+				line.dequeue();
+				timeUntilServiceCompleted = 0;
 			}
+			
+			if (++timeUntilServiceCompleted > 4)
+				timeUntilServiceCompleted = 0;
+			
+			System.out.printf("%d", line.getMaxCustomersInLine());
 		}
 				
 	}
