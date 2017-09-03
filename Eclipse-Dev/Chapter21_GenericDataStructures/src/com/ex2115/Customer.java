@@ -6,6 +6,7 @@ public class Customer {
 	private int minutes_served;
 	private int minutes_waiting;
 	private int minute_discarded;
+	private int minutes_inQueue;
 	
 	public Customer () {
 		this(0, 0, 0, 0);
@@ -55,11 +56,21 @@ public class Customer {
 		this.minute_discarded = minute_discarded;
 	}
 	
+	public int getMinutes_inQueue() {
+		return minutes_inQueue;
+	}
+
+	public void setMinutes_inQueue(int minutes_inQueue) {
+		this.minutes_inQueue = minutes_inQueue;
+	}
+
 	public void displayCustomer() {
-		System.out.printf("Arrival time: %d %nMinutes served: %d%nMinutes waiting: %d%nMinute exited the queue: %d", getArrivalTime(),
+		System.out.printf("Arrival time: %d, Minutes served: %d, Minutes waiting: %d, Minute exited the queue: %d, Minutes in the queue: %d%n", 
+				getArrivalTime(),
 				getMinutes_served(),
 				getMinutes_waiting(),
-				getMinute_discarded());
+				getMinute_discarded(),
+				getMinutes_inQueue());
 	}
 
 }

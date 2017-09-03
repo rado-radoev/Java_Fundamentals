@@ -5,12 +5,11 @@ import com.figLinkedList.EmptyListException;
 public class Queue<T> {
 	
 	private List<T> queueList;
-	private int size;
+	private static int size;
 	
 	// constructor
 	public Queue() {
 		queueList = new List<T>("Queue");
-		this.size++;
 	}
 	
 	// get queue size
@@ -21,11 +20,13 @@ public class Queue<T> {
 	// add object to queue
 	public void enqueue(T object) {
 		queueList.insertAtBack(object);
+		size++;
 	}
 	
 	// remove object from queue
 	public T dequeue() throws EmptyListException {
-		return queueList.removeFromFront();
+		size--;
+		return queueList.removeFromFront();	
 	}
 	
 	// detemine if queue is empty

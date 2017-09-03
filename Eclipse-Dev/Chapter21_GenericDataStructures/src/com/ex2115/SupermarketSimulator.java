@@ -13,45 +13,49 @@ public class SupermarketSimulator {
 	}
 		
 	public static void simulateLine() {
-		Customer firstCustomer = new Customer();
-				
+			
 		// set arrival time for the first customer
-		int arrivalTime = rand.nextInt(AVGWAIT) + 1;
-		int minute = arrivalTime;
-		
-//		// first customer
-		firstCustomer.setArrivalTime(arrivalTime); // 1. determine customer's arrival time
-		firstCustomer.setMinutes_served(rand.nextInt(AVGWAIT) + 1);  // 2. determine customer's service time
-		firstCustomer.setMinute_discarded(firstCustomer.getArrivalTime() + firstCustomer.getMinutes_served());
-		firstCustomer.setMinutes_waiting(firstCustomer.getArrivalTime() - minute);
-//	
-		line.enqueue(firstCustomer); // 3. begin serving the client
-		
-		int nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1);
-		int timeUntilServiceCompleted = 0;
-		for (; minute < SIMULATIONTIME; minute++) {
+		int minute = 0;
 
-			if (minute == nextCustArrivalTime)	{// 5. if next customer arrives proceeed
-				System.out.printf("%s%n", "New customer arrives");
+		int nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1); // get the time the next (first) customer arrives
+		int timeUntilServiceCompleted = 0;	// control variable to monitor how many minutes have passed serving a client
+		
+		for (; minute < SIMULATIONTIME; minute++) {	// loop 720 minutes (12 hours)
+
+			if (minute == nextCustArrivalTime)	{	// wait until current it is time for the next customer arrival
+				System.out.printf("%s%n", "New customer arrives");	// announce the new customer arrival
 				
-				Customer newCustomer = new Customer(nextCustArrivalTime, rand.nextInt(AVGWAIT) + 1);
-				newCustomer.setMinute_discarded(minute);
-				newCustomer.setMinutes_waiting(newCustomer.getArrivalTime() - minute);
-				line.enqueue(newCustomer);
-				nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1);
-			}
-				
-			if (!line.isEmpty() && line.peek().getMinutes_served() == timeUntilServiceCompleted) {
-				System.out.printf("%s%n", "Service completed");
-				line.dequeue();
-				timeUntilServiceCompleted = 0;
+				Customer newCustomer = new Customer(nextCustArrivalTime, rand.nextInt(AVGWAIT) + 1);	// create new customer obj with arrival time and random service time	
+				line.enqueue(newCustomer);	// add customer to the queue
+				nextCustArrivalTime = minute + (rand.nextInt(AVGWAIT) + 1); // calculate arrival time for next customer
 			}
 			
-			if (++timeUntilServiceCompleted > 4)
-				timeUntilServiceCompleted = 0;
+			if (!line.isEmpty() && line.peek().getMinutes_served() == timeUntilServiceCompleted) { // if there are customers in the queue and the customer service time is == to the service time 
+				System.out.printf("%s%n", "Service completed");	// announce the service is completed
+				Customer currentCust = line.peek();		// get the current customer in var for easy access
+				currentCust.setMinute_discarded(minute); // get the time when the customer exited the queue
+				currentCust.setMinutes_inQueue(minute - currentCust.getArrivalTime());	// get the time spend in the queue -> entered the queue + waiting + service
+				currentCust.setMinutes_waiting(minute - currentCust.getArrivalTime() - currentCust.getMinutes_served()); // get the time customer spend waiting before the service started
+				
+				if (line.getHighestWaitTime() < currentCust.getMinutes_waiting()) // get the highest number of minutes a customer has spend in the queue
+					line.setHighestWaitTime(currentCust.getMinutes_waiting());
+				
+				currentCust.displayCustomer(); // display the customer properties before discarding from the queue
+				line.dequeue();	// remove customer from queue
+				timeUntilServiceCompleted = 0;	// reset service time when customer is removed from the queue
+			}
+
+			if (!line.isEmpty())	// increment service time only if there are customers in the queue
+				timeUntilServiceCompleted++;
 			
-			System.out.printf("%d", line.getMaxCustomersInLine());
+			if (line.getMaxCustomersInLine() < line.getSize())	// capture the maximum queue size
+				line.setMaxCustomersInLine(line.getSize());
+			
+			System.out.printf("Queue size: %d%n", line.getSize()); // display max numbers in the queue at any time
 		}
-				
+			
+		System.out.printf("Maximum number of customers in queue: %d%n", line.getMaxCustomersInLine());
+		System.out.printf("Maximum time customer spend in the queue: %d%n", line.getHighestWaitTime());
+		
 	}
 }
