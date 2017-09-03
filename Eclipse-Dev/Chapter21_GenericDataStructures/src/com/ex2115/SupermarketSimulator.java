@@ -56,6 +56,6 @@ public class SupermarketSimulator {
 			
 		System.out.printf("Maximum number of customers in queue: %d%n", line.getMaxCustomersInLine());
 		System.out.printf("Maximum time customer spend in the queue: %d%n", line.getHighestWaitTime());
-		
+		System.out.printf("People still in queue: %d%n", line.getSize());
 	}
 }
