@@ -26,7 +26,7 @@ public class Tree<T extends Comparable<T>> {
 		if (node == null)
 			return;
 		
-		System.out.printf("%s ", node.nodeData);
+		System.out.printf("%s(%d) ", node.nodeData, node.count);
 		preorderHelper(node.leftNode);
 		preorderHelper(node.rightNode);
 	}
@@ -42,7 +42,7 @@ public class Tree<T extends Comparable<T>> {
 		
 		postorderHelper(node.leftNode);
 		postorderHelper(node.rightNode);
-		System.out.printf("%s ", node.nodeData);
+		System.out.printf("%s(%d) ", node.nodeData, node.count);
 	}
 	
 	// inorder traversal
@@ -55,7 +55,7 @@ public class Tree<T extends Comparable<T>> {
 			return;
 		
 		inorderHelper(node.leftNode);
-		System.out.printf("%s ", node.nodeData);
+		System.out.printf("%s(%d) ", node.nodeData, node.count);
 		inorderHelper(node.rightNode);
 	}
 }
