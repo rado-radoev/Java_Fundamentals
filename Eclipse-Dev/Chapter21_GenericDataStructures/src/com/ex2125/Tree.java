@@ -39,8 +39,20 @@ public class Tree<T extends Comparable<T>> {
 		
 	}
 	
-	public void outputTree() {
+	public void outputTree(TreeNode<T> node, int totalSpaces) {
+		if (node == null)
+			return;
 		
+		outputTree(node.rightNode, totalSpaces + 5);
+
+		int newTotalSpaces = 0;
+		for (int i = 1; i < totalSpaces; i++) {
+			newTotalSpaces = i;
+		}
+		
+		System.out.printf("%s ", node.data);
+		node = node.leftNode;
+		totalSpaces += 5;
 	}
 	
 	public void levelOrder() {

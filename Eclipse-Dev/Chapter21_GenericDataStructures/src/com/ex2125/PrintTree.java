@@ -19,6 +19,6 @@ public class PrintTree {
 		tree.insertNode(20);
 		tree.insertNode(18);
 		
-		tree.minValue(0);
+		tree.outputTree(tree.getRoot(), 0);
 	}
 }
