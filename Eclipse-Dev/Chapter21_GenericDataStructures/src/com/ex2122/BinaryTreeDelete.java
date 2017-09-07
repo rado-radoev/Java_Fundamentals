@@ -1,4 +1,4 @@
-package com.ex2222;
+package com.ex2122;
 
 // watch this: https://www.youtube.com/watch?v=gcULXE7ViZw
 // http://www.geeksforgeeks.org/find-the-minimum-element-in-a-binary-search-tree/

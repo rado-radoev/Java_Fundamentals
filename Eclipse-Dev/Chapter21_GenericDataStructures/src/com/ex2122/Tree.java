@@ -1,4 +1,4 @@
-package com.ex2222;
+package com.ex2122;
 
 public class Tree<T extends Comparable<T>> {
 
@@ -12,10 +12,16 @@ public class Tree<T extends Comparable<T>> {
 		return root;
 	}
 	
+	/**
+	 * 
+	 * @param node
+	 * @param data
+	 * @return
+	 */
 	public TreeNode<T> delete(TreeNode<T> node, T data) {
 		if (node == null)
 			return node;
-		else if (data.compareTo(node.getData()) < 0) {
+		else if (data.compareTo(node.data) < 0) {
 			node.setLeftNode(delete(node.getLeftNode(), data));
 		}
 		else if (data.compareTo(node.getData()) > 0) {
@@ -28,14 +34,10 @@ public class Tree<T extends Comparable<T>> {
 			}
 			// Case 2: One child
 			else if (node.getLeftNode() == null) {
-				TreeNode<T> temp = node;
 				node = node.getRightNode();
-				temp = null;
 			}
 			else if (node.getRightNode() == null) {
-				TreeNode<T> temp = node;
 				node = node.getLeftNode();
-				temp = null;
 			}
 			// Case 3: 2 children
 			else {
@@ -48,13 +50,17 @@ public class Tree<T extends Comparable<T>> {
 	}
 	
 	private TreeNode<T> findMin(TreeNode<T> node) {
-		TreeNode<T> current = node;
+		if (node.getLeftNode() == null)
+			return node;
 		
-		while (node.getLeftNode() != null) {
-			current = current.getLeftNode();
-		}
-		
-		return current;
+		return findMin(node.getLeftNode());
+//		TreeNode<T> current = node;
+//		
+//		while (node.getLeftNode() != null) {
+//			current = current.getLeftNode();
+//		}
+//		
+//		return current;
 	}
 	
 	public TreeNode<T> searchNode(TreeNode<T> node, T data) {

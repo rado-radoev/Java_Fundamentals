@@ -1,13 +1,13 @@
-package com.ex2222;
+package com.ex2122;
 
 public class TreeNode<T extends Comparable<T>> {
 	
 	/**
 	 * Class members
 	 */
-	private TreeNode<T> leftNode;
-	private TreeNode<T> rightNode;
-	private T data;
+	TreeNode<T> leftNode;
+	TreeNode<T> rightNode;
+	T data;
 	
 	/**
 	 * TreeNode Constructor
