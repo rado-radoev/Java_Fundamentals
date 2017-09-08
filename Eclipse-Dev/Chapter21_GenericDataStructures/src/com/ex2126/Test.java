@@ -21,5 +21,9 @@ public class Test {
 		list.deleteNode(60);
 		System.out.println();
 		list.print();
+		
+		list.insertNodeAfter(60, 100);
+		System.out.println();
+		list.print();
 	}
 }

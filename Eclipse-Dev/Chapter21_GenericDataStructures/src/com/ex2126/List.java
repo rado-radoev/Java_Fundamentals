@@ -1,6 +1,7 @@
 package com.ex2126;
 
 import com.ex2116.TreeNode;
+import com.figLinkedListTest.ListTest;
 
 public class List<T extends Comparable<T>> {
 
@@ -26,19 +27,32 @@ public class List<T extends Comparable<T>> {
 			lastNode = lastNode.nextNode = new ListNode<T>(insertItem);
 	}
 	
+	public void insertNodeAfter(T insert, T after) {
+		ListNode<T> current = firstNode;
+		
+		while (current != null) {
+			if (current.data.compareTo(after) == 0){
+				ListNode<T> newNode = new ListNode<T>(insert);
+				ListNode<T> temp = current.nextNode;
+				current.nextNode = newNode;
+				newNode.nextNode = temp;
+			}
+
+			current = current.nextNode;
+		}
+	}
+	
 	public void deleteNode(T value) {
 		ListNode<T> currentNode = firstNode;
-		ListNode<T> previousNode = null;
+		ListNode<T> previousNode = currentNode;
 		
 		while (currentNode != null) {		
-			previousNode = currentNode;
-			
+
 			if (currentNode.data.compareTo(value) == 0) {
 				previousNode.nextNode = currentNode.nextNode;
-				break;
-				//currentNode = null;
 			}
 			
+			previousNode = currentNode;
 			currentNode = currentNode.nextNode;
 		}
 		
