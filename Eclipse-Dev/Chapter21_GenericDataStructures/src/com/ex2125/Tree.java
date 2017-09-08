@@ -40,7 +40,17 @@ public class Tree<T extends Comparable<T>> {
 	}
 	
 	
-	
+	/**
+	 * 	While the reference to the current node is not null, perform the following:
+	 *	Recursively call outputTree with the right subtree of the current node and
+	 *	totalSpaces + 5.
+	 *	Use a for statement to count from 1 to totalSpaces and output spaces.
+	 *	Output the value in the current node.
+	 *	Set the reference to the current node to refer to the left subtree of the current node.
+	 *	Increment totalSpaces by 5.
+	 * @param node
+	 * @param totalSpaces
+	 */
 	public void outputTree(TreeNode<T> node, int totalSpaces) {
 		while (node != null) {
 			outputTree(node.rightNode, totalSpaces + 5);  // traverse right subtree 
