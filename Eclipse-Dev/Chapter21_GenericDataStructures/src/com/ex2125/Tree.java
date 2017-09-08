@@ -1,6 +1,5 @@
 package com.ex2125;
 
-import java.util.Comparator;
 
 public class Tree<T extends Comparable<T>> {
 
@@ -23,36 +22,37 @@ public class Tree<T extends Comparable<T>> {
 			root.insert(value);
 	}
 	
-	public T minValue(T data) {
-		if (root == null)
+	public T minValue() {
+		return minValue(root).data;
+	}
+	
+	private TreeNode<T> minValue(TreeNode<T> node) {
+		if (node == null)
 			return null;
 		
-		T curVal = root.data;
-		T left = minValue(root.leftNode.data);
-		T right = minValue(root.rightNode.data);
+		T value = node.data;
+		TreeNode<T> left = minValue(node.leftNode);
 		
-		T lrMin = left.compareTo(right) < 0 ? left : right;
+		TreeNode<T> minNode = left.data.compareTo(value) < 0 ? left : node;
 		
-		T min = curVal.compareTo(lrMin) < 0 ? curVal : lrMin;
-		
-		return min;
+		return minNode;
 		
 	}
 	
+	
+	
 	public void outputTree(TreeNode<T> node, int totalSpaces) {
-		if (node == null)
-			return;
-		
-		outputTree(node.rightNode, totalSpaces + 5);
+		while (node != null) {
+			outputTree(node.rightNode, totalSpaces + 5);  // traverse right subtree 
+			
+			for (int i = 1; i <= totalSpaces;i++)
+				System.out.printf(" ");
+			
+			System.out.printf("%s%n", node.data);   // output node data
 
-		int newTotalSpaces = 0;
-		for (int i = 1; i < totalSpaces; i++) {
-			newTotalSpaces = i;
+			node = node.leftNode;
+			totalSpaces += 5;		
 		}
-		
-		System.out.printf("%s ", node.data);
-		node = node.leftNode;
-		totalSpaces += 5;
 	}
 	
 	public void levelOrder() {
