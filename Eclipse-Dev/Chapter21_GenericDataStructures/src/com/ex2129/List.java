@@ -1,41 +1,59 @@
-package com.ex2126;
+package com.ex2129;
 
 public class List<T extends Comparable<T>> {
 
+	// take a look a this; http://www.chegg.com/homework-help/indexed-lists-presented-text-linked-lists-must-searched-sequ-chapter-22-problem-29e-solution-9780136023395-exc
+	
 	private ListNode<T> firstNode;
 	private ListNode<T> lastNode;
+	private int size;
 	
 	public List() {
 		super();
 		firstNode = lastNode = null;
 	}
 	
-	public void insertAtFront(T insertNode) {
-		if (isEmpty())
-			firstNode = lastNode = new ListNode<T>(insertNode);
-		else
-			firstNode = new ListNode<T>(insertNode, firstNode);
+	public int getSize() {
+		return size;
 	}
 	
-	public void insertAtBack(T insertItem) {
-		if (isEmpty())
-			firstNode = lastNode = new ListNode<T>(insertItem);
-		else
-			lastNode = lastNode.nextNode = new ListNode<T>(insertItem);
+	public ListNode<T> getFirstNode() {
+		return firstNode;
 	}
-	
-	public void insertNodeAfter(T insert, T after) {
-		ListNode<T> current = firstNode;
-		
-		while (current != null) {
-			if (current.data.compareTo(after) == 0){
-				ListNode<T> newNode = new ListNode<T>(insert);
-				ListNode<T> temp = current.nextNode;
-				current.nextNode = newNode;
-				newNode.nextNode = temp;
-			}
 
-			current = current.nextNode;
+	public ListNode<T> getLastNode() {
+		return lastNode;
+	}
+
+	public void insertAtFront(T value) {
+		if (isEmpty())
+			firstNode = lastNode = new ListNode<T>(value);
+		else
+			firstNode = new ListNode<T>(value, firstNode);
+		size++;
+	}
+	
+	public void insertAtBack(T value) {
+		if (isEmpty())
+			firstNode = lastNode = new ListNode<T>(value);
+		else
+			lastNode = lastNode.nextNode = new ListNode<T>(value);
+		size++;
+	}
+	
+	public void deleteNode(ListNode<T> node) {
+		ListNode<T> currentNode = firstNode;
+		ListNode<T> previousNode = currentNode;
+		
+		while (currentNode != null) {		
+
+			if (currentNode == node) {
+				previousNode.nextNode = currentNode.nextNode;
+				size--;
+			}
+			
+			previousNode = currentNode;
+			currentNode = currentNode.nextNode;
 		}
 	}
 	
@@ -47,13 +65,12 @@ public class List<T extends Comparable<T>> {
 
 			if (currentNode.data.compareTo(value) == 0) {
 				previousNode.nextNode = currentNode.nextNode;
+				size--;
 			}
 			
 			previousNode = currentNode;
 			currentNode = currentNode.nextNode;
 		}
-		
-		
 	}
 	
 	public T search(ListNode<T> node, T value) {

@@ -1,22 +1,24 @@
 package com.ex2129;
 
-public class ListNode<T> {
+public class ListNode<T extends Comparable<T>> {
 
 	ListNode<T> nextNode;
 	T data;
-	T index;
 	
-	public ListNode(T data, T index) {
-		nextNode = null;
-		this.data = data;
-		this.index = index;
+	public ListNode(T data) {
+		this(data, null);
 	}
 	
-	public T getData() {
+	public ListNode(T data, ListNode<T> nextNode) {
+		this.data = data;
+		this.nextNode = nextNode;
+	}
+	
+	T getData() {
 		return data;
 	}
-	
-	public T getIndex() {
-		return index;
+
+	ListNode<T> getNext() {
+		return nextNode;
 	}
 }
