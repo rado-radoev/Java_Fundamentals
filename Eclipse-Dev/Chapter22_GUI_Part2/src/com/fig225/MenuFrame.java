@@ -44,7 +44,7 @@ public class MenuFrame extends JFrame {
 		aboutItem.setMnemonic('A'); // set mnemonic to A
 		fileMenu.add(aboutItem);	// add about item to file menu
 		aboutItem.addActionListener(
-			// terminate application when user clicks exitItem
+			// dispaly about text
 			event -> JOptionPane.showMessageDialog(MenuFrame.this, 
 					"This is an example\nof using menus",
 					"About", JOptionPane.PLAIN_MESSAGE)	
@@ -166,7 +166,7 @@ public class MenuFrame extends JFrame {
 			String name = displayJLabel.getFont().getName(); // current font
 			Font font; // new font based on user selections
 			
-			// determin which items are checked and crate font
+			// determine which items are checked and crate font
 			if (styleItems[0].isSelected() &&
 					styleItems[1].isSelected())
 				font = new Font(name, Font.BOLD + Font.ITALIC, 72);
