@@ -50,6 +50,13 @@ public class MenuFrame extends JFrame {
 					"About", JOptionPane.PLAIN_MESSAGE)	
 			);
 		
+		JMenuItem exitItem = new JMenuItem("Exit");  //create exit item
+		exitItem.setMnemonic('x'); // set mnemonic to x
+		fileMenu.add(exitItem);	// add exitItem to file menu
+		exitItem.addActionListener(
+			event -> System.exit(0) // exit application
+			);
+		
 		JMenuBar bar = new JMenuBar(); // create menu bar
 		setJMenuBar(bar);  // add menu bar to application
 		bar.add(fileMenu);  // add file menu to menu bar
