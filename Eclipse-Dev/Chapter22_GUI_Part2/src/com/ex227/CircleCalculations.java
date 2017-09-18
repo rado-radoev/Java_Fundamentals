@@ -28,7 +28,7 @@ public class CircleCalculations extends JFrame {
 		
 		calculations = new JTextArea();
 		calculations.setEditable(false);
-		calculations.setText(String.format("Circle diameter: %.2f%nCircle area: %.2f%nCircle circumference: %.2f%n", 
+		calculations.setText(String.format("Circle diameter: %.2f cm%nCircle area: %.2f cm%nCircle circumference: %.2f cm%n", 
 				getDiameter(),
 				getArea(),
 				getCircumference()));
