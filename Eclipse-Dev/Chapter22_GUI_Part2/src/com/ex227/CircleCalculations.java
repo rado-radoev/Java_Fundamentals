@@ -7,10 +7,10 @@ import java.awt.BorderLayout;
 
 public class CircleCalculations extends JFrame {
 
-	private JTextArea calculations;	// display the results of the calculations
-	private SecureRandom rnd;
-	private Circle circle;
-	private BorderLayout layout;
+	private final JTextArea calculations;	// display the results of the calculations
+	private final SecureRandom rnd;
+	private final Circle circle;
+	private final BorderLayout layout;
 	
 	public CircleCalculations() {
 		super("Display circle calculations");
@@ -51,5 +51,16 @@ public class CircleCalculations extends JFrame {
 		return  2 * Math.PI * radius;
 	}
 	
+	public double getRadius() {
+		return (double)getDiameter() / 2;
+	}
+	
+	public JTextArea getCalculations() {
+		return calculations;
+	}
+	
+	public void setCalculations(String text) {
+		calculations.setText(text);
+	}
 	
 }
