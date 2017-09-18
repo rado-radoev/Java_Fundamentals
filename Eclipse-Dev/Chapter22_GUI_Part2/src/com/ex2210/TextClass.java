@@ -31,14 +31,26 @@ public class TextClass extends JFrame {
 		jSlider.setMajorTickSpacing(1);
 		jSlider.setPaintTicks(true);
 		
+		// display the initial value of the jSlider
+		jTextField.setText(String.valueOf(jSlider.getValue()));
+		
 		// JSlider event listener
+		// show current vlaue in the text field
 		jSlider.addChangeListener(
 				event -> {jTextField.setText(String.valueOf(jSlider.getValue()));}
 				);
 		
+		// text field can move the slider as well
+		jTextField.addActionListener(
+				event -> {jSlider.setValue(Integer.valueOf(jTextField.getText()));}
+				);
+		
+		// group JLable and JTextField into one JPanel so they are added together
+		// to the north of the main window 
 		jPanel.add(jLabel);
 		jPanel.add(jTextField);
 		
+		// add the two panels to the JFrame
 		add(jPanel, BorderLayout.NORTH);
 		add(jSlider, BorderLayout.SOUTH);
 	}
