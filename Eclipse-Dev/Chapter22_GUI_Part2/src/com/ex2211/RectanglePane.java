@@ -10,26 +10,28 @@ public class RectanglePane extends JPanel {
 	private int width;
 	private int height;
 	
-	public RectanglePane(int widht, int height, Color color) {
-		setWidth(widht);
-		setHeight(height);
-		this.color = color;
-	}
-	
-	public RectanglePane(int width, int height) {
-		setWidth(width);
-		setHeight(height);
-	}
-	
-	public RectanglePane() {
-		this(100, 100);
-	}
-	
+//	public RectanglePane(int widht, int height, Color color) {
+//		setWidth(widht);
+//		setHeight(height);
+//		this.color = color;
+//	}
+//	
+//	public RectanglePane(int width, int height) {
+//		setWidth(width);
+//		setHeight(height);
+//	}
+//	
+//	public RectanglePane() {
+//		this(100, 100);
+//	}
+		
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		g.setColor(color);
 		g.fillRect(5, 5, getWidth(), getHeight());
+		
 	}
 	
 	
