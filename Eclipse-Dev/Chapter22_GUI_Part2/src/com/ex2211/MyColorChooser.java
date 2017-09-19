@@ -15,7 +15,7 @@ import java.awt.TextField;
 
 public class MyColorChooser extends JFrame {
 
-	private final String[] colorNames = {"red", "green", "blue"};
+	private final RGB[] colorNames = {RGB.RED, RGB.GREEN, RGB.BLUE};
 	private final JTextField[] colorTextFields;
 	private final JLabel[] colorLabels;
 	private final JSlider[] colorSliders;
@@ -30,10 +30,12 @@ public class MyColorChooser extends JFrame {
 		displayValuesPanel = new JPanel();
 		displaySlidersPanel = new JPanel();
 		
+		
 		// setup Labels
 		colorLabels = new JLabel[colorNames.length];
 		for (int i = 0; i < colorLabels.length; i++) {
-			colorLabels[i] = new JLabel(colorNames[i].substring(0, 1).toUpperCase() + colorNames[i].substring(1) + ":");
+			String currentColor = colorNames[i].name();
+			colorLabels[i] = new JLabel(currentColor.substring(0, 1).toUpperCase() + currentColor.substring(1) + ":");
 		}
 				
 		// setup text fields
@@ -56,19 +58,22 @@ public class MyColorChooser extends JFrame {
 			colorSliders[i] = new JSlider(SwingConstants.HORIZONTAL, 0, 255, 0);
 			colorSliders[i].setMajorTickSpacing(10);
 			colorSliders[i].setPaintTicks(true);
-			colorSliders[i].setName(colorNames[i]);
+			colorSliders[i].setName(colorNames[i].name());
+			colorSliders[i].addChangeListener(listener);
 			displaySlidersPanel.add(colorSliders[i]);
 		}
+		
+		add(displayValuesPanel, BorderLayout.NORTH);
+		add(displaySlidersPanel, BorderLayout.SOUTH);
 	}
 	
 	private ChangeListener listener = new ChangeListener() {
 		
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			for (JSlider slider : colorSliders) {
-				if (slider.getName() == "")
-			}
-			
+			for (int i = 0; i < colorSliders.length;i++) {
+				colorTextFields[i].setText(String.valueOf(colorSliders[i].getValue()));
+			}	
 		}
 	};
 	
