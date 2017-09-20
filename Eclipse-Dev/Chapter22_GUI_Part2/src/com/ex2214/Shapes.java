@@ -4,9 +4,10 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;	
 
-public class Shapes extends JFrame {
+public class Shapes extends JFrame implements MouseListener {
 	
 	private ArrayList<Double> xPoints;
 	private ArrayList<Double> yPoints;
@@ -25,18 +26,41 @@ public class Shapes extends JFrame {
 		drawPanel.setXPoint(xPoints);
 		drawPanel.setYPoint(yPoints);
 		
-		
-		// declare mouse listener for the window	
-		addMouseListener(
-			new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				xPoints.add(getMousePosition().getX());
-				yPoints.add(getMousePosition().getY());
-			}
-			});
-	
+		this.addMouseListener(this);
 
+		add(drawPanel);
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		xPoints.add(getMousePosition().getX());
+		yPoints.add(getMousePosition().getY());
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
