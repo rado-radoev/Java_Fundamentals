@@ -1,67 +1,48 @@
 package com.ex2214;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.util.ArrayList;	
 
-public class Shapes extends JFrame implements MouseListener {
+public class Shapes extends JFrame {
 	
 	private ArrayList<Double> xPoints;
 	private ArrayList<Double> yPoints;
 	private Color color;
 	private DrawPanel drawPanel;
+	private JPanel drawingJPanel;
 	
 	public Shapes() {
 		
-		xPoints =  new ArrayList<Double>();
-		yPoints=  new ArrayList<Double>();
+		xPoints = new ArrayList<Double>();
+		yPoints = new ArrayList<Double>();
 		
 		color = Color.BLACK;
 		
+		drawingJPanel = new JPanel();
+		
 		drawPanel = new DrawPanel();
 		drawPanel.setColor(color);
-		drawPanel.setXPoint(xPoints);
-		drawPanel.setYPoint(yPoints);
-		
-		this.addMouseListener(this);
 
-		add(drawPanel);
+		addMouseListener(new MouseClickedHandler());
+		
+		drawingJPanel.add(drawPanel);
+		add(drawingJPanel, BorderLayout.CENTER);
 
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		xPoints.add(getMousePosition().getX());
-		yPoints.add(getMousePosition().getY());
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
+	private class MouseClickedHandler extends MouseAdapter {
+		public void mouseClicked(MouseEvent e) {
+			xPoints.add((double)e.getX());
+			yPoints.add((double)e.getY());
+			drawPanel.setXPoint(xPoints);
+			drawPanel.setYPoint(yPoints);
+		}
+	}
+
 }

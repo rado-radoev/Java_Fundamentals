@@ -22,22 +22,27 @@ public class DrawPanel extends JPanel {
 		
 		color = getColor();
 		
-		Graphics2D g2d = (Graphics2D) g;
-		GeneralPath shape = new GeneralPath();
-		
-		// set the initial coordinate  of the General Path
-		shape.moveTo(xPoints.get(0), yPoints.get(0));
-		
-		// create the shape
-		for (int i = 0; i < xPoints.size(); i++) {
-			shape.lineTo(xPoints.get(i), yPoints.get(i));
+		if (xPoints.size() > 0 && yPoints.size() > 0) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setColor(color);
+			
+			GeneralPath shape = new GeneralPath();
+			
+			// set the initial coordinate  of the General Path
+			shape.moveTo(xPoints.get(0), yPoints.get(0));
+			
+			// create the shape
+			for (int i = 0; i < xPoints.size(); i++) {
+				shape.lineTo(xPoints.get(i), yPoints.get(i));
+			}
+			
+			shape.closePath();
+
+			g2d.draw(shape);
+			g2d.fill(shape);
+			
 		}
-		
-		shape.closePath();
-		
-		g2d.setColor(color);
-		g2d.fill(shape);
-		
+
 	}
 	
 	public Color getColor() {
