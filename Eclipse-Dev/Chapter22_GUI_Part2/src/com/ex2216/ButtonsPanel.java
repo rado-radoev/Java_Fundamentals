@@ -17,8 +17,10 @@ public class ButtonsPanel extends JPanel{
 	private final JComboBox colorsList;
 	private final String[] colorNames = {"Black", "Blue", "Cyan","DarkGray", "Gray", "Green", "LightGray",	"Magenta", 
 			"Orange", "Pink", "Red", "White", "Yellow"	};
+	
 	private final Color[] colors = {Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GREEN, Color.LIGHT_GRAY, Color.MAGENTA, 
 			Color.ORANGE, Color.PINK, Color.RED, Color.WHITE, Color.YELLOW};
+	
 	private final String[] shapeNames = {"Arc", "Elipse", "Line", "Polygon", "Rectangle", "RoundRectangle"};
 	private final JComboBox shapesList;
 	private final MyShapes[] shapes = {};

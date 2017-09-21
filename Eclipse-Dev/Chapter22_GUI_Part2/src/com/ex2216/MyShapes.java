@@ -2,6 +2,11 @@ package com.ex2216;
 
 import java.awt.Shape;
 
-public class MyShapes {
+public abstract class MyShapes implements Shape {
 
+	Shape circle;
+	
+	public MyShapes() {
+		
+	}
 }
