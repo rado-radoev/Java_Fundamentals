@@ -1,6 +1,7 @@
-package com.ex2216;
+ package com.ex2216;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
@@ -19,11 +20,11 @@ public class DesktopFrame extends JFrame {
 	private JMenu fileMenu;
 	private JMenuItem newFrame;
 	private JMenuItem exitMenuItem;
+	private ButtonsPanel buttonsPanel;
 	
 	public DesktopFrame() {
 		super ("Shapes drawing application");
-
-		
+	
 		bar = new JMenuBar(); // create menu bar
 		
 		addMenu = new JMenu("Add"); // create Add menu
@@ -46,6 +47,7 @@ public class DesktopFrame extends JFrame {
 		add(theDesktop); // add desktop pane to JFrame
 		
 		setContentPane(theDesktop);
+		
 	}
 	
 	private ActionListener listener = new ActionListener() {
@@ -57,9 +59,13 @@ public class DesktopFrame extends JFrame {
 			else if (e.getSource() == newFrame) {
 				JInternalFrame frame = new JInternalFrame("Internal Frame", true, true, true, true);
 				
+				buttonsPanel = new ButtonsPanel();
+				frame.add(buttonsPanel, BorderLayout.NORTH);
+				
 				MyPanel panel = new MyPanel(); // create new panel
 				frame.add(panel, BorderLayout.CENTER);  // add panel
 				frame.pack(); // set internal frame to size of contents
+				
 				
 				theDesktop.add(frame); // attach internal frame to desktop pane
 				frame.setVisible(true); // show internal frame
