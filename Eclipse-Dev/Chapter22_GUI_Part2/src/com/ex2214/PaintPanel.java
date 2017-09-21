@@ -5,13 +5,11 @@ package com.ex2214;
  * */
 
 import java.awt.Point;
-import java.awt.Shape;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.GeneralPath;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
@@ -22,6 +20,7 @@ import javax.swing.JLabel;
 public class PaintPanel extends JPanel {
 
 	private int pointCount = 0;  // count number of points
+	private Color color;
 	private JLabel statusBar;
 	
 	// array of 10,000 java.awt.Point references
@@ -47,7 +46,14 @@ public class PaintPanel extends JPanel {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					statusBar.setText( String.format( "Pressed at [%d, %d]",
-							e.getX(), e.getY()));				
+							e.getX(), e.getY()));	
+					
+					if (e.isMetaDown()) {
+						points = null;
+						points = new Point[10000];
+						pointCount = 0;
+						repaint();
+					}
 				}
 				
 				@Override
@@ -108,110 +114,20 @@ public class PaintPanel extends JPanel {
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(1.0f));
-		g2d.setColor(Color.BLUE);
+		g2d.setColor(color);
 		
-		GeneralPath shape = new GeneralPath();
-		
-		if (pointCount > 0) {
-			shape.moveTo(points[pointCount - 1].x, points[pointCount - 1].y);
-		}
 		
 		// draw all points in array
 		for (int i = 1; i < pointCount; i++) {
 			g2d.drawLine(points[i - 1].x, points[i - 1].y, points[i].x, points[i].y);
-			shape.lineTo(points[i].x, points[i].y);
 		}
-		
-		shape.closePath();
-		g2d.fill(shape);
+	}
+	
+	
+	public void setColor(Color color) {
+		this.color = color;
 	}
 }
-
-	
-//	public PaintPanel() {
-//		
-//		addMouseListener(
-//				new MouseListener() {
-//					
-//					@Override
-//					public void mouseReleased(MouseEvent e) {
-//						if (pointCount < points.length) {
-//							points[pointCount] = e.getPoint();
-//							++pointCount;
-//							repaint();
-//						}
-//						
-//					}
-//					
-//					@Override
-//					public void mousePressed(MouseEvent e) {
-//						if (pointCount < points.length) {
-//							points[pointCount] = e.getPoint();
-//							++pointCount;
-//							repaint();
-//						}
-//						
-//					}
-//					
-//					@Override
-//					public void mouseClicked(MouseEvent e) {
-//						if (pointCount < points.length) {
-//							points[pointCount] = e.getPoint();
-//							++pointCount;
-//							repaint();
-//						}
-//						
-//					}
-//
-//					@Override
-//					public void mouseEntered(MouseEvent e) {
-//						// TODO Auto-generated method stub
-//						
-//					}
-//
-//					@Override
-//					public void mouseExited(MouseEvent e) {
-//						// TODO Auto-generated method stub
-//						
-//					}
-//				}
-//		);
-//		
-////		addMouseMotionListener(
-////				new MouseMotionAdapter() {
-////					public void mouseDragged(MouseEvent e) {
-////						if (pointCount < points.length) {
-////							points[pointCount] = e.getPoint();
-////							++pointCount;
-////							repaint();
-////						}
-////					}
-////				}
-////			);
-//	}
-//	
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		
-//		GeneralPath shape = new GeneralPath();
-//		Graphics2D g2d = (Graphics2D) g;
-//		g2d.setPaint(Color.BLACK);
-//		g2d.setStroke(new BasicStroke(6.0f));
-//		
-//		if (pointCount == 0)
-//			shape.moveTo(0, 0);
-//		else
-//			shape.moveTo(points[pointCount -1].x, points[pointCount -1].y);
-//				
-//		for (int i = 0; i < pointCount; i++) {
-//			shape.lineTo(points[i].x, points[i].y);
-//		}
-//		
-//		shape.closePath();
-//	
-//		g2d.fill(shape);
-//	}
-//}
 
 
 
