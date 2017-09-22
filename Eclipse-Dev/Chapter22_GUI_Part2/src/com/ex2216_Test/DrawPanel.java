@@ -26,6 +26,24 @@ public class DrawPanel extends JPanel {
 	
 	public DrawPanel() { }
 	
+	public DrawPanel (JLabel label) {
+		statusLabel = label;
+		
+		for (int i = 0; i < 100; i++) {
+			shapes[i] = null;
+		}
+		
+		shapeCount = 0;
+		shapeType = 2;
+		currentShape = null;
+		currentColor = Color.BLACK;
+		
+		this.setBackground(Color.WHITE);
+		MouseHandler mh = new MouseHandler();
+		addMouseListener(mh);
+		addMouseMotionListener(mh);
+	}
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -35,6 +53,22 @@ public class DrawPanel extends JPanel {
 				shapes[i].draw(g);
 			}
 		}
+	}
+	
+	public MyShape getCurrentShape() {
+		switch (shapeType) {
+		case 0:
+			currentShape = new Oval();
+			return currentShape;
+		case 1:
+			currentShape = new Rectangle();
+			return currentShape;
+		case 2: 
+			currentShape = new Line();
+			return currentShape;
+		}
+		
+		return null;
 	}
 	
 	public void getShapeType() {
@@ -75,7 +109,44 @@ public class DrawPanel extends JPanel {
 	private class MouseHandler extends MouseAdapter implements MouseMotionListener {
 		@Override
 		public void mousePressed(MouseEvent event) {
-			shape
+			// assign currentShape a new shape of the specified type by shapeType
+			// and initialize both points to the mouse position
+			getShapeType();
+			currentShape.setX1(event.getX());
+			currentShape.setY1(event.getY());
+		}
+		
+		@Override
+		public void mouseReleased(MouseEvent event) {
+			// set the second point of currentShape to the current mouse position
+			currentShape.setX2(event.getX());
+			currentShape.setY2(event.getY());
+			
+			// add currentShape to the array
+			shapes[shapeCount] = currentShape;
+			
+			// set currentShape to null 
+			currentShape = null;
+			// and call repaint to update the drawing with the new shape.
+			repaint();
+		}
+		
+		
+		@Override
+		public void mouseMoved(MouseEvent event) {
+			// update the label with the current coordinates
+			statusLabel.setText(String.format("x:%d y:%d", event.getX(), event.getY()));
+		}
+		
+		
+		@Override
+		public void mouseDragged(MouseEvent event) {
+			// this will allow the user to shape while dragging mouse
+			// update the label with the current coordinates
+			statusLabel.setText(String.format("x:%d y:%d", event.getX(), event.getY()));
+			currentShape.setX2(event.getX());
+			currentShape.setY2(event.getY());
+			repaint();
 		}
 	}
 	
