@@ -1,24 +1,25 @@
 package com.ex2216_Test;
 
-public class Rectangle extends MyShape {
-	
-	private int x, y, w, h;
-	
-   Rectangle(int x, int y, int w, int h)
-   {
-      this.x = x;
-      this.y = y;
-      this.w = w;
-      this.h = h;
-   }
+import java.awt.Graphics;
+import java.awt.Color;
 
-   // For brevity, I've omitted getX(), getY(), getWidth(), and getHeight()
-   // methods.
+public class Rectangle extends MyBoundedShape {
+	
+	public Rectangle() {}
+	
+	public Rectangle (int x1, int y1, int x2, int y2, Color color, boolean fill) {
+		super(x1, y1, x2, y2, color, fill);
+	}
 
-   @Override
-   public void draw()
-   {
-      System.out.println("Drawing rectangle (" + x + ", "+ y + ", " + w + "," +
-                 h + ")");
-   }
+	@Override
+	public void draw(Graphics g) {
+		if (getFill()) {
+			g.fillRect(getX1(), getY1(), getX2() - getX1(), getY2() - getY2());
+		}
+		else {
+			g.fillRect(getX1(), getY1(), getX2() - getX1(), getY2() - getY1());
+		}
+		
+	}
+
 }
