@@ -14,13 +14,12 @@ public class DrawPanel extends JPanel {
 	
 	private final int OVAL = 0;
 	private final int RECTANGLE = 1;
-	private final int TRIANGLE = 2;
-	private final int LINE = 3;
+	private final int LINE = 2;
 
 	private MyShape[] shapes;		// An array shapes of type MyShape that will store all the shapes the user draws
 	private int shapeCount;			// An integer shapeCount that counts the number of shapes in the array
 	private int shapeType; 			//An integer shapeType that determines the type of shape to draw.
-	private MyShape currentShap;  	// A MyShape currentShape that represents the current shape the user is drawing.
+	private MyShape currentShape;  	// A MyShape currentShape that represents the current shape the user is drawing.
 	private Color currentColor;		// A Color currentColor that represents the current drawing color.
 	private boolean filledShape;		// A boolean filledShape that determines whether to draw a filled shape.
 	private JLabel statusLabel; 		// A JLabel statusLabel that represents the status bar. The status bar will display the coordinates of the current mouse position
@@ -38,22 +37,17 @@ public class DrawPanel extends JPanel {
 		}
 	}
 	
-	public void setShapeType(MyShape shape) {
-		if (shape instanceof Oval)
-			shapeType = OVAL;
-		else if(shape instanceof Rectangle)
-			shapeType = RECTANGLE;
-		else if (shape instanceof Triangle)
-			shapeType = TRIANGLE;
-		else if (shape instanceof Line) {
-			shapeType = LINE;
+	public void getShapeType() {
+		if (currentShape != null) {
+			if (currentShape instanceof Oval)
+				shapeType = 0;
+			else if (currentShape instanceof Rectangle)
+				shapeType = 1;
+			else if (currentShape instanceof Line)
+				shapeType = 2;
 		}
 	}
-	
-	public int getShapeType() {
-		return shapeType;
-	}
-	
+
 	public void setCurrentColor(Color color) {
 		currentColor = color;
 	}
@@ -81,7 +75,7 @@ public class DrawPanel extends JPanel {
 	private class MouseHandler extends MouseAdapter implements MouseMotionListener {
 		@Override
 		public void mousePressed(MouseEvent event) {
-			
+			shape
 		}
 	}
 	
