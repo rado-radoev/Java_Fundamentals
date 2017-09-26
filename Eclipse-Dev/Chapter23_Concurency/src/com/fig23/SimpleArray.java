@@ -10,7 +10,7 @@ public class SimpleArray { 		// CAUTION: NOT THREAD SAFE!
 	private final int[] array;	// the shared integer array
 	private int writeIndex;		// Shared index of next element to write
 	
-	// Construct a SimpleArray of a give size
+	// Construct a SimpleArray of a given size
 	public SimpleArray(int size) {
 		array = new int[size];
 	}
