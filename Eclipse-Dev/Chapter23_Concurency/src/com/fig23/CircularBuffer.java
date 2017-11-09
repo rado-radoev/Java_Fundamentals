@@ -1,7 +1,5 @@
 package com.fig23;
-
 // Synchronizing access to a shared three-element bounded buffer
-
 public class CircularBuffer implements Buffer {
 	
 	private final int[] buffer = { -1 , -1 , -1};  // shared buffer
