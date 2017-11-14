@@ -13,6 +13,12 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	private int clickCount;
 	private JLabel label = new JLabel();
 	
+	public Clicker(double delay, JLabel label) {
+		this.delay = delay;
+		this.label = label;
+	}
+	
+	
 	public JLabel getLabel() {
 		return label;
 	}
@@ -35,7 +41,7 @@ public class Clicker extends SwingWorker<Void, Integer> {
 		while (!isCancelled()) {
 			click();
 			publish(clickCount);
-			Thread.sleep((long) (getDelay() / 1000.0));
+			Thread.sleep((long) (getDelay() * 1000.0));
 		}
 		return null;
 	}
@@ -53,16 +59,15 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	
 	
 	private void click() {
-		robot.mousePress(InputEvent.BUTTON1_MASK);
-		System.out.println("mouse clicker");
 		try {
-			robot.wait(5);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		System.out.println("mouse clicked");
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 		System.out.println("mouse released");
+		robot.waitForIdle();
 		++clickCount;
 	}
 }

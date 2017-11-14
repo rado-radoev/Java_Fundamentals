@@ -45,10 +45,10 @@ public class MouseClickerFrame extends JFrame {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						clicker = new Clicker();
+						int delay = Integer.valueOf(delayJTextField.getText());
+						clicker = new Clicker(delay, clickCounterJLabel);
 						
 						clicker.execute();
-						clickCounterJLabel.setText(String.valueOf(clicker.getClickCount()));
 						okJButton.setEnabled(false);
 						cancelJButton.setEnabled(true);
 					}
