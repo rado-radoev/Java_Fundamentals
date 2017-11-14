@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class MouseClickerFrame extends JFrame {
 
 	private JLabel delayJLabel;
-	private JLabel clickCounterJLabel;
+	private JLabel clickCounterJLabel = new JLabel();
 	private JTextField delayJTextField;
 	private JButton okJButton;
 	private JButton cancelJButton;
@@ -48,7 +48,7 @@ public class MouseClickerFrame extends JFrame {
 						clicker = new Clicker();
 						
 						clicker.execute();
-						clickCounterJLabel = clicker.getLabel();
+						clickCounterJLabel.setText(String.valueOf(clicker.getClickCount()));
 						okJButton.setEnabled(false);
 						cancelJButton.setEnabled(true);
 					}
@@ -72,12 +72,15 @@ public class MouseClickerFrame extends JFrame {
 		mainJpanel.add(okJButton);
 		mainJpanel.add(cancelJButton);
 		
+		
+		
 		// construct the JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 200);
 		
 		// add mainJPanel to JFrame
 		add(mainJpanel, BorderLayout.CENTER);
+		add(clickCounterJLabel, BorderLayout.SOUTH);
 	}
 	
 	

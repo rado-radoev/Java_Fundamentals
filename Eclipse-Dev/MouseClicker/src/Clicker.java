@@ -3,6 +3,8 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.util.List;
 import javax.swing.JLabel;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 
 public class Clicker extends SwingWorker<Void, Integer> {
 
@@ -15,6 +17,10 @@ public class Clicker extends SwingWorker<Void, Integer> {
 		return label;
 	}
 	
+	public int getClickCount() {
+		return clickCount;
+	}
+	
 	public double getDelay() {
 		return delay;
 	}
@@ -25,10 +31,11 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	
 	@Override
 	protected Void doInBackground() throws Exception {
+		//ExecutorService executorService = Executors.newCachedThreadPool();
 		while (!isCancelled()) {
 			click();
 			publish(clickCount);
-			Thread.sleep((long) getDelay());
+			Thread.sleep((long) (getDelay() / 1000.0));
 		}
 		return null;
 	}
@@ -47,6 +54,7 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	
 	private void click() {
 		robot.mousePress(InputEvent.BUTTON1_MASK);
+		System.out.println("mouse clicker");
 		try {
 			robot.wait(5);
 		} catch (InterruptedException e) {
@@ -54,6 +62,7 @@ public class Clicker extends SwingWorker<Void, Integer> {
 			e.printStackTrace();
 		}
 		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		System.out.println("mouse released");
 		++clickCount;
 	}
 }
