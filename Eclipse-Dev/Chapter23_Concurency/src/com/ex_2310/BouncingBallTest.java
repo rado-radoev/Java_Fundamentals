@@ -2,6 +2,7 @@ package com.ex_2310;
 
 import java.awt.*;
 import javax.swing.*;
+import java.util.concurrent.*;
  
 public class BouncingBallTest extends JPanel {
  
@@ -20,64 +21,73 @@ public class BouncingBallTest extends JPanel {
   // Direction
   float dx = 3;
   float dy = 3;
+  
+  Color c; 
+  
+  public void setColor(Color c) {
+	  this.c = c;
+  }
+  
+	public BouncingBallTest(float radius, Color color) {
+		this.radius = radius;
+		this.c = color;
+	}
  
   public BouncingBallTest() {
 	  
- 
-    Thread thread = new Thread() {
-      public void run() {
-        while (true) {
- 
-          width = getWidth();
-          height = getHeight();
- 
-          X = X + dx ;
-          Y = Y + dy;
- 
-          if (X - radius < 0) {
-            dx = -dx; 
-            X = radius; 
-          } else if (X + radius > width) {
-            dx = -dx;
-            X = width - radius;
-          }
- 
-          if (Y - radius < 0) {
-            dy = -dy;
-            Y = radius;
-          } else if (Y + radius > height) {
-            dy = -dy;
-            Y = height - radius;
-          }
-          repaint();
- 
-          try {
-            Thread.sleep(50);
-          } catch (InterruptedException ex) {
-          }
- 
-        }
-      }
-    };
-    thread.start();
+
+	  ExecutorService executorService = Executors.newCachedThreadPool();
+	  
+    executorService.execute( new Runnable() {
+		
+		@Override
+		public void run() {
+		
+			while (true) {
+	        	 
+	            width = getWidth();
+	            height = getHeight();
+	   
+	            X = X + dx ;
+	            Y = Y + dy;
+	   
+	            if (X - radius < 0) {
+	              dx = -dx; 
+	              X = radius; 
+	            } else if (X + radius > width) {
+	              dx = -dx;
+	              X = width - radius;
+	            }
+	   
+	            if (Y - radius < 0) {
+	              dy = -dy;
+	              Y = radius;
+	            } else if (Y + radius > height) {
+	              dy = -dy;
+	              Y = height - radius;
+	            }
+	            repaint();
+	   
+	            try {
+	              Thread.sleep(50);
+	            } catch (InterruptedException ex) {
+	            }
+	   
+	          }
+			
+		}
+	});
+
   }
  
+  @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.setColor(Color.GRAY);
     g.fillOval((int)(X-radius) - 10, (int)(Y-radius) + 5, (int)diameter, (int)diameter);
     
-    g.setColor(Color.BLUE);
+    g.setColor(c);
     g.fillOval((int)(X-radius), (int)(Y-radius), (int)diameter, (int)diameter);
 
-  }
- 
-  public static void main(String[] args) {
-    JFrame.setDefaultLookAndFeelDecorated(true);
-    JFrame frame = new JFrame("Bouncing Ball");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(300, 200);
-    frame.setContentPane(new BouncingBallTest());
-    frame.setVisible(true);
   }
 }
