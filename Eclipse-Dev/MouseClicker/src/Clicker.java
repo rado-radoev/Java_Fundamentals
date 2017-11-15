@@ -1,4 +1,8 @@
 import javax.swing.SwingWorker;
+
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.util.List;
@@ -12,6 +16,8 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	private double delay;
 	private int clickCount;
 	private JLabel label = new JLabel();
+	PointerInfo a;
+	Point b;
 	
 	public Clicker(double delay, JLabel label) {
 		this.delay = delay;
@@ -38,6 +44,8 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	@Override
 	protected Void doInBackground() throws Exception {
 		//ExecutorService executorService = Executors.newCachedThreadPool();
+		robot = new Robot();
+	    
 		while (!isCancelled()) {
 			click();
 			publish(clickCount);
@@ -59,14 +67,16 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	
 	
 	private void click() {
-		try {
-			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("mouse clicked");
-		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		System.out.println("mouse released");
+	    // need to get mouse current position, otherwise
+		// it is sent back to original position
+		a = MouseInfo.getPointerInfo();
+		b = a.getLocation();
+		robot.mouseMove((int)b.getX(), (int)b.getY());
+		
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		//System.out.println("mouse clicked");
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		//System.out.println("mouse released");
 		robot.waitForIdle();
 		++clickCount;
 	}
