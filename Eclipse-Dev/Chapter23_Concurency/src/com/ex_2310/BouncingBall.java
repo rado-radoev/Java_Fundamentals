@@ -3,7 +3,7 @@ package com.ex_2310;
 import javax.swing.JPanel;
 
 
-public class BouncingBall extends JPanel implements Runnable {
+public class BouncingBall extends JPanel {
 
 	// Box height and width
 	private int width;
@@ -27,48 +27,8 @@ public class BouncingBall extends JPanel implements Runnable {
 	public BouncingBall() {
 
 		ball = new DrawBallPanel(radius, diameter, X, Y);
+		ball.repaint();
 		add(ball);	
+		repaint();
 	}
-	
-	private void draw(DrawBallPanel drawBall) {
-		while (true) {
-
-			width = getWidth();
-			height = getHeight();
-
-			X = X + dx;
-			Y = Y + dy;
-
-			if (X - radius < 0) {
-				dx = -dx;
-				X = radius;
-			} else if (X + radius > width) {
-				dx = -dx;
-				X = width - radius;
-			}
-
-			if (Y - radius < 0) {
-				dy = -dy;
-				Y = radius;
-			} else if (Y + radius > height) {
-				dy = -dy;
-				Y = height - radius;
-			}
-			
-			drawBall.repaint();
-
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException ex) {
-				ex.printStackTrace();
-			}
-
-		}
-	}
-	
-	@Override
-	public void run() {
-		draw(ball);
-	}
-
 }

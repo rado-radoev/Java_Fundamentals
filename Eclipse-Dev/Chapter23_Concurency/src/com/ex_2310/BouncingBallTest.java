@@ -64,8 +64,12 @@ public class BouncingBallTest extends JPanel {
  
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
+    g.setColor(Color.GRAY);
+    g.fillOval((int)(X-radius) - 10, (int)(Y-radius) + 5, (int)diameter, (int)diameter);
+    
     g.setColor(Color.BLUE);
     g.fillOval((int)(X-radius), (int)(Y-radius), (int)diameter, (int)diameter);
+
   }
  
   public static void main(String[] args) {

@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class DrawBallPanel extends JPanel {
+public class DrawBallPanel extends JPanel implements Runnable {
 	
 	// ball size
 	private float radius;
@@ -29,7 +29,16 @@ public class DrawBallPanel extends JPanel {
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
+	    g2d.setColor(Color.GRAY);
+	    g2d.fillOval((int)(X-radius) - 10, (int)(Y-radius) + 5, (int)diameter, (int)diameter);
+		
 		g2d.setColor(Color.BLUE);
 		g2d.fillOval((int)(X-radius), (int)(Y-radius), (int)diameter, (int)diameter);
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
