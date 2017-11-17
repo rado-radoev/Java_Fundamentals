@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Nov 16 22:43:47 PST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-015f-c8b8-1286-000006f468c8 
+on database directory /Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases/books with class loader sun.misc.Launcher$AppClassLoader@4e25154f 
+Loaded from file:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_144-b01
+user.dir=/Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.13.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
