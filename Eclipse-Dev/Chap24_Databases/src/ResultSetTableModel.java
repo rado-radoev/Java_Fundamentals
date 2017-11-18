@@ -80,14 +80,15 @@ public class ResultSetTableModel extends AbstractTableModel {
 	
 	
 	// get number of particular column in ResultSet
-	public String getColmnName(int column) throws IllegalStateException {
+	@Override
+	public String getColumnName(int column) throws IllegalStateException {
 		// ensure database connection is available
 		if (!connectedToDatabase) 
 			throw new IllegalStateException(NODBCONN);
 		
 		// determine column name
 		try {
-			return metaData.getColumnName(column);
+			return metaData.getColumnName(column + 1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -97,7 +98,6 @@ public class ResultSetTableModel extends AbstractTableModel {
 	}
 	
 	// return number of rows in ResultSet
-	@Override
 	public int getRowCount() throws IllegalStateException {
 		// ensure database connection is alive
 		checkDBConnAlive();
