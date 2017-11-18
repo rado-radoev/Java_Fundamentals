@@ -74,7 +74,7 @@ public class DisplayQueryResults extends JFrame {
 			// place GUI components on JFrame content pane
 			JFrame window = new JFrame("Display Query Results");
 			window.add(boxNorth, BorderLayout.NORTH);
-			window.add(new JScrollPane(resultTable), BorderLayout.CENTER	);
+			window.add(new JScrollPane(resultTable), BorderLayout.CENTER);
 			window.add(boxSouth, BorderLayout.SOUTH);
 			
 			// create event listener for submit button
