@@ -19,7 +19,6 @@ import javax.swing.table.AbstractTableModel;
  */
 public class DBQueries extends AbstractTableModel {
 
-	private final String DATABASE = "jdbc:derby:books";
 	private Connection connection;
 	private PreparedStatement allAuthors;
 	private PreparedStatement booksByAuthor;
@@ -28,17 +27,18 @@ public class DBQueries extends AbstractTableModel {
 	private ResultSet resultSet;
 	private ResultSetMetaData metaData;
 	
-	public DBQueries() {
+	public DBQueries(String db) {
 		
 		try {
 			// connect to a database
-			connection = DriverManager.getConnection(DATABASE);
+			connection = DriverManager.getConnection(db);
 			
 			// Prepare Statements to query database
 			
 			// create query that selects all authors
 			allAuthors = connection.prepareStatement(
-				"SELECT * FROM Authors");
+				"SELECT * FROM Authors", 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			// create query that selects author's first and last names, title of books written
 			// year published and their ISBN when provided author's first name
@@ -51,7 +51,8 @@ public class DBQueries extends AbstractTableModel {
 					 "INNER JOIN Titles" +
 					 "ON AuthorISBN.ISBN = Titles.ISBN" + 
 					 "WHERE FirstName like ?" +
-					 "ORDER BY LastName, FirstName");
+					 "ORDER BY LastName, FirstName",
+					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			// create query that selects author's first and last names and book titles
 			// when provided book title
@@ -64,7 +65,8 @@ public class DBQueries extends AbstractTableModel {
 					 "INNER JOIN Titles" + 
 					 "ON AuthorISBN.ISBN = Titles.ISBN" +  
 					 "WHERE title LIKE ?" +
-					 "ORDER BY LastName, FirstName");
+					 "ORDER BY LastName, FirstName", 
+					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			// create a query that selects author's first and last names, book title,
 			// edition number and publication year
@@ -78,7 +80,8 @@ public class DBQueries extends AbstractTableModel {
 					 "INNER JOIN Titles" +
 					 "ON AuthorISBN.ISBN = Titles.ISBN" + 
 					 "WHERE copyright LIKE ?" +
-					 "ORDER BY copyright");
+					 "ORDER BY copyright",
+					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -111,6 +114,15 @@ public class DBQueries extends AbstractTableModel {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	// select all authors
+	public void getAllAuthors() {
+		try {
+			allAuthors.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// select all books by year
