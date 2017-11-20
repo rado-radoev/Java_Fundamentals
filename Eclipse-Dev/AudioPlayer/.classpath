@@ -6,5 +6,10 @@
 	<classpathentry kind="lib" path="/Library/Java/Extensions/JMF-2.1.1e/lib/jmf.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/Extensions/JMF-2.1.1e/lib/mediaplayer.jar" sourcepath="/Library/Java/Extensions/JMF-2.1.1e/lib/mediaplayer.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/Extensions/JMF-2.1.1e/lib/multiplayer.jar"/>
+	<classpathentry kind="lib" path="/Users/superlamer/Downloads/SoundSystem/SoundSystem.jar" sourcepath="/Users/superlamer/Downloads/SoundSystem/src"/>
+	<classpathentry kind="lib" path="/Users/superlamer/Downloads/CodecWav/CodecWav.jar" sourcepath="/Users/superlamer/Downloads/CodecWav/src"/>
+	<classpathentry kind="lib" path="/Users/superlamer/Downloads/LibraryJavaSound/LibraryJavaSound.jar" sourcepath="/Users/superlamer/Downloads/LibraryJavaSound/src"/>
+	<classpathentry kind="lib" path="/Users/superlamer/Downloads/LibraryLWJGLOpenAL/LibraryLWJGLOpenAL.jar" sourcepath="/Users/superlamer/Downloads/LibraryLWJGLOpenAL/src"/>
+	<classpathentry kind="lib" path="/Users/superlamer/Downloads/CodecJOgg/CodecJOgg.jar" sourcepath="/Users/superlamer/Downloads/CodecJOgg/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
