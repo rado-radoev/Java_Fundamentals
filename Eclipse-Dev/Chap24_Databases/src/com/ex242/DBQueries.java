@@ -44,13 +44,13 @@ public class DBQueries extends AbstractTableModel {
 			// year published and their ISBN when provided author's first name
 			// results sorted by first name and then by last name
 			booksByAuthor = connection.prepareStatement(
-					 "SELECT FirstName, LastName, Title, Copyright, Titles.ISBN" + 
-					 "FROM Authors" +
-					 "INNER JOIN AuthorISBN" +  
-					 "ON Authors.AuthorID = AuthorISBN.AuthorID" + 
-					 "INNER JOIN Titles" +
-					 "ON AuthorISBN.ISBN = Titles.ISBN" + 
-					 "WHERE FirstName like ?" +
+					 "SELECT FirstName, LastName, Title, Copyright, Titles.ISBN " + 
+					 "FROM Authors " +
+					 "INNER JOIN AuthorISBN " +  
+					 "ON Authors.AuthorID = AuthorISBN.AuthorID " + 
+					 "INNER JOIN Titles " +
+					 "ON AuthorISBN.ISBN = Titles.ISBN " + 
+					 "WHERE FirstName like ? " +
 					 "ORDER BY LastName, FirstName",
 					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
@@ -58,13 +58,13 @@ public class DBQueries extends AbstractTableModel {
 			// when provided book title
 			// results sorted by author's first name and then by last name
 			booksByTitle = connection.prepareStatement(
-					 "SELECT firstname, lastname, title" + 
-					 "FROM Authors" + 
-					 "INNER JOIN AuthorISBN" + 
-					 "ON Authors.AuthorID = AuthorISBN.AuthorID" +  
-					 "INNER JOIN Titles" + 
-					 "ON AuthorISBN.ISBN = Titles.ISBN" +  
-					 "WHERE title LIKE ?" +
+					 "SELECT firstname, lastname, title " + 
+					 "FROM Authors " + 
+					 "INNER JOIN AuthorISBN " + 
+					 "ON Authors.AuthorID = AuthorISBN.AuthorID " +  
+					 "INNER JOIN Titles " + 
+					 "ON AuthorISBN.ISBN = Titles.ISBN " +  
+					 "WHERE title LIKE ? " +
 					 "ORDER BY LastName, FirstName", 
 					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
@@ -73,13 +73,13 @@ public class DBQueries extends AbstractTableModel {
 			// when year provided
 			// results are sorted by year
 			booksByYear = connection.prepareStatement(
-					 "SELECT firstname, lastname, title, editionNumber, copyright" +   
-					 "FROM Authors" +
-					 "INNER JOIN AuthorISBN" + 
-					 "ON Authors.AuthorID = AuthorISBN.AuthorID" + 
-					 "INNER JOIN Titles" +
-					 "ON AuthorISBN.ISBN = Titles.ISBN" + 
-					 "WHERE copyright LIKE ?" +
+					 "SELECT firstname, lastname, title, editionNumber, copyright " +   
+					 "FROM Authors " +
+					 "INNER JOIN AuthorISBN " + 
+					 "ON Authors.AuthorID = AuthorISBN.AuthorID " + 
+					 "INNER JOIN Titles " +
+					 "ON AuthorISBN.ISBN = Titles.ISBN " + 
+					 "WHERE copyright LIKE ? " +
 					 "ORDER BY copyright",
 					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
