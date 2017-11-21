@@ -38,29 +38,49 @@ public class DisplayDBQueryResults extends JFrame {
 			"Books by Title",
 			"Books by Year"};
 	
+	private static JButton submitQueryButton;
+	private static JButton cancelButton;
+	private static JButton clearButton;
+	private static JButton filterButton;
+	private static JComboBox<String> predefinedQueriesJComboBox;
+	private static JTextArea queryArea;
+	private static JTable resultTable;
+	private static JLabel filterLabel;
+	private static JTextField filterTextField;
+	private QueryWorker query;
+	
 	public static void main(String[] args) {
 		
 		// create ResulTableModel and display database
 		try {
 			// create TableModel
-			tableModel = new DBQueries(DATABASE);
+			tableModel = new DBQueries(DATABASE, "authors");
 
+			// combobox handler
+			ComboBoxHandler comboBoxHandler = new ComboBoxHandler();
+			
 			// setup JComboBox that will contain the predefined queries
 			// and add it to a JScrollPane
-			JComboBox<String> predefinedQueriesJComboBox = new JComboBox<String>(predefinedQueries);
+			predefinedQueriesJComboBox = new JComboBox<String>(predefinedQueries);
+			predefinedQueriesJComboBox.addActionListener(comboBoxHandler);
 			JScrollPane predefinedQueriesJScrollPane = new JScrollPane(predefinedQueriesJComboBox, 
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			
 			// Text Area in which user can type queries
-			JTextArea queryArea = new JTextArea(3, 100);
+			queryArea = new JTextArea(3, 100);
 			queryArea.setWrapStyleWord(true);
 			queryArea.setLineWrap(true);
 			
-			// Setup two buttons
-			JButton submitQueryButton = new JButton("Submit Query");
-			JButton cancelButton = new JButton("Cancel");
-			JButton clearButton = new JButton("Clear");
+			// Setup buttons
+			// Button handler
+			ButtonHandler buttonHandler = new ButtonHandler();
+			submitQueryButton = new JButton("Submit Query");
+			submitQueryButton.addActionListener(buttonHandler);
+			cancelButton = new JButton("Cancel");
+			cancelButton.addActionListener(buttonHandler);
+			clearButton = new JButton("Clear");
+			clearButton.addActionListener(buttonHandler);
 			
 			// Create a box to manage placement of combo box and text area
 			Box boxNorth = Box.createVerticalBox();
@@ -77,12 +97,12 @@ public class DisplayDBQueryResults extends JFrame {
 			boxNorth.add(boxNorthInner);
 			
 			// create JTable based on tableModel
-			JTable resultTable = new JTable();
+			JTable resultTable = new JTable(tableModel);
 			
 			// create filter section
-			JLabel filterLabel = new JLabel("Filter: ");
-			JTextField filterTextField = new JTextField();
-			JButton filterButton = new JButton("Apply Filter");
+			filterLabel = new JLabel("Filter: ");
+			filterTextField = new JTextField();
+			filterButton = new JButton("Apply Filter");
 			
 			// create south box for filter section
 			Box boxSouth = Box.createHorizontalBox();
@@ -101,12 +121,73 @@ public class DisplayDBQueryResults extends JFrame {
 			window.setSize(500, 250);
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
+			// set default index for combo box
+			predefinedQueriesJComboBox.setSelectedIndex(0);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		final TableRowSorter<TableModel> sorter = 
+				new TableRowSorter<TableModel>(tableModel);
+		resultTable.setRowSorter(sorter);
 	}
 	
+	private static class ComboBoxHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String query = (String)predefinedQueriesJComboBox.getSelectedItem();
+			if (query.
+					toLowerCase().
+					contains("authors")) {
+				queryArea.setText("SELECT * FROM Authors");
+			}
+		}
+		
+	}
+	
+	private static class ButtonHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			String query = queryArea.getText();
+			if (event.getSource() == submitQueryButton) {
+				// if combo box with title is selected
+				if (String.valueOf(predefinedQueriesJComboBox.getSelectedItem()).
+						toLowerCase().
+						contains("authors")) {
+					tableModel = new DBQueries(DATABASE, "authors");
+				}
+				else if (String.valueOf(predefinedQueriesJComboBox.getSelectedItem()).
+						toLowerCase().
+						contains("title")) {
+					tableModel.getBooksByTitle(query);
+				}
+				// if combo box with Author is selected
+				else if (String.valueOf(predefinedQueriesJComboBox.getSelectedItem()).
+						toLowerCase().
+						contains("author")) {
+					tableModel.getBooksByAuthor(query);
+				}
+				// if combo box with Year is selected
+				else if (String.valueOf(predefinedQueriesJComboBox.getSelectedItem()).
+						toLowerCase().
+						contains("year")) {
+					tableModel.getBooksByYear(query);
+				}
+			}
+			else if (event.getSource() == cancelButton) {
+				JOptionPane.showMessageDialog(null, "Cancel button not implemented");
+			}
+			else if (event.getSource() == clearButton) {
+				// reset query
+				predefinedQueriesJComboBox.setSelectedIndex(0);
+				queryArea.setText("");
+				resultTable.clearSelection();
+			}			
+		}
+	}
 }
 
 

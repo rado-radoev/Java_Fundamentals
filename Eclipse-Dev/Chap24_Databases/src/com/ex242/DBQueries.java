@@ -28,6 +28,10 @@ public class DBQueries extends AbstractTableModel {
 	private ResultSetMetaData metaData;
 	
 	public DBQueries(String db) {
+		this(db, "");
+	}
+	
+	public DBQueries(String db, String query) {
 		
 		try {
 			// connect to a database
@@ -82,6 +86,10 @@ public class DBQueries extends AbstractTableModel {
 					 "WHERE copyright LIKE ? " +
 					 "ORDER BY copyright",
 					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			if (query.toLowerCase().equals("authors"))
+				getAllAuthors();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -106,10 +114,13 @@ public class DBQueries extends AbstractTableModel {
 	public void getUserDefined(String userStatement) {
 		try {
 			PreparedStatement uStatement = connection.prepareStatement(userStatement);
-			uStatement.executeQuery();
+			resultSet = uStatement.executeQuery();
 			
 			// notify JTable that model has changed
 			fireTableStructureChanged();
+			
+			// obtain meta data for ResultSet
+			metaData = resultSet.getMetaData();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -119,7 +130,14 @@ public class DBQueries extends AbstractTableModel {
 	// select all authors
 	public void getAllAuthors() {
 		try {
-			allAuthors.executeQuery();
+			// executeQuery returns ResultSet containing matching entries
+			resultSet = allAuthors.executeQuery();
+
+			// obtain meta data for ResultSet
+			metaData = resultSet.getMetaData();
+			
+			// notify JTable that model has changed
+			fireTableStructureChanged();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -132,6 +150,9 @@ public class DBQueries extends AbstractTableModel {
 			
 			// executeQuery returns ResultSet containing matching entries
 			resultSet = booksByYear.executeQuery();
+			
+			// obtain meta data for ResultSet
+			metaData = resultSet.getMetaData();
 			
 			// notify JTable that model has changed
 			fireTableStructureChanged();
@@ -150,12 +171,15 @@ public class DBQueries extends AbstractTableModel {
 			// executeQuery returns ResultSet containing matching entries
 			resultSet = booksByTitle.executeQuery();
 			
+			// obtain meta data for ResultSet
+			metaData = resultSet.getMetaData();
+			
 			// notify JTable that model has changed
 			fireTableStructureChanged();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			disconnect();
+			//disconnect();
 		}
 	}
 	
@@ -237,6 +261,8 @@ public class DBQueries extends AbstractTableModel {
 		}
 	}
 	
-
+	public ResultSet getResultSet() {
+		return resultSet;
+	}
 	
 }
