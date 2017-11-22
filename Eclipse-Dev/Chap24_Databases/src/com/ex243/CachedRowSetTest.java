@@ -16,7 +16,15 @@ public class CachedRowSetTest {
 		final String DATABASE_URL = "jdbc:derby:books";
 		final String USERNAME = "";
 		final String PASSWORD = "";
-		final String SELECT_QUERY = "SELECT * FROM Titles";
+		// final String SELECT_QUERY = "SELECT * FROM Authors";
+		final String SELECT_QUERY = "SELECT FirstName, LastName, Title, Copyright, Titles.ISBN " + 
+				 "FROM Authors " +
+				 "INNER JOIN AuthorISBN " +  
+				 "ON Authors.AuthorID = AuthorISBN.AuthorID " + 
+				 "INNER JOIN Titles " +
+				 "ON AuthorISBN.ISBN = Titles.ISBN " + 
+				 "WHERE FirstName like 'Frank' " +
+				 "ORDER BY LastName, FirstName";
 		
 		// INSERT INTO Authors (FirstName, LastName) VALUES ('Looser', 'BigLooser')
 	
@@ -62,16 +70,34 @@ public class CachedRowSetTest {
 /*					if (rowSet.getString("FirstName").equals("Frank"))
 						authorID = rowSet.getInt("AuthorID");
 */					
+					// delete row from titles
+//					try {
+//						if (rowSet.getInt("ISBN") == 999999999) {
+//							rowSet.deleteRow();
+//						}	
+//					} catch (SQLException e) {
+//						// in case there is a string added to the ISBN field
+//					}
 					
+							
 					System.out.printf("%-16s\t", rowSet.getObject(i));
 				}
 				System.out.println();
 			}
 			
+			// add isbn, title, editionnumber and copyright to titles 
+//			rowSet.setCommand("INSERT INTO Titles (ISBN, Title, EditionNumber, Copyright) VALUES (?, ?, ? ,?)");
+//			rowSet.setLong(1, 9999999999L);
+//			rowSet.setString(2, "Catch me if you can");
+//			rowSet.setInt(3, 2);
+//			rowSet.setInt(4, 2017);
+//			rowSet.execute();
+			
+			
 			// insert AuthorID to AuthorISBN
 //			rowSet.setCommand("INSERT INTO AuthorISBN (AuthorID, ISBN) VALUES (?, ?)");
-//			rowSet.setInt(1, 1001);
-//			rowSet.setInt(2, 999999999);
+//			rowSet.setInt(1, 1101);
+//			rowSet.setLong(2, 9999999999L);
 //			rowSet.execute();
 			
 			
