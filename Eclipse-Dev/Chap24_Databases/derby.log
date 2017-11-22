@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Tue Nov 21 23:11:15 PST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-015f-e291-0466-000006cfaee0 
-on database directory /Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases/books with class loader sun.misc.Launcher$AppClassLoader@4e25154f 
+Tue Nov 21 23:51:07 PST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-015f-e2b5-8488-000006f47fa8 
+on database directory /Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases/employees with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
 Loaded from file:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
@@ -11,3 +11,25 @@ os.arch=x86_64
 os.version=10.13.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Nov 21 23:53:48 PST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance 52da80c5-015f-e2b5-8488-000006f47fa8 
+on database directory /Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases/bankDatabase with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_144-b01
+user.dir=/Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.13.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Nov 22 00:24:46 PST 2017: Shutting down Derby engine
+----------------------------------------------------------------
+Wed Nov 22 00:24:46 PST 2017:
+Shutting down instance 52da80c5-015f-e2b5-8488-000006f47fa8 on database directory /Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases/bankDatabase with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+----------------------------------------------------------------
+Wed Nov 22 00:24:46 PST 2017:
+Shutting down instance a816c00e-015f-e2b5-8488-000006f47fa8 on database directory /Users/superlamer/GitHub/Java_Fundamentals/Eclipse-Dev/Chap24_Databases/employees with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+----------------------------------------------------------------
