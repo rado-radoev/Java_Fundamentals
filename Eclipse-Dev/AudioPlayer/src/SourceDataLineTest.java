@@ -54,18 +54,18 @@ public class SourceDataLineTest {
 			
 			targetThread.start();
 			System.out.println("Started recording ...");
-			Thread.sleep(10000);
-			targetLine.stop();
-			targetLine.close();
+			Thread.sleep(500);
+			//targetLine.stop();
+			//targetLine.close();
 			
-			System.out.println("Ended recording ...");
+			//System.out.println("Ended recording ...");
 			System.out.println("Starting playback ...");
 			
 			sourceThread.start();
-			Thread.sleep(10000);
-			sourceLine.stop();
-			sourceLine.close();
-			System.out.println("Ended playback ...");
+			//Thread.sleep(10000);
+			//sourceLine.stop();
+			//sourceLine.close();
+			//System.out.println("Ended playback ...");
 			
 		} catch (LineUnavailableException | InterruptedException e) {
 			e.printStackTrace();
