@@ -77,27 +77,28 @@ public class AudioPlayer3 {
 
             for(;;) {  // We'll exit the loop when we reach the end of stream
                 // First, read some bytes from the input stream.
-                int bytesread=ain.read(buffer,numbytes,buffer.length-numbytes);
+                int bytesread=ain.read(buffer,numbytes,((buffer.length-numbytes)/framesize)*framesize);
                 System.out.println("bytes read: " + bytesread);
                 // If there were no more bytes to read, we're done.
                  if (bytesread == -1)  {
-                     line.stop();
-                     line.close();
 
-                	 	// Get a wrapper stream around the input stream that does the
-                     // transcoding for us.
-                     ain = AudioSystem.getAudioInputStream(url);
+                	 AudioFormat pcm =
+                             new AudioFormat(format.getSampleRate( ), 16,
+                                             format.getChannels( ), true, false);
 
-                     // Update the format and info variables for the transcoded data
-                     format = ain.getFormat( ); 
-                     info = new DataLine.Info(SourceDataLine.class, format);
+                         // Get a wrapper stream around the input stream that does the
+                         // transcoding for us.
+                         ain = AudioSystem.getAudioInputStream(pcm, ain);
+
+                         // Update the format and info variables for the transcoded data
+                         format = ain.getFormat( ); 
+                         info = new DataLine.Info(SourceDataLine.class, format);
                      
                      line = (SourceDataLine) AudioSystem.getLine(info);
                      line.open(format);
                      line.start();
-                	 
+             	 	continue;
                  }
-                	 	//break;
                 numbytes += bytesread;
                 
                 // Now that we've got some audio data to write to the line,
