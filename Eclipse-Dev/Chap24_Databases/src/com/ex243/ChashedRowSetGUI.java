@@ -25,6 +25,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.sql.RowSet;
 
+
+// TO DO: Need to implement a list that will hold the objects ouptut from RowSet
+// then these object will be displayed in the TextFields
+
+
+
 public class ChashedRowSetGUI extends JFrame {
 		
 	private JButton prevButton;
