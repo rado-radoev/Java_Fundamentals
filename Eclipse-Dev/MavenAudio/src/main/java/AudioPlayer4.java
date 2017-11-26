@@ -39,9 +39,24 @@ public class AudioPlayer4 {
 			
 			int bufferSize = (int) format.getSampleRate() * format.getFrameSize();
 			byte[] buffer = new byte[bufferSize];
-			int count; 
-			while ((count = input.read(buffer, 0, buffer.length)) != -1) {
-				if (count > 0) {
+			int count = 0 ; 
+			while (count != -1) {
+				count = input.read(buffer, 0, buffer.length);
+				sourceLine.write(buffer, 0, count);
+				System.out.println(count);
+			}
+			System.out.println(count);
+			if (count < 0) {
+				System.out.println("Resrarted ...");
+				input = AudioSystem.getAudioInputStream(pcm, input);
+				
+				format = input.getFormat();
+				dataInfo = new DataLine.Info(SourceDataLine.class, format);
+				sourceLine = (SourceDataLine)AudioSystem.getLine(dataInfo);
+				sourceLine.open(format);
+				sourceLine.start();
+				while (count != -1) {
+					count = input.read(buffer, 0, buffer.length);
 					sourceLine.write(buffer, 0, count);
 				}
 			}

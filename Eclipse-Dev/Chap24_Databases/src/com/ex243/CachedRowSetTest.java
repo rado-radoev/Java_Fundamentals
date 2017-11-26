@@ -10,6 +10,8 @@ import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.JdbcRowSet;
 import javax.sql.rowset.RowSetProvider;
 
+import org.apache.derby.tools.sysinfo;
+
 public class CachedRowSetTest {
 
 	public static void main(String[] args) {
@@ -46,9 +48,9 @@ public class CachedRowSetTest {
 			System.out.printf("Authors Table of Books Database:%n%n");
 			
 			// display the names of the columns in the ResultSet
-			for (int i = 1; i <= numberOfColumns; i++)
-				System.out.printf("%-16s\t", metaData.getColumnName(i));
-			System.out.println();
+//			for (int i = 1; i <= numberOfColumns; i++)
+//				System.out.printf("%-16s\t", metaData.getColumnName(i));
+//			System.out.println();
 			
 			
 			// display the query results
@@ -80,7 +82,7 @@ public class CachedRowSetTest {
 //					}
 					
 							
-					System.out.printf("%-16s\t", rowSet.getObject(i));
+					//System.out.printf("%-16s\t", rowSet.getObject(i));
 				}
 				System.out.println();
 			}

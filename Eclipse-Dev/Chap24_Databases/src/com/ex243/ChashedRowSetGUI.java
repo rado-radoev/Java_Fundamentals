@@ -66,6 +66,8 @@ public class ChashedRowSetGUI extends JFrame {
 	private long currentIndex;
 	private long numberOfEntries;
 	private RowSet rowSet;
+	
+	private Authors authors;
 
 	public ChashedRowSetGUI() {
 		super("Authors Database");
@@ -97,6 +99,7 @@ public class ChashedRowSetGUI extends JFrame {
 		navigationPanel = new JPanel();
 		displayPanel = new JPanel();
 		queryPanel = new JPanel();
+		authors = new Authors();
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		setSize(400, 340);
@@ -264,6 +267,10 @@ public class ChashedRowSetGUI extends JFrame {
 		setVisible(true);
 	}
 	
+	private void displayOutput() {
+		
+	}
+	
 	private void outputRowSet() throws SQLException{
 		while (rowSet.next()) {
 			for (int i = 1; i <= cashedRowSetQuery.getNumberOfColumns(); i++) {
@@ -321,8 +328,8 @@ public class ChashedRowSetGUI extends JFrame {
 			cashedRowSetQuery = new CashedRowSetQuery();
 		
 		rowSet = cashedRowSetQuery.getRowSet();
-
-			outputRowSet();
+		
+			
 
 	}
 }
