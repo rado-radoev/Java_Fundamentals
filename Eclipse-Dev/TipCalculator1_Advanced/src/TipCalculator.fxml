@@ -33,7 +33,7 @@
       <TextField fx:id="totalTextField" editable="false" focusTraversable="false" maxWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label fx:id="partySizeLabel" text="Party size" GridPane.rowIndex="1" />
       <Label fx:id="totalPerPersonLabel" text="Total per person" GridPane.rowIndex="5" />
-      <TextField fx:id="partySizeTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="partySizeTextField" text="1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="totalPerPersonTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
    </children>
    <padding>
