@@ -1,7 +1,7 @@
+package com.AudioTest1;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -22,7 +22,7 @@ public class AudioPlayer5 {
 	AudioInputStream in;
 	
     public static void main(String[] args) {
-        final AudioPlayer player = new AudioPlayer ();
+        final AudioPlayer5 player = new AudioPlayer5 ();
         //player.play("something.mp3");
         try {
         	 	url = new URL("http://stream.metacast.eu/nrj.ogg");
