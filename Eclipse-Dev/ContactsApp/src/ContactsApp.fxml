@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ContactsAppController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ListView fx:id="contactsListView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" />
+      <VBox prefHeight="200.0" prefWidth="250.0" GridPane.columnIndex="1">
+         <children>
+            <Label alignment="TOP_LEFT" text="First Name">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="firstNameTextField" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="150.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </TextField>
+            <Label alignment="TOP_LEFT" text="Lastt Name">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="lastNameTextField" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="150.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </TextField>
+            <Label alignment="TOP_LEFT" text="E-Mail Address">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="emailAddressTextField" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="150.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </TextField>
+            <Label alignment="TOP_LEFT" text="Phone">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="phoneTextField" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="150.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" />
+               </padding>
+            </TextField>
+            <ImageView fx:id="avatarImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets left="25.0" top="10.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</GridPane>
