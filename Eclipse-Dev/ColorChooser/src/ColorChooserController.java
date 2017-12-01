@@ -5,6 +5,9 @@
  */
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.beans.property.Property;
 import javafx.fxml.FXML;
@@ -37,15 +40,21 @@ public class ColorChooserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // bind textfield values to corresponding slider values
-        redTextField.textProperty().bindBidirectional(redSlider.idProperty());
-        redTextField.textProperty().bind(
-            redSlider.valueProperty().asString("%.0f"));
-        greenTextField.textProperty().bind(
-            greenSlider.valueProperty().asString("%.0f"));
-        blueTextField.textProperty().bind(
-            blueSlider.valueProperty().asString("%.0f"));
-        alphaTextField.textProperty().bind(
-            alphaSlider.valueProperty().asString("%.1f"));
+        redTextField.textProperty().bindBidirectional(redSlider.valueProperty(), NumberFormat.getIntegerInstance());
+        greenTextField.textProperty().bindBidirectional(greenSlider.valueProperty(), NumberFormat.getIntegerInstance());
+        blueTextField.textProperty().bindBidirectional(blueSlider.valueProperty(), NumberFormat.getIntegerInstance());
+        DecimalFormat df = new DecimalFormat("#0.0");
+        df.setMaximumFractionDigits(1);
+        alphaTextField.textProperty().bindBidirectional(alphaSlider.valueProperty(), df.getInstance());
+        
+//        redTextField.textProperty().bind(
+//            redSlider.valueProperty().asString("%.0f"));
+//        greenTextField.textProperty().bind(
+//            greenSlider.valueProperty().asString("%.0f"));
+//        blueTextField.textProperty().bind(
+//            blueSlider.valueProperty().asString("%.0f"));
+//        alphaTextField.textProperty().bind(
+//            alphaSlider.valueProperty().asString("%.1f"));
     
         // listeners that set rectangle's color based on slider change
         redSlider.valueProperty().addListener(
