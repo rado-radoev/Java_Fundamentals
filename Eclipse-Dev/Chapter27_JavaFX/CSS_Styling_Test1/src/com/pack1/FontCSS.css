@@ -1,0 +1,41 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 30, 2017, 11:17:00 PM
+    Author     : superlamer
+    CSS rule to style VBox and Labels
+*/
+
+
+.vbox {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+#label1 {
+    -fx-font: bold 14pt Arial;
+}
+
+#label2 {
+    -fx-font: 16pt "Times New Roman";
+}
+
+#label3 {
+    -fx-font: bold italic 16pt "Courrier New";
+}
+
+#label4 {
+    -fx-font-size: 14pt;
+    -fx-underline: true;
+}
+
+#label5 {
+    -fx-font-size: 14pt;
+}
+
+#label5 .text {
+    -fx-strikethrough: true;
+}
