@@ -1,20 +1,20 @@
-// Fig. 24.19: DeitelMessengerServerTest.java
-// Test the DeitelMessengerServer class.
-package com.deitel.messanger;
+package com.fig283;
+// Fig. 28.4: ServerTest.java
+// Test the Server application.
+import javax.swing.JFrame;
 
-public class DeitelMessengerServerTest 
-{   
-   public static void main ( String args[] ) 
+public class ServerTest
+{
+   public static void main(String[] args)
    {
-      DeitelMessengerServer application = new DeitelMessengerServer();
-      application.startServer(); // start server
-   } // end main
-} // end class DeitelMessengerServerTest
-
-
+      Server application = new Server(); // create server
+      application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      application.runServer(); // run server application
+   } 
+}
 
 /**************************************************************************
- * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

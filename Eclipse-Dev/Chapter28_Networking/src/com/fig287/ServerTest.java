@@ -1,17 +1,20 @@
-// Fig. 24.21: MessageListener.java
-// MessageListener is an interface for classes that wish to
-// receive new chat messages.
-package com.deitel.messanger;
+package com.fig287;
+// Fig. 28.8: ServerTest.java
+// Class that tests the Server.
+import javax.swing.JFrame;
 
-public interface MessageListener 
+public class ServerTest
 {
-   // receive new chat message
-   public void messageReceived( String from, String message );
-} // end interface MessageListener
-
+   public static void main(String[] args)
+   {
+      Server application = new Server(); // create server
+      application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      application.waitForPackets(); // run server application
+   } 
+}
 
 /**************************************************************************
- * (C) Copyright 1992-2007 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *
