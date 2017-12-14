@@ -2,23 +2,21 @@ package com.youtube;
 
 import java.sql.*;
 
-public class PrepStatementsDB {
+public class PrepStatementsDBDelete {
 
 	public static void main(String[] args) {
 		
 		String url = "jdbc:mysql://localhost:3306/demo?useSSL=false";
 		String user = "";
 		String pass = "";
-		Connection conn =  null;
 		PreparedStatement prepStmt = null;
 		ResultSet res = null;
 		
-		try {
-			// 1. get connection to db
-			conn = DriverManager.getConnection(url, user, pass);
+		try  (// 1. get connection to db
+				Connection conn = DriverManager.getConnection(url, user, pass)) {
+			
 			// 2. prepare a statement
-
-			String sql = "SELECT * FROM employees WHERE salary > ? AND department = ?";
+			String sql = "DELETE FROM employees WHERE salary > ? AND department = ?";
 			
 			prepStmt = conn.prepareStatement(sql);
 			
@@ -26,10 +24,10 @@ public class PrepStatementsDB {
 			prepStmt.setDouble(1, 80000);
 			prepStmt.setString(2, "Legal");
 
-			// 4. Execute SQL query
-			res = prepStmt.executeQuery();
-			
-			display(res);
+			// 4. Execute SQL query and return number of rows deleted
+			int rowsDeleted = prepStmt.executeUpdate();		
+
+			System.out.printf("Number of rows deleted %d", rowsDeleted);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +39,6 @@ public class PrepStatementsDB {
 				
 				if (prepStmt != null) {
 					prepStmt.close();
-				}
-				
-				if (conn != null) {
-					conn.close();
 				}
 			} catch (SQLException sqle) {
 				sqle.printStackTrace();
