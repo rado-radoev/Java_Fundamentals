@@ -2,7 +2,10 @@ package com.youtube;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,33 +16,42 @@ public class ReadClobFromDB {
 	public static void main(String[] args) {
 		
 		String url = "jdbc:mysql://localhost:3306/demo?useSSL=false";
-		String user = "";
-		String pass = "";
+		String user = "root";
+		String pass = "rado";
 				
 		try  (
 				// 1. get connection to db
 				Connection conn = DriverManager.getConnection(url, user, pass)) {
 			
-			PreparedStatement preparedStatement = null;
-			FileReader input = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+			Reader input = null;
+			FileWriter output = null;
 			
-			String sql = "UPDATE employees SET resume=? WHERE email='john.doe@foo.com'";
-			preparedStatement = conn.prepareStatement(sql);
+			// 2. execute statement
+			statement = conn.createStatement();
+			String sql = "SELECT resume FROM employees WHERE email='john.doe@foo.com'";
+			resultSet = statement.executeQuery(sql);
 			
-			// 3. set parameter for resume file name
-			File file = new File("sample_resume.txt");
-			input = new FileReader(file);
-			preparedStatement.setCharacterStream(1, input);
+			// 3. setup handle to the file
+			File file = new File("resume_from_db.txt");
+			output = new FileWriter(file);
 			
-			System.out.println("Reading input file: " + file.getAbsolutePath());
+			if (resultSet.next()) {
+				input = resultSet.getCharacterStream("resume");
+				System.out.println("Reading resume from database ...");
+				System.out.println();
+				
+				int character;
+				while((character = input.read()) > 0) {
+					output.write(character);
+				}
+			}
 			
-			// 4. Execute statement
-			System.out.println("\nStoring resume in database " + file);
-			System.out.println(preparedStatement);
-			
-			preparedStatement.executeUpdate();
-			
+			System.out.println("\nSaved to file: " + file.getAbsolutePath());
 			System.out.println("\nCompleted successfully!");
+			
+			output.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();	
