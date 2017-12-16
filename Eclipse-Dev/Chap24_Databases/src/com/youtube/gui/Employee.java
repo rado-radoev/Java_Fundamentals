@@ -1,5 +1,6 @@
 package com.youtube.gui;
 
+import java.io.FileInputStream;
 import java.math.BigDecimal;
 
 public class Employee {
@@ -10,6 +11,10 @@ public class Employee {
 	private String firstName;
 	private String email;
 	private BigDecimal salary;
+	
+	public Employee(String lastName, String firstName, String email, BigDecimal salary) {
+		this(0, lastName, firstName, email, salary);
+	}
 	
 	public Employee(int id, String lastName, String firstName, String email, BigDecimal salary) {
 		super();

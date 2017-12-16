@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class AddEmployeeForm extends JFrame {
+public class UpdateEmployeeForm extends JFrame {
 
 	private final JPanel mainPanel;
 	private final JPanel buttonPanel;
@@ -33,26 +33,24 @@ public class AddEmployeeForm extends JFrame {
 	private EmployeeDAO employeeDAO;
 	private EmployeeSearchApp employeeSearchApp;
 	
-	public AddEmployeeForm(EmployeeSearchApp employeeSearchApp, EmployeeDAO employeeDAO) {
-		this();
+	public UpdateEmployeeForm(EmployeeSearchApp employeeSearchApp, EmployeeDAO employeeDAO, Employee employee) {
+		super("Update app");
 		this.employeeDAO = employeeDAO;
 		this.employeeSearchApp = employeeSearchApp;
-	}
+		this.employee = employee;
 	
-	public AddEmployeeForm() {
-		super("Add Employee");
 		
 		FlowLayout mainPanelLayout = new FlowLayout(FlowLayout.CENTER);
 		mainPanel = new JPanel(mainPanelLayout);
 		
 		firstNameLabel = new JLabel("First Name");
-		firstNameTextField = new JTextField(20);
+		firstNameTextField = new JTextField(employee.getFirstName());
 		lastNameLabel = new JLabel("Last Name");
-		lastNameTextField = new JTextField(20);
+		lastNameTextField = new JTextField(employee.getLastName());
 		emailLabel = new JLabel("Email");
-		emailTextField = new JTextField(20);
+		emailTextField = new JTextField(employee.getEmail());
 		salaryLabel = new JLabel("Salary");
-		salaryTextField = new JTextField(20);
+		salaryTextField = new JTextField(String.valueOf(employee.getSalary()));
 		
 		mainPanel.add(firstNameLabel);
 		mainPanel.add(firstNameTextField);
@@ -79,7 +77,7 @@ public class AddEmployeeForm extends JFrame {
 		add(buttonPanel, BorderLayout.SOUTH);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(350, 200);
+		setSize(400, 200);
 	}
 	
 	private class ButtonHandler implements ActionListener {
@@ -91,15 +89,13 @@ public class AddEmployeeForm extends JFrame {
 			}
 			else if (e.getSource() == saveButton) {
 				// get the employee info from gui
-				employee = new Employee(lastNameTextField.getText(),
-									    firstNameTextField.getText(),
-										emailTextField.getText(),
-										BigDecimal.valueOf((
-												Double.valueOf(
-														salaryTextField.getText()))));
+				employee.setLastName(lastNameTextField.getText());
+				employee.setFirstName(firstNameTextField.getText());
+				employee.setEmail(emailTextField.getText());
+				employee.setSalary(BigDecimal.valueOf(Double.valueOf(salaryTextField.getText())));
 				
 				// save to database
-				employeeDAO.addEmployee(employee);
+				employeeDAO.updateEmployee(employee);
 
 				// close dialog
 				setVisible(false);
@@ -110,8 +106,8 @@ public class AddEmployeeForm extends JFrame {
 				
 				// show success message
 				JOptionPane.showMessageDialog(employeeSearchApp, 
-						"Employee added successfully.", 
-						"Employee Added", 
+						"Employee Updated successfully.", 
+						"Employee Updated", 
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}

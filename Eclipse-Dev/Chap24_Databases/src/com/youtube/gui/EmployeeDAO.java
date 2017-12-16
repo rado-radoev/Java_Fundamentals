@@ -41,6 +41,46 @@ public class EmployeeDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean updateEmployee(Employee employee) {
+		PreparedStatement statement = null;
+		String sql = "UPDATE employees SET first_name=?, last_name=?, email=?, salary=? WHERE id=?";
+		
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, employee.getFirstName());
+			statement.setString(2, employee.getLastName());
+			statement.setString(3, employee.getEmail());
+			statement.setBigDecimal(4, employee.getSalary());
+			statement.setInt(5, employee.getId());
+			
+			statement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean addEmployee(Employee employee) {
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO employees (first_name, last_name, email, salary) " + 
+				" values (?, ?, ?, ?)";
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, employee.getFirstName());
+			statement.setString(2, employee.getLastName());
+			statement.setString(3, employee.getEmail());
+			statement.setBigDecimal(4, employee.getSalary());
+			
+			statement.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public List<Employee> getAllEmployees() throws SQLException {
 		List<Employee> list = new ArrayList<>();
