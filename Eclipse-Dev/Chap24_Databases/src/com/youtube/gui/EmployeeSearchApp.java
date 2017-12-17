@@ -29,14 +29,30 @@ public class EmployeeSearchApp extends JFrame {
 	private final JPanel manipulateDBPanel;
 	private final JButton addEmployeeButton;
 	private final JButton updateEmployeeButton;
+	private final JButton showHistoryButton;
 	private final EmployeeDAO dao;
+	private int userId;
+	JLabel loggedInUserLabel = new JLabel("New label");
+	JLabel loggedInLabel = new JLabel("Logged in:");
+	private User user;
 	
-	public EmployeeSearchApp() {
+	public User getUser() {
+		return user;
+	}
 	
-		super("Employee Search App");
-		
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public EmployeeSearchApp(int userId, EmployeeDAO employeeDAO) {
 
-		dao = new EmployeeDAO();
+		super("Employee Search App");
+
+		
+		this.userId = userId;
+		this.dao = employeeDAO;
+		
+		AuditHistory ah = new AuditHistory(userId, employeeId, action, actionDateTime, userFirstName, userLastName)
 
 		FlowLayout searchPanelLayout = new FlowLayout(FlowLayout.CENTER);
 		TextFieldHandler handler = new TextFieldHandler();
@@ -49,6 +65,12 @@ public class EmployeeSearchApp extends JFrame {
 		searchPanel.add(lastNameLabel);
 		searchPanel.add(lastNameTextField);
 		searchPanel.add(searchButton);
+		
+		
+		searchPanel.add(loggedInLabel);
+		
+		
+		searchPanel.add(loggedInUserLabel);
 		
 		add(searchPanel, BorderLayout.NORTH);
 		
@@ -89,6 +111,43 @@ public class EmployeeSearchApp extends JFrame {
 						updateEmpFm.setVisible(true);
 					}
 				});
+		showHistoryButton = new JButton("Show History");
+		manipulateDBPanel.add(showHistoryButton);
+		showHistoryButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				
+				// make sure a row is selected
+				if (row < 0) {
+					JOptionPane.showMessageDialog(EmployeeSearchApp.this, "You must select an employee", "Error",
+							JOptionPane.ERROR_MESSAGE);				
+					return;
+				}
+				
+				// get the current employee
+				Employee tempEmployee = (Employee) table.getValueAt(row, EmployeeTableModel.OBJECT_COL);
+				
+				try {
+					// get audit history for this employee
+					int employeeId = tempEmployee.getId();
+					List<AuditHistory> auditHistoryList = employeeDAO.getAuditHistory(employeeId);
+
+					// show audit history dialog
+					AuditHistoryDialog dialog = new AuditHistoryDialog();
+					dialog.populate(tempEmployee, auditHistoryList);
+					
+					dialog.setVisible(true);
+				}
+				catch (Exception exc) {
+					exc.printStackTrace();
+					JOptionPane.showMessageDialog(EmployeeSearchApp.this, "Error retrieving audit history", "Error",
+							JOptionPane.ERROR_MESSAGE);				
+					return;					
+				}
+			}
+		});
 		add(manipulateDBPanel, BorderLayout.SOUTH);
 	}
 	
@@ -139,6 +198,10 @@ public class EmployeeSearchApp extends JFrame {
 			}
 		}
 		
+	}
+	
+	public void setLoggedInUserName(String firstName, String lastName) {
+		loggedInUserLabel.setText(firstName + " " + lastName);
 	}
 }
 
