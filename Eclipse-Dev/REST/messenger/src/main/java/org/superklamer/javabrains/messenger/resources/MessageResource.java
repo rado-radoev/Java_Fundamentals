@@ -1,5 +1,6 @@
 package org.superklamer.javabrains.messenger.resources;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.GET;
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.superklamer.javabrains.messenger.service.MessageService;
 import org.superklamer.javabrains.messenger.model.Message;
+import org.superklamer.javabrains.messenger.resources.beans.MessageFilterBean;
 
 import java.util.List;
 
@@ -24,15 +26,13 @@ public class MessageResource {
 	MessageService messageService = new MessageService();
 
 	@GET
-	public List<Message> getMessages(@QueryParam("year") int year,
-									@QueryParam("start") int start,
-									@QueryParam("size") int size) {
-		if (start > 0 && size > 0) {
-			return messageService.getAllMessagesPaginated(start, size);
+	public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
+		if (filterBean.getStart()> 0 && filterBean.getSize() > 0) {
+			return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
 		}
 		
-		if (year > 0	)
-			return messageService.getAllMessagesForYear(year);
+		if (filterBean.getYear() > 0	)
+			return messageService.getAllMessagesForYear(filterBean.getYear());
 		return messageService.getAllMessages(); 
 	}
 	
