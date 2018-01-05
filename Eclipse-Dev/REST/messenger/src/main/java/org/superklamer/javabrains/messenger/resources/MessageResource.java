@@ -11,11 +11,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.superklamer.javabrains.messenger.service.MessageService;
 import org.superklamer.javabrains.messenger.model.Message;
 import org.superklamer.javabrains.messenger.resources.beans.MessageFilterBean;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Path("/messages")
@@ -37,9 +41,15 @@ public class MessageResource {
 	}
 	
 	@POST
-	public Message addMessage(Message message) {
-		return 	messageService.addMessage(message);
+	public Response addMessage(Message message) throws URISyntaxException {
+		Message newMessage = messageService.addMessage(message);
+		return Response.created(new URI("/messenger/webapi/messages" + newMessage.getId()))
+			.entity(newMessage)
+			.build();
 	}
+//	public Message addMessage(Message message) {
+//		return 	messageService.addMessage(message);
+//	}
 	
 	@DELETE
 	@Path("/{messageId}")
