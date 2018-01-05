@@ -76,7 +76,31 @@ public class MessageResource {
 							@Context UriInfo uriInfo) {
 		Message message = messageService.getMessage(messageId);
 		message.addLink(getURIForSelf(uriInfo, message), "self");
+		message.addLink(getURIForProfile(uriInfo, message), "profile");
+		message.addLink(getURIForComments(uriInfo, message), "comments");
 		return message;
+	}
+
+	private String getURIForComments(UriInfo uriInfo, Message message) {
+		String uri = uriInfo.getBaseUriBuilder()
+							.path(MessageResource.class)
+							.path(MessageResource.class, "getCommentResource")
+							.path(CommentResource.class)
+							.resolveTemplate("messageId", message.getId())
+							.build()
+							.toString();
+							
+		return uri;
+	}
+
+	private String getURIForProfile(UriInfo uriInfo, Message message) {
+		String uri = uriInfo.getBaseUriBuilder()
+						.path(ProfileResource.class)
+						.path(message.getAuthor())
+						.build()
+						.toString();
+		
+		return uri;
 	}
 
 	private String getURIForSelf(UriInfo uriInfo, Message message) {
