@@ -7,7 +7,7 @@ import javax.ws.rs.ext.Provider;
 
 import org.superklamer.javabrains.messenger.model.ErrorMessage;
 
-@Provider
+//@Provider
 public class GenericExceptionMapper implements ExceptionMapper<Throwable>{
 
 	@Override
