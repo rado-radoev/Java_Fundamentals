@@ -10,7 +10,7 @@ public class BinarySearch {
 		
 		int[] arr = new int[10];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = generator.nextInt(20);
+			arr[i] = generator.nextInt(10);
 		}
 		
 		Arrays.sort(arr);
