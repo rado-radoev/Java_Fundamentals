@@ -45,11 +45,20 @@ public class Clicker extends SwingWorker<Void, Integer> {
 	protected Void doInBackground() throws Exception {
 		//ExecutorService executorService = Executors.newCachedThreadPool();
 		robot = new Robot();
-	    
+		Point mouseOldPosition = MouseInfo.getPointerInfo().getLocation();;
+	    Point mouseNewPosition = MouseInfo.getPointerInfo().getLocation();
+		
 		while (!isCancelled()) {
-			click();
-			publish(clickCount);
+			mouseOldPosition = MouseInfo.getPointerInfo().getLocation();
+			
+			if (mouseOldPosition.x == mouseNewPosition.x && mouseOldPosition.y == mouseNewPosition.y) {
+				click();
+				publish(clickCount);
+			}
 			Thread.sleep((long) (getDelay() * 1000.0));
+			mouseNewPosition = MouseInfo.getPointerInfo().getLocation();
+			
+
 		}
 		return null;
 	}
