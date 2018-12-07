@@ -11,19 +11,21 @@ import com.knockers.server.KnockKnockServer;
 
 public class KnocKnockClient  {
 
-	private final int port = 6542;
+	private final int port = 65432;
 	private final String hostname = Inet4Address.getLocalHost().getHostName();
 	
 	public KnocKnockClient() throws UnknownHostException {}
 	
 	public void chat() {
+				
 		try (Socket socket = new Socket(hostname, port);
 			 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
 			
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			
-			String fromServer, fromUser;
+			String fromServer = null; 
+			String fromUser = null;
 			
 			while ((fromServer = in.readLine()) != null) {
 				System.out.println("Server: " + fromServer);
@@ -31,8 +33,8 @@ public class KnocKnockClient  {
 				
 				fromUser = stdIn.readLine();
 				if (fromUser != null) {
-					System.out.println("From User: " + fromUser);
-					out.print(fromUser);
+					System.out.println("Client: " + fromUser);
+					out.println(fromUser);
 				}
 			}
 			
