@@ -1,4 +1,4 @@
-package org.knockers.server;
+package com.knockers.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
