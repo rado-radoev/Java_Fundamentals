@@ -29,6 +29,7 @@ public class KnockKnockMultiServerThread extends Thread {
 			
 			while ((inputLine = in.readLine()) != null) {
 				outputLine = kkp.processInput(inputLine);
+				out.println(outputLine);
 				if (outputLine.equals("Bye")) break;
 			}
 			

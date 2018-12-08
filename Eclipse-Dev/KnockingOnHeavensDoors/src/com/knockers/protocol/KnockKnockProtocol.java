@@ -30,7 +30,7 @@ public class KnockKnockProtocol {
 			                "Try again. Knock! Knock!";
 			 }
 		 } else if (state == STATE.SENTCLUE.numVal) {
-			 if (theInput.equalsIgnoreCase(clues[currentJoke] + "who?")) {
+			 if (theInput.equalsIgnoreCase(clues[currentJoke] + " who?")) {
 				 theOutput = answers[currentJoke] + " Want another (y/n)?";
 				 state = STATE.ANOTHER.numVal;
 			 } else {
